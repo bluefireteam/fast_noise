@@ -15,6 +15,9 @@ The following noise types are available:
 - [ValueNoise][value_noise]
 - [WhiteNoise][white_noise]
 
+# Demo
+Try out some settings [here][preview]
+
 # Examples
 ## Cellular Noise
     import 'package:fast_noise/fast_noise.dart';
@@ -64,6 +67,7 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 
 [tracker]: https://github.com/frankpepermans/fast_noise/issues
 [auburns]: https://github.com/Auburns
+[preview]: http://igindo.com/fastnoise
 [cellular_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/cellular.dart
 [cubic_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/cubic.dart
 [perlin_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/perlin.dart
