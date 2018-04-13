@@ -26,7 +26,7 @@ The following noise types are available:
           frequency: 0.015,
           cellularReturnType: CellularReturnType.Distance2Add);
     }
-![Cellular Noise](https://imgur.com/ajmSxvC)
+![Cellular Noise](https://imgur.com/ajmSxvC.png)
 
     import 'package:fast_noise/fast_noise.dart';
 
@@ -36,7 +36,7 @@ The following noise types are available:
           octaves: 3,
           frequency: 0.05);
           
-![Perlin Noise](https://imgur.com/vUFS893)       
+![Perlin Noise](https://imgur.com/vUFS893.png)       
 
     import 'package:fast_noise/fast_noise.dart';
 
@@ -46,7 +46,7 @@ The following noise types are available:
           octaves: 4,
           frequency: 0.0075)
           
-![Simplex Fractal Noise](https://imgur.com/PRSWv95)
+![Simplex Fractal Noise](https://imgur.com/PRSWv95.png)
 
 You can also call a noise type directly:
 
