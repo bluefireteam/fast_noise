@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+ul {
+    width: 50%;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+    align-items: center;
+}
+
+input {
+    padding: 0 0 0 3px;
+    width: 150px;
+    height: 25px;
+}
+
+select {
+    width: 300px;
+    height: 25px;
+}
+
+button {
+    align-self: flex-end;
+    flex: 1 1 auto;
+    height: 32px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.canvas-container {
+    margin: 20px;
+}

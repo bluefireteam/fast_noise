@@ -8,8 +8,92 @@
     <title>Preview</title>
     <script defer src="preview.dart" type="application/dart"></script>
     <script defer src="packages/browser/dart.js"></script>
+    <link rel="stylesheet" href="preview.css">
 </head>
 <body>
-
+    <div class="main-container">
+        <ul>
+            <li>
+                <label for="input-size">Size:&nbsp;</label>
+                <input id="input-size" type="number" value="512" step="128">
+            </li>
+            <li>
+                <label for="input-seed">Seed:&nbsp;</label>
+                <input id="input-seed" type="number" value="1337" step="1">
+            </li>
+            <li>
+                <label for="input-freq">Frequency:&nbsp;</label>
+                <input id="input-freq" type="number" value="0.01" step="0.001">
+            </li>
+            <li>
+                <label for="input-gain">Gain:&nbsp;</label>
+                <input id="input-gain" type="number" value="0.5" step="0.025">
+            </li>
+            <li>
+                <label for="input-lacunarity">Lacunarity:&nbsp;</label>
+                <input id="input-lacunarity" type="number" value="2.0" step="0.5">
+            </li>
+            <li>
+                <label for="input-octaves">Octaves:&nbsp;</label>
+                <input id="input-octaves" type="number" value="3" step="1">
+            </li>
+            <li>
+                <label for="select-noise-type">Noise Type:&nbsp;</label>
+                <select id="select-noise-type">
+                    <option>Cellular</option>
+                    <option>Cubic</option>
+                    <option>CubicFractal</option>
+                    <option>Perlin</option>
+                    <option>PerlinFractal</option>
+                    <option>Simplex</option>
+                    <option>SimplexFractal</option>
+                    <option>Value</option>
+                    <option>ValueFractal</option>
+                    <option>WhiteNoise</option>
+                </select>
+            </li>
+            <li>
+                <label for="select-fractal-type">Fractal Type:&nbsp;</label>
+                <select id="select-fractal-type">
+                    <option>FBM</option>
+                    <option>Billow</option>
+                    <option>RigidMulti</option>
+                </select>
+            </li>
+            <li>
+                <label for="select-interp">Interp:&nbsp;</label>
+                <select id="select-interp">
+                    <option>Linear</option>
+                    <option>Hermite</option>
+                    <option>Quintic</option>
+                </select>
+            </li>
+            <li>
+                <label for="select-cellular-distance-fnc">Cellular Distance Function:&nbsp;</label>
+                <select id="select-cellular-distance-fnc">
+                    <option>Euclidean</option>
+                    <option>Manhattan</option>
+                    <option>Natural</option>
+                </select>
+            </li>
+            <li>
+                <label for="select-cellular-return-type">Cellular Return Type:&nbsp;</label>
+                <select id="select-cellular-return-type">
+                    <option>CellValue</option>
+                    <option>Distance</option>
+                    <option>Distance2</option>
+                    <option>Distance2Add</option>
+                    <option>Distance2Sub</option>
+                    <option>Distance2Mul</option>
+                    <option>Distance2Div</option>
+                </select>
+            </li>
+            <li>
+                <button id="render-now">RENDER</button>
+            </li>
+        </ul>
+        <div id="canvas-container" class="canvas-container"></div>
+    </div>
 </body>
 </html>
+

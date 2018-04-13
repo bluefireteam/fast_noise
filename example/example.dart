@@ -7,22 +7,21 @@ void main() {
   final canvas = new CanvasElement(width: w, height: h);
   final map = _getCellular(w, h);
   final context = canvas.getContext('2d') as CanvasRenderingContext2D;
+  final imageData = context.createImageData(w, h);
 
   context.imageSmoothingEnabled = false;
 
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
-      var imageData = context.createImageData(1, 1);
-      var value = map[x][y].abs();
+      var s = 4 * (y * h + x);
+      var value = (255 * map[x][y].abs()).floor();
 
-      imageData.data[0] = (255 * value).floor();
-      imageData.data[1] = (255 * value).floor();
-      imageData.data[2] = (255 * value).floor();
-      imageData.data[3] = 255;
-
-      context.putImageData(imageData, x, y, 0, 0, w, h);
+      imageData.data[s] = imageData.data[s + 1] = imageData.data[s + 2] = value;
+      imageData.data[s + 3] = 255;
     }
   }
+
+  context.putImageData(imageData, 0, 0, 0, 0, w, h);
 
   document.body.append(canvas);
 }
