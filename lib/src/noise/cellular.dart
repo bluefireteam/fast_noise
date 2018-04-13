@@ -11,7 +11,6 @@ class CellularNoise {
   final int seed, octaves;
   final double frequency, lacunarity, gain;
   final Interp interp;
-  final FractalType fractalType;
   final CellularDistanceFunction cellularDistanceFunction;
   final CellularReturnType cellularReturnType;
   final double fractalBounding;
@@ -23,7 +22,6 @@ class CellularNoise {
       this.octaves: 3,
       this.lacunarity: 2.0,
       this.gain: .5,
-      this.fractalType: FractalType.FBM,
       this.cellularDistanceFunction: CellularDistanceFunction.Euclidean,
       this.cellularReturnType: CellularReturnType.CellValue})
       : this.fractalBounding = calculateFractalBounding(gain, octaves);
