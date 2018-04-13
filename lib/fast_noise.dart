@@ -1,3 +1,6 @@
+/// This is a port of FastNoise, by Jordan Peck
+/// Please visit https://github.com/Auburns/FastNoise
+
 library fast_noise;
 
 import 'package:fast_noise/src/noise/enums.dart'
