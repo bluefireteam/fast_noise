@@ -1,3 +1,15 @@
+class Vector2f {
+  double x, y;
+
+  Vector2f(this.x, this.y);
+}
+
+class Vector3f {
+  double x, y, z;
+
+  Vector3f(this.x, this.y, this.z);
+}
+
 class Float2 {
   final double x, y;
 

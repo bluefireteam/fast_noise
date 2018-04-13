@@ -1,18 +1,6 @@
 import 'package:fixnum/fixnum.dart';
 
-import 'package:fast_noise/src/float.dart';
-
-class Vector2f {
-  double x, y;
-
-  Vector2f(this.x, this.y);
-}
-
-class Vector3f {
-  double x, y, z;
-
-  Vector3f(this.x, this.y, this.z);
-}
+import 'package:fast_noise/src/types.dart';
 
 double calculateFractalBounding(double gain, int octaves) {
   double amp = gain, ampFractal = 1.0;

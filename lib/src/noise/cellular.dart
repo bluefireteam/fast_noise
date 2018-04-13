@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
-import 'package:fast_noise/src/float.dart';
-import 'package:fast_noise/src/math.dart';
+import 'package:fast_noise/src/types.dart';
+import 'package:fast_noise/src/utils.dart';
 
 import 'package:fast_noise/src/noise/enums.dart';
 

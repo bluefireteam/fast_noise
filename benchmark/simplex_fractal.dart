@@ -10,7 +10,7 @@ class SimplexFractalBenchmark extends BenchmarkBase {
   }
 
   void run() {
-    getNoise2(128, 128, noiseType: NoiseType.SimplexFractal);
+    noise2(128, 128, noiseType: NoiseType.SimplexFractal);
   }
 
   void setup() {}

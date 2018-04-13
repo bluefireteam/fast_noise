@@ -1,4 +1,4 @@
-import 'package:fast_noise/src/math.dart';
+import 'package:fast_noise/src/utils.dart';
 
 class WhiteNoise {
   final int seed;
