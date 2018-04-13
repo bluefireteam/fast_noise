@@ -1,22 +1,72 @@
 # fast_noise
 
-A library for Dart developers.
-
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+Fast noise is a direct port from the implementations by [Jordan Peck][auburns].
+The Dart version currently does not yet leverage SIMD for better performance.
 
 ## Usage
 
-A simple usage example:
+fast_noise offers both 2D and 3D noise generation with ``noise2`` and ``noise3``
+
+The following noise types are available:
+- [CellularNoise][cellular_noise]
+- [CubicNoise][cubic_noise]
+- [PerlinNoise][perlin_noise]
+- [SimplexNoise][simplex_noise]
+- [ValueNoise][value_noise]
+- [WhiteNoise][white_noise]
+
+# Examples
+## Cellular Noise
+    import 'package:fast_noise/fast_noise.dart';
+
+    main() {
+      var arr2d = noise2(w, h,
+          noiseType: NoiseType.Cellular,
+          octaves: 5,
+          frequency: 0.015,
+          cellularReturnType: CellularReturnType.Distance2Add);
+    }
+![Cellular Noise](https://imgur.com/ajmSxvC)
 
     import 'package:fast_noise/fast_noise.dart';
 
     main() {
-      var awesome = new Awesome();
-    }
+      var arr2d = noise2(w, h,
+          noiseType: NoiseType.Perlin,
+          octaves: 3,
+          frequency: 0.05);
+          
+![Perlin Noise](https://imgur.com/vUFS893)       
+
+    import 'package:fast_noise/fast_noise.dart';
+
+    main() {
+      var arr2d = noise2(w, h,
+          noiseType: NoiseType.SimplexFractal,
+          octaves: 4,
+          frequency: 0.0075)
+          
+![Simplex Fractal Noise](https://imgur.com/PRSWv95)
+
+You can also call a noise type directly:
+
+      var noise = new ValueNoise(interp: Interp.Quintic, octaves: 5);
+      // generate 512x512  
+      for (int x = 0; x < 512; x++) {
+        for (int y = 0; y < 512; y++) {
+          noise.singleValueFractalBillow2(x.toDouble(), y.toDouble());
+        }
+      }
 
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: http://example.com/issues/replaceme
+[tracker]: https://github.com/frankpepermans/fast_noise/issues
+[auburns]: https://github.com/Auburns
+[cellular_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/cellular.dart
+[cubic_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/cubic.dart
+[perlin_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/perlin.dart
+[simplex_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/simplex.dart
+[value_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/value.dart
+[white_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/white.dart
