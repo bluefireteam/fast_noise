@@ -14,7 +14,7 @@ void main() {
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
       var s = 4 * (y * h + x);
-      var value = (255 * map[x][y].abs()).floor();
+      var value = (128 + 128 * map[x][y]).floor();
 
       imageData.data[s] = imageData.data[s + 1] = imageData.data[s + 2] = value;
       imageData.data[s + 3] = 255;

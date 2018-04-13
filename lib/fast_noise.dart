@@ -288,7 +288,7 @@ List<List<double>> noise2(int width, int height,
         for (int y = 0; y < height; y++) {
           double dx = x * frequency, dy = y * frequency;
 
-          map[x][y] = noise.getWhiteNoise2(dx, dy);
+          map[x][y] = noise.getWhiteNoise2(dx.toInt(), dy.toInt());
         }
       }
 
@@ -581,7 +581,8 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           for (int z = 0; z < height; z++) {
             double dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
-            map[x][y][z] = noise.getWhiteNoise3(dx, dy, dz);
+            map[x][y][z] =
+                noise.getWhiteNoise3(dx.toInt(), dy.toInt(), dz.toInt());
           }
         }
       }
