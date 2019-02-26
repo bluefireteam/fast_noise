@@ -11,14 +11,14 @@ class PerlinNoise {
   final double fractalBounding;
 
   PerlinNoise(
-      {this.seed: 1337,
-      this.frequency: .01,
-      this.interp: Interp.Quintic,
-      this.octaves: 3,
-      this.lacunarity: 2.0,
-      this.gain: .5,
-      this.fractalType: FractalType.FBM,
-      this.cellularReturnType: CellularReturnType.CellValue})
+      {this.seed = 1337,
+      this.frequency = .01,
+      this.interp = Interp.Quintic,
+      this.octaves = 3,
+      this.lacunarity = 2.0,
+      this.gain = .5,
+      this.fractalType = FractalType.FBM,
+      this.cellularReturnType = CellularReturnType.CellValue})
       : this.fractalBounding = calculateFractalBounding(gain, octaves);
 
   double getPerlinFractal3(double x, double y, double z) {

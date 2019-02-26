@@ -28,24 +28,24 @@ export 'package:fast_noise/src/noise/value.dart' show ValueNoise;
 export 'package:fast_noise/src/noise/white.dart' show WhiteNoise;
 
 List<List<double>> noise2(int width, int height,
-    {final int seed: 1337,
-    final double frequency: .01,
-    final Interp interp: Interp.Quintic,
-    final NoiseType noiseType: NoiseType.Simplex,
-    final int octaves: 3,
-    final double lacunarity: 2.0,
-    final double gain: .5,
-    final FractalType fractalType: FractalType.FBM,
-    final CellularDistanceFunction cellularDistanceFunction:
+    {final int seed = 1337,
+    final double frequency = .01,
+    final Interp interp = Interp.Quintic,
+    final NoiseType noiseType = NoiseType.Simplex,
+    final int octaves = 3,
+    final double lacunarity = 2.0,
+    final double gain = .5,
+    final FractalType fractalType = FractalType.FBM,
+    final CellularDistanceFunction cellularDistanceFunction =
         CellularDistanceFunction.Euclidean,
-    final CellularReturnType cellularReturnType:
+    final CellularReturnType cellularReturnType =
         CellularReturnType.CellValue}) {
-  final map = new List<List<double>>.generate(
-      width, (_) => new List<double>.generate(height, (_) => .0));
+  final map = List<List<double>>.generate(
+      width, (_) => List<double>.generate(height, (_) => .0));
 
   switch (noiseType) {
     case NoiseType.Cellular:
-      final noise = new CellularNoise(
+      final noise = CellularNoise(
           cellularDistanceFunction: cellularDistanceFunction,
           cellularReturnType: cellularReturnType,
           frequency: frequency,
@@ -74,7 +74,7 @@ List<List<double>> noise2(int width, int height,
       return map;
 
     case NoiseType.Cubic:
-      final noise = new CubicNoise(
+      final noise = CubicNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -95,7 +95,7 @@ List<List<double>> noise2(int width, int height,
       return map;
 
     case NoiseType.CubicFractal:
-      final noise = new CubicNoise(
+      final noise = CubicNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -126,7 +126,7 @@ List<List<double>> noise2(int width, int height,
       return map;
 
     case NoiseType.Perlin:
-      final noise = new PerlinNoise(
+      final noise = PerlinNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -147,7 +147,7 @@ List<List<double>> noise2(int width, int height,
       return map;
 
     case NoiseType.PerlinFractal:
-      final noise = new PerlinNoise(
+      final noise = PerlinNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -178,7 +178,7 @@ List<List<double>> noise2(int width, int height,
       return map;
 
     case NoiseType.Simplex:
-      final noise = new SimplexNoise(
+      final noise = SimplexNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -199,7 +199,7 @@ List<List<double>> noise2(int width, int height,
       return map;
 
     case NoiseType.SimplexFractal:
-      final noise = new SimplexNoise(
+      final noise = SimplexNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -230,7 +230,7 @@ List<List<double>> noise2(int width, int height,
       return map;
 
     case NoiseType.Value:
-      final noise = new ValueNoise(
+      final noise = ValueNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -251,7 +251,7 @@ List<List<double>> noise2(int width, int height,
       return map;
 
     case NoiseType.ValueFractal:
-      final noise = new ValueNoise(
+      final noise = ValueNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -282,7 +282,7 @@ List<List<double>> noise2(int width, int height,
       return map;
 
     case NoiseType.WhiteNoise:
-      final noise = new WhiteNoise(seed: seed);
+      final noise = WhiteNoise(seed: seed);
 
       for (int x = 0; x < width; x++) {
         for (int y = 0; y < height; y++) {
@@ -299,26 +299,26 @@ List<List<double>> noise2(int width, int height,
 }
 
 List<List<List<double>>> noise3(int width, int height, int depth,
-    {final int seed: 1337,
-    final double frequency: .01,
-    final Interp interp: Interp.Quintic,
-    final NoiseType noiseType: NoiseType.Simplex,
-    final int octaves: 3,
-    final double lacunarity: 2.0,
-    final double gain: .5,
-    final FractalType fractalType: FractalType.FBM,
-    final CellularDistanceFunction cellularDistanceFunction:
+    {final int seed = 1337,
+    final double frequency = .01,
+    final Interp interp = Interp.Quintic,
+    final NoiseType noiseType = NoiseType.Simplex,
+    final int octaves = 3,
+    final double lacunarity = 2.0,
+    final double gain = .5,
+    final FractalType fractalType = FractalType.FBM,
+    final CellularDistanceFunction cellularDistanceFunction =
         CellularDistanceFunction.Euclidean,
-    final CellularReturnType cellularReturnType:
+    final CellularReturnType cellularReturnType =
         CellularReturnType.CellValue}) {
-  final map = new List<List<List<double>>>.generate(
+  final map = List<List<List<double>>>.generate(
       width,
-      (_) => new List<List<double>>.generate(
-          height, (_) => new List<double>.generate(depth, (_) => .0)));
+      (_) => List<List<double>>.generate(
+          height, (_) => List<double>.generate(depth, (_) => .0)));
 
   switch (noiseType) {
     case NoiseType.Cellular:
-      final noise = new CellularNoise(
+      final noise = CellularNoise(
           cellularDistanceFunction: cellularDistanceFunction,
           cellularReturnType: cellularReturnType,
           frequency: frequency,
@@ -349,7 +349,7 @@ List<List<List<double>>> noise3(int width, int height, int depth,
       return map;
 
     case NoiseType.Cubic:
-      final noise = new CubicNoise(
+      final noise = CubicNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -372,7 +372,7 @@ List<List<List<double>>> noise3(int width, int height, int depth,
       return map;
 
     case NoiseType.CubicFractal:
-      final noise = new CubicNoise(
+      final noise = CubicNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -405,7 +405,7 @@ List<List<List<double>>> noise3(int width, int height, int depth,
       return map;
 
     case NoiseType.Perlin:
-      final noise = new PerlinNoise(
+      final noise = PerlinNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -428,7 +428,7 @@ List<List<List<double>>> noise3(int width, int height, int depth,
       return map;
 
     case NoiseType.PerlinFractal:
-      final noise = new PerlinNoise(
+      final noise = PerlinNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -461,7 +461,7 @@ List<List<List<double>>> noise3(int width, int height, int depth,
       return map;
 
     case NoiseType.Simplex:
-      final noise = new SimplexNoise(
+      final noise = SimplexNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -484,7 +484,7 @@ List<List<List<double>>> noise3(int width, int height, int depth,
       return map;
 
     case NoiseType.SimplexFractal:
-      final noise = new SimplexNoise(
+      final noise = SimplexNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -518,7 +518,7 @@ List<List<List<double>>> noise3(int width, int height, int depth,
       return map;
 
     case NoiseType.Value:
-      final noise = new ValueNoise(
+      final noise = ValueNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -541,7 +541,7 @@ List<List<List<double>>> noise3(int width, int height, int depth,
       return map;
 
     case NoiseType.ValueFractal:
-      final noise = new ValueNoise(
+      final noise = ValueNoise(
           cellularReturnType: cellularReturnType,
           fractalType: fractalType,
           frequency: frequency,
@@ -574,7 +574,7 @@ List<List<List<double>>> noise3(int width, int height, int depth,
       return map;
 
     case NoiseType.WhiteNoise:
-      final noise = new WhiteNoise(seed: seed);
+      final noise = WhiteNoise(seed: seed);
 
       for (int x = 0; x < width; x++) {
         for (int y = 0; y < height; y++) {

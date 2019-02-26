@@ -34,7 +34,7 @@ const int Z_PRIME = 6971;
 const int W_PRIME = 1013;
 
 int hash2D(int seed, int x, int y) {
-  Int32 hash = new Int32(seed);
+  Int32 hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
 
@@ -45,7 +45,7 @@ int hash2D(int seed, int x, int y) {
 }
 
 int hash3D(int seed, int x, int y, int z) {
-  Int32 hash = new Int32(seed);
+  Int32 hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
   hash ^= Z_PRIME * z;
@@ -57,7 +57,7 @@ int hash3D(int seed, int x, int y, int z) {
 }
 
 double valCoord2D(int seed, int x, int y) {
-  Int32 n = new Int32(seed);
+  Int32 n = Int32(seed);
   n ^= X_PRIME * x;
   n ^= Y_PRIME * y;
 
@@ -65,7 +65,7 @@ double valCoord2D(int seed, int x, int y) {
 }
 
 double valCoord3D(int seed, int x, int y, int z) {
-  Int32 n = new Int32(seed);
+  Int32 n = Int32(seed);
   n ^= X_PRIME * x;
   n ^= Y_PRIME * y;
   n ^= Z_PRIME * z;
@@ -74,7 +74,7 @@ double valCoord3D(int seed, int x, int y, int z) {
 }
 
 double valCoord4D(int seed, int x, int y, int z, int w) {
-  Int32 n = new Int32(seed);
+  Int32 n = Int32(seed);
   n ^= X_PRIME * x;
   n ^= Y_PRIME * y;
   n ^= Z_PRIME * z;
@@ -84,7 +84,7 @@ double valCoord4D(int seed, int x, int y, int z, int w) {
 }
 
 double gradCoord2D(int seed, int x, int y, double xd, double yd) {
-  Int32 hash = new Int32(seed);
+  Int32 hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
 
@@ -98,7 +98,7 @@ double gradCoord2D(int seed, int x, int y, double xd, double yd) {
 
 double gradCoord3D(
     int seed, int x, int y, int z, double xd, double yd, double zd) {
-  Int32 hash = new Int32(seed);
+  Int32 hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
   hash ^= Z_PRIME * z;
@@ -113,7 +113,7 @@ double gradCoord3D(
 
 double gradCoord4D(int seed, int x, int y, int z, int w, double xd, double yd,
     double zd, double wd) {
-  Int32 hash = new Int32(seed);
+  Int32 hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
   hash ^= Z_PRIME * z;

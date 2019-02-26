@@ -11,14 +11,14 @@ class SimplexNoise {
   final double fractalBounding;
 
   SimplexNoise(
-      {this.seed: 1337,
-      this.frequency: .01,
-      this.interp: Interp.Quintic,
-      this.octaves: 3,
-      this.lacunarity: 2.0,
-      this.gain: .5,
-      this.fractalType: FractalType.FBM,
-      this.cellularReturnType: CellularReturnType.CellValue})
+      {this.seed = 1337,
+      this.frequency = .01,
+      this.interp = Interp.Quintic,
+      this.octaves = 3,
+      this.lacunarity = 2.0,
+      this.gain = .5,
+      this.fractalType = FractalType.FBM,
+      this.cellularReturnType = CellularReturnType.CellValue})
       : this.fractalBounding = calculateFractalBounding(gain, octaves);
 
   double getSimplexFractal3(double x, double y, double z) {
@@ -331,7 +331,7 @@ class SimplexNoise {
   double getSimplex4(double x, double y, double z, double w) => singleSimplex4(
       seed, x * frequency, y * frequency, z * frequency, w * frequency);
 
-  static const List<int> SIMPLEX_4D = const <int>[
+  static const List<int> SIMPLEX_4D = <int>[
     0,
     1,
     2,

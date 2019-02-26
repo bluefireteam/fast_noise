@@ -16,14 +16,14 @@ class CellularNoise {
   final double fractalBounding;
 
   CellularNoise(
-      {this.seed: 1337,
-      this.frequency: .01,
-      this.interp: Interp.Quintic,
-      this.octaves: 3,
-      this.lacunarity: 2.0,
-      this.gain: .5,
-      this.cellularDistanceFunction: CellularDistanceFunction.Euclidean,
-      this.cellularReturnType: CellularReturnType.CellValue})
+      {this.seed = 1337,
+      this.frequency = .01,
+      this.interp = Interp.Quintic,
+      this.octaves = 3,
+      this.lacunarity = 2.0,
+      this.gain = .5,
+      this.cellularDistanceFunction = CellularDistanceFunction.Euclidean,
+      this.cellularReturnType = CellularReturnType.CellValue})
       : this.fractalBounding = calculateFractalBounding(gain, octaves);
 
   double getCellular3(double x, double y, double z) {

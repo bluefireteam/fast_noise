@@ -3,7 +3,7 @@ import 'package:fast_noise/src/utils.dart';
 class WhiteNoise {
   final int seed;
 
-  WhiteNoise({this.seed: 1337});
+  WhiteNoise({this.seed = 1337});
 
   double getWhiteNoise2(int x, int y) => valCoord2D(seed, x, y);
 
