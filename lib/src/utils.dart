@@ -3,9 +3,9 @@ import 'package:fixnum/fixnum.dart';
 import 'package:fast_noise/src/types.dart';
 
 double calculateFractalBounding(double gain, int octaves) {
-  double amp = gain, ampFractal = 1.0;
+  var amp = gain, ampFractal = 1.0;
 
-  for (int i = 1; i < octaves; i++) {
+  for (var i = 1; i < octaves; i++) {
     ampFractal += amp;
     amp *= gain;
   }
@@ -24,7 +24,8 @@ double interpHermiteFunc(double t) => t * t * (3 - 2 * t);
 double interpQuinticFunc(double t) => t * t * t * (t * (t * 6 - 15) + 10);
 
 double cubicLerp(double a, double b, double c, double d, double t) {
-  final double p = (d - c) - (a - b);
+  final p = (d - c) - (a - b);
+
   return t * t * t * p + t * t * ((a - b) - p) + t * (c - a) + b;
 }
 
@@ -34,7 +35,7 @@ const int Z_PRIME = 6971;
 const int W_PRIME = 1013;
 
 int hash2D(int seed, int x, int y) {
-  Int32 hash = Int32(seed);
+  IntX hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
 
@@ -45,7 +46,7 @@ int hash2D(int seed, int x, int y) {
 }
 
 int hash3D(int seed, int x, int y, int z) {
-  Int32 hash = Int32(seed);
+  IntX hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
   hash ^= Z_PRIME * z;
@@ -57,7 +58,7 @@ int hash3D(int seed, int x, int y, int z) {
 }
 
 double valCoord2D(int seed, int x, int y) {
-  Int32 n = Int32(seed);
+  var n = Int32(seed);
   n ^= X_PRIME * x;
   n ^= Y_PRIME * y;
 
@@ -65,7 +66,7 @@ double valCoord2D(int seed, int x, int y) {
 }
 
 double valCoord3D(int seed, int x, int y, int z) {
-  Int32 n = Int32(seed);
+  var n = Int32(seed);
   n ^= X_PRIME * x;
   n ^= Y_PRIME * y;
   n ^= Z_PRIME * z;
@@ -74,7 +75,7 @@ double valCoord3D(int seed, int x, int y, int z) {
 }
 
 double valCoord4D(int seed, int x, int y, int z, int w) {
-  Int32 n = Int32(seed);
+  var n = Int32(seed);
   n ^= X_PRIME * x;
   n ^= Y_PRIME * y;
   n ^= Z_PRIME * z;
@@ -84,21 +85,21 @@ double valCoord4D(int seed, int x, int y, int z, int w) {
 }
 
 double gradCoord2D(int seed, int x, int y, double xd, double yd) {
-  Int32 hash = Int32(seed);
+  IntX hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
 
   hash = hash * hash * hash * 60493;
   hash = (hash >> 13) ^ hash;
 
-  Float2 g = GRAD_2D[hash.toInt() & 7];
+  final g = GRAD_2D[hash.toInt() & 7];
 
   return xd * g.x + yd * g.y;
 }
 
 double gradCoord3D(
     int seed, int x, int y, int z, double xd, double yd, double zd) {
-  Int32 hash = Int32(seed);
+  IntX hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
   hash ^= Z_PRIME * z;
@@ -106,14 +107,14 @@ double gradCoord3D(
   hash = hash * hash * hash * 60493;
   hash = (hash >> 13) ^ hash;
 
-  Float3 g = GRAD_3D[hash.toInt() & 15];
+  final g = GRAD_3D[hash.toInt() & 15];
 
   return xd * g.x + yd * g.y + zd * g.z;
 }
 
 double gradCoord4D(int seed, int x, int y, int z, int w, double xd, double yd,
     double zd, double wd) {
-  Int32 hash = Int32(seed);
+  IntX hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
   hash ^= Z_PRIME * z;
@@ -123,7 +124,7 @@ double gradCoord4D(int seed, int x, int y, int z, int w, double xd, double yd,
   hash = (hash >> 13) ^ hash;
 
   hash &= 31;
-  double a = yd, b = zd, c = wd;
+  var a = yd, b = zd, c = wd;
   switch (hash.toInt() >> 3) {
     case 1:
       a = wd;

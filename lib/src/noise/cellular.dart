@@ -24,7 +24,7 @@ class CellularNoise {
       this.gain = .5,
       this.cellularDistanceFunction = CellularDistanceFunction.Euclidean,
       this.cellularReturnType = CellularReturnType.CellValue})
-      : this.fractalBounding = calculateFractalBounding(gain, octaves);
+      : fractalBounding = calculateFractalBounding(gain, octaves);
 
   double getCellular3(double x, double y, double z) {
     x *= frequency;
@@ -41,19 +41,19 @@ class CellularNoise {
   }
 
   double singleCellular3(double x, double y, double z) {
-    int xr = fastRound(x), yr = fastRound(y), zr = fastRound(z);
+    final xr = fastRound(x), yr = fastRound(y), zr = fastRound(z);
 
-    double distance = 999999.0;
-    int xc = 0, yc = 0, zc = 0;
+    var distance = 999999.0;
+    var xc = 0, yc = 0, zc = 0;
 
     switch (cellularDistanceFunction) {
       case CellularDistanceFunction.Euclidean:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            for (int zi = zr - 1; zi <= zr + 1; zi++) {
-              Float3 vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            for (var zi = zr - 1; zi <= zr + 1; zi++) {
+              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
 
-              double vecX = xi - x + vec.x,
+              final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
                   vecZ = zi - z + vec.z,
                   newDistance = vecX * vecX + vecY * vecY + vecZ * vecZ;
@@ -69,12 +69,12 @@ class CellularNoise {
         }
         break;
       case CellularDistanceFunction.Manhattan:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            for (int zi = zr - 1; zi <= zr + 1; zi++) {
-              Float3 vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            for (var zi = zr - 1; zi <= zr + 1; zi++) {
+              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
 
-              double vecX = xi - x + vec.x,
+              final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
                   vecZ = zi - z + vec.z,
                   newDistance = vecX.abs() + vecY.abs() + vecZ.abs();
@@ -90,12 +90,12 @@ class CellularNoise {
         }
         break;
       case CellularDistanceFunction.Natural:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            for (int zi = zr - 1; zi <= zr + 1; zi++) {
-              Float3 vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            for (var zi = zr - 1; zi <= zr + 1; zi++) {
+              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
 
-              double vecX = xi - x + vec.x,
+              final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
                   vecZ = zi - z + vec.z,
                   newDistance = (vecX.abs() + vecY.abs() + vecZ.abs()) +
@@ -125,21 +125,17 @@ class CellularNoise {
   }
 
   double singleCellular2Edge3(double x, double y, double z) {
-    int xr = fastRound(x);
-    int yr = fastRound(y);
-    int zr = fastRound(z);
-
-    double distance = 999999.0;
-    double distance2 = 999999.0;
+    final xr = fastRound(x), yr = fastRound(y), zr = fastRound(z);
+    var distance = 999999.0, distance2 = 999999.0;
 
     switch (cellularDistanceFunction) {
       case CellularDistanceFunction.Euclidean:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            for (int zi = zr - 1; zi <= zr + 1; zi++) {
-              Float3 vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            for (var zi = zr - 1; zi <= zr + 1; zi++) {
+              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
 
-              double vecX = xi - x + vec.x,
+              final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
                   vecZ = zi - z + vec.z,
                   newDistance = vecX * vecX + vecY * vecY + vecZ * vecZ;
@@ -151,12 +147,12 @@ class CellularNoise {
         }
         break;
       case CellularDistanceFunction.Manhattan:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            for (int zi = zr - 1; zi <= zr + 1; zi++) {
-              Float3 vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            for (var zi = zr - 1; zi <= zr + 1; zi++) {
+              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
 
-              double vecX = xi - x + vec.x,
+              final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
                   vecZ = zi - z + vec.z,
                   newDistance = vecX.abs() + vecY.abs() + vecZ.abs();
@@ -168,12 +164,12 @@ class CellularNoise {
         }
         break;
       case CellularDistanceFunction.Natural:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            for (int zi = zr - 1; zi <= zr + 1; zi++) {
-              Float3 vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            for (var zi = zr - 1; zi <= zr + 1; zi++) {
+              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
 
-              double vecX = xi - x + vec.x,
+              final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
                   vecZ = zi - z + vec.z,
                   newDistance = (vecX.abs() + vecY.abs() + vecZ.abs()) +
@@ -219,18 +215,17 @@ class CellularNoise {
   }
 
   double singleCellular2(double x, double y) {
-    int xr = fastRound(x), yr = fastRound(y);
-
-    double distance = 999999.0;
-    int xc = 0, yc = 0;
+    final xr = fastRound(x), yr = fastRound(y);
+    var distance = 999999.0;
+    var xc = 0, yc = 0;
 
     switch (cellularDistanceFunction) {
       case CellularDistanceFunction.Euclidean:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            Float2 vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
 
-            double vecX = xi - x + vec.x,
+            final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
                 newDistance = vecX * vecX + vecY * vecY;
 
@@ -243,11 +238,11 @@ class CellularNoise {
         }
         break;
       case CellularDistanceFunction.Manhattan:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            Float2 vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
 
-            double vecX = xi - x + vec.x,
+            final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
                 newDistance = (vecX.abs() + vecY.abs());
 
@@ -260,11 +255,11 @@ class CellularNoise {
         }
         break;
       case CellularDistanceFunction.Natural:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            Float2 vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
 
-            double vecX = xi - x + vec.x,
+            final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
                 newDistance =
                     (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
@@ -291,17 +286,16 @@ class CellularNoise {
   }
 
   double singleCellular2Edge2(double x, double y) {
-    int xr = fastRound(x), yr = fastRound(y);
-
-    double distance = 999999.0, distance2 = 999999.0;
+    final xr = fastRound(x), yr = fastRound(y);
+    var distance = 999999.0, distance2 = 999999.0;
 
     switch (cellularDistanceFunction) {
       case CellularDistanceFunction.Euclidean:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            Float2 vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
 
-            double vecX = xi - x + vec.x,
+            final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
                 newDistance = vecX * vecX + vecY * vecY;
 
@@ -311,11 +305,11 @@ class CellularNoise {
         }
         break;
       case CellularDistanceFunction.Manhattan:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            Float2 vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
 
-            double vecX = xi - x + vec.x,
+            final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
                 newDistance = vecX.abs() + vecY.abs();
 
@@ -325,11 +319,11 @@ class CellularNoise {
         }
         break;
       case CellularDistanceFunction.Natural:
-        for (int xi = xr - 1; xi <= xr + 1; xi++) {
-          for (int yi = yr - 1; yi <= yr + 1; yi++) {
-            Float2 vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+        for (var xi = xr - 1; xi <= xr + 1; xi++) {
+          for (var yi = yr - 1; yi <= yr + 1; yi++) {
+            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
 
-            double vecX = xi - x + vec.x,
+            final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
                 newDistance =
                     (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
@@ -361,12 +355,12 @@ class CellularNoise {
       singleGradientPerturb3(seed, gradientPerturbAmp, frequency, v3);
 
   void gradientPerturbFractal3(Vector3f v3) {
-    int seed = this.seed;
-    double amp = gradientPerturbAmp * fractalBounding, freq = frequency;
+    var seed = this.seed;
+    var amp = gradientPerturbAmp * fractalBounding, freq = frequency;
 
     singleGradientPerturb3(seed, amp, frequency, v3);
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       freq *= lacunarity;
       amp *= gain;
       singleGradientPerturb3(++seed, amp, freq, v3);
@@ -375,9 +369,8 @@ class CellularNoise {
 
   void singleGradientPerturb3(
       int seed, double perturbAmp, double frequency, Vector3f v3) {
-    double xf = v3.x * frequency, yf = v3.y * frequency, zf = v3.z * frequency;
-
-    int x0 = fastFloor(xf),
+    final xf = v3.x * frequency, yf = v3.y * frequency, zf = v3.z * frequency;
+    var x0 = fastFloor(xf),
         y0 = fastFloor(yf),
         z0 = fastFloor(zf),
         x1 = x0 + 1,
@@ -403,17 +396,17 @@ class CellularNoise {
         break;
     }
 
-    Float3 vec0 = CELL_3D[hash3D(seed, x0, y0, z0) & 255],
+    var vec0 = CELL_3D[hash3D(seed, x0, y0, z0) & 255],
         vec1 = CELL_3D[hash3D(seed, x1, y0, z0) & 255];
 
-    double lx0x = lerp(vec0.x, vec1.x, xs),
+    var lx0x = lerp(vec0.x, vec1.x, xs),
         ly0x = lerp(vec0.y, vec1.y, xs),
         lz0x = lerp(vec0.z, vec1.z, xs);
 
     vec0 = CELL_3D[hash3D(seed, x0, y1, z0) & 255];
     vec1 = CELL_3D[hash3D(seed, x1, y1, z0) & 255];
 
-    double lx1x = lerp(vec0.x, vec1.x, xs),
+    var lx1x = lerp(vec0.x, vec1.x, xs),
         ly1x = lerp(vec0.y, vec1.y, xs),
         lz1x = lerp(vec0.z, vec1.z, xs),
         lx0y = lerp(lx0x, lx1x, ys),
@@ -443,12 +436,12 @@ class CellularNoise {
       singleGradientPerturb2(seed, gradientPerturbAmp, frequency, v2);
 
   void gradientPerturbFractal2(Vector2f v2) {
-    int seed = this.seed;
-    double amp = gradientPerturbAmp * fractalBounding, freq = frequency;
+    var seed = this.seed;
+    var amp = gradientPerturbAmp * fractalBounding, freq = frequency;
 
     singleGradientPerturb2(seed, amp, frequency, v2);
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       freq *= lacunarity;
       amp *= gain;
       singleGradientPerturb2(++seed, amp, freq, v2);
@@ -457,9 +450,8 @@ class CellularNoise {
 
   void singleGradientPerturb2(
       int seed, double perturbAmp, double frequency, Vector2f v2) {
-    double xf = v2.x * frequency, yf = v2.y * frequency;
-
-    int x0 = fastFloor(xf), y0 = fastFloor(yf), x1 = x0 + 1, y1 = y0 + 1;
+    final xf = v2.x * frequency, yf = v2.y * frequency;
+    final x0 = fastFloor(xf), y0 = fastFloor(yf), x1 = x0 + 1, y1 = y0 + 1;
 
     double xs, ys;
     switch (interp) {
@@ -477,15 +469,15 @@ class CellularNoise {
         break;
     }
 
-    Float2 vec0 = CELL_2D[hash2D(seed, x0, y0) & 255],
+    var vec0 = CELL_2D[hash2D(seed, x0, y0) & 255],
         vec1 = CELL_2D[hash2D(seed, x1, y0) & 255];
 
-    double lx0x = lerp(vec0.x, vec1.x, xs), ly0x = lerp(vec0.y, vec1.y, xs);
+    final lx0x = lerp(vec0.x, vec1.x, xs), ly0x = lerp(vec0.y, vec1.y, xs);
 
     vec0 = CELL_2D[hash2D(seed, x0, y1) & 255];
     vec1 = CELL_2D[hash2D(seed, x1, y1) & 255];
 
-    double lx1x = lerp(vec0.x, vec1.x, xs), ly1x = lerp(vec0.y, vec1.y, xs);
+    final lx1x = lerp(vec0.x, vec1.x, xs), ly1x = lerp(vec0.y, vec1.y, xs);
 
     v2.x += lerp(lx0x, lx1x, ys) * perturbAmp;
     v2.y += lerp(ly0x, ly1x, ys) * perturbAmp;

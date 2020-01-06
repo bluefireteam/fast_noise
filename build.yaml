@@ -1,0 +1,10 @@
+targets:
+  fast_noise:
+    builders:
+      build_web_compilers|entrypoint:
+        generate_for:
+          - test/**_test.dart
+          - web/**.dart
+        options:
+          dart2js_args:
+            - -O4

@@ -145,12 +145,12 @@ void main() {
 
 void render(List<List<double>> map, int w, int h) {
   final container = querySelector('#canvas-container');
-  final canvas = new CanvasElement(width: w, height: h);
+  final canvas = CanvasElement(width: w, height: h);
   final context = canvas.getContext('2d') as CanvasRenderingContext2D;
   final imageData = context.createImageData(w, h);
 
-  for (int x = 0; x < w; x++) {
-    for (int y = 0; y < h; y++) {
+  for (var x = 0; x < w; x++) {
+    for (var y = 0; y < h; y++) {
       var s = 4 * (y * h + x);
       var value = (128 + 128 * map[x][y]).floor();
 

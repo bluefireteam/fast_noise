@@ -19,7 +19,7 @@ class ValueNoise {
       this.gain = .5,
       this.fractalType = FractalType.FBM,
       this.cellularReturnType = CellularReturnType.CellValue})
-      : this.fractalBounding = calculateFractalBounding(gain, octaves);
+      : fractalBounding = calculateFractalBounding(gain, octaves);
 
   double getValueFractal3(double x, double y, double z) {
     x *= frequency;
@@ -38,11 +38,10 @@ class ValueNoise {
   }
 
   double singleValueFractalFBM3(double x, double y, double z) {
-    int seed = this.seed;
-    double sum = singleValue3(seed, x, y, z);
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = singleValue3(seed, x, y, z), amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
       z *= lacunarity;
@@ -55,11 +54,10 @@ class ValueNoise {
   }
 
   double singleValueFractalBillow3(double x, double y, double z) {
-    int seed = this.seed;
-    double sum = singleValue3(seed, x, y, z).abs() * 2.0 - 1.0;
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = singleValue3(seed, x, y, z).abs() * 2.0 - 1.0, amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
       z *= lacunarity;
@@ -72,11 +70,10 @@ class ValueNoise {
   }
 
   double singleValueFractalRigidMulti3(double x, double y, double z) {
-    int seed = this.seed;
-    double sum = 1.0 - singleValue3(seed, x, y, z).abs();
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = 1.0 - singleValue3(seed, x, y, z).abs(), amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
       z *= lacunarity;
@@ -88,19 +85,18 @@ class ValueNoise {
     return sum;
   }
 
-  double getValue3(double x, double y, double z) {
-    return singleValue3(seed, x * frequency, y * frequency, z * frequency);
-  }
+  double getValue3(double x, double y, double z) =>
+      singleValue3(seed, x * frequency, y * frequency, z * frequency);
 
   double singleValue3(int seed, double x, double y, double z) {
-    int x0 = fastFloor(x);
-    int y0 = fastFloor(y);
-    int z0 = fastFloor(z);
-    int x1 = x0 + 1;
-    int y1 = y0 + 1;
-    int z1 = z0 + 1;
-
+    final x0 = fastFloor(x),
+        y0 = fastFloor(y),
+        z0 = fastFloor(z),
+        x1 = x0 + 1,
+        y1 = y0 + 1,
+        z1 = z0 + 1;
     double xs, ys, zs;
+
     switch (interp) {
       case Interp.Linear:
         xs = x - x0;
@@ -119,19 +115,16 @@ class ValueNoise {
         break;
     }
 
-    double xf00 =
-        lerp(valCoord3D(seed, x0, y0, z0), valCoord3D(seed, x1, y0, z0), xs);
-    double xf10 =
-        lerp(valCoord3D(seed, x0, y1, z0), valCoord3D(seed, x1, y1, z0), xs);
-    double xf01 =
-        lerp(valCoord3D(seed, x0, y0, z1), valCoord3D(seed, x1, y0, z1), xs);
-    double xf11 =
-        lerp(valCoord3D(seed, x0, y1, z1), valCoord3D(seed, x1, y1, z1), xs);
+    final xf00 = lerp(
+            valCoord3D(seed, x0, y0, z0), valCoord3D(seed, x1, y0, z0), xs),
+        xf10 = lerp(
+            valCoord3D(seed, x0, y1, z0), valCoord3D(seed, x1, y1, z0), xs),
+        xf01 = lerp(
+            valCoord3D(seed, x0, y0, z1), valCoord3D(seed, x1, y0, z1), xs),
+        xf11 = lerp(
+            valCoord3D(seed, x0, y1, z1), valCoord3D(seed, x1, y1, z1), xs);
 
-    double yf0 = lerp(xf00, xf10, ys);
-    double yf1 = lerp(xf01, xf11, ys);
-
-    return lerp(yf0, yf1, zs);
+    return lerp(lerp(xf00, xf10, ys), lerp(xf01, xf11, ys), zs);
   }
 
   double getValueFractal2(double x, double y) {
@@ -150,11 +143,10 @@ class ValueNoise {
   }
 
   double singleValueFractalFBM2(double x, double y) {
-    int seed = this.seed;
-    double sum = singleValue2(seed, x, y);
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = singleValue2(seed, x, y), amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
 
@@ -166,11 +158,10 @@ class ValueNoise {
   }
 
   double singleValueFractalBillow2(double x, double y) {
-    int seed = this.seed;
-    double sum = singleValue2(seed, x, y).abs() * 2.0 - 1.0;
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = singleValue2(seed, x, y).abs() * 2.0 - 1.0, amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
       amp *= gain;
@@ -181,11 +172,10 @@ class ValueNoise {
   }
 
   double singleValueFractalRigidMulti2(double x, double y) {
-    int seed = this.seed;
-    double sum = 1.0 - singleValue2(seed, x, y).abs();
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = 1.0 - singleValue2(seed, x, y).abs(), amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
 
@@ -200,12 +190,9 @@ class ValueNoise {
       singleValue2(seed, x * frequency, y * frequency);
 
   double singleValue2(int seed, double x, double y) {
-    int x0 = fastFloor(x);
-    int y0 = fastFloor(y);
-    int x1 = x0 + 1;
-    int y1 = y0 + 1;
-
+    final x0 = fastFloor(x), y0 = fastFloor(y), x1 = x0 + 1, y1 = y0 + 1;
     double xs, ys;
+
     switch (interp) {
       case Interp.Linear:
         xs = x - x0;
@@ -221,9 +208,7 @@ class ValueNoise {
         break;
     }
 
-    double xf0 = lerp(valCoord2D(seed, x0, y0), valCoord2D(seed, x1, y0), xs);
-    double xf1 = lerp(valCoord2D(seed, x0, y1), valCoord2D(seed, x1, y1), xs);
-
-    return lerp(xf0, xf1, ys);
+    return lerp(lerp(valCoord2D(seed, x0, y0), valCoord2D(seed, x1, y0), xs),
+        lerp(valCoord2D(seed, x0, y1), valCoord2D(seed, x1, y1), xs), ys);
   }
 }

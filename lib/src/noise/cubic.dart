@@ -19,7 +19,7 @@ class CubicNoise {
       this.gain = .5,
       this.fractalType = FractalType.FBM,
       this.cellularReturnType = CellularReturnType.CellValue})
-      : this.fractalBounding = calculateFractalBounding(gain, octaves);
+      : fractalBounding = calculateFractalBounding(gain, octaves);
 
   double getCubicFractal3(double x, double y, double z) {
     x *= frequency;
@@ -39,10 +39,8 @@ class CubicNoise {
   }
 
   double singleCubicFractalFBM3(double x, double y, double z) {
-    int seed = this.seed;
-    double sum = singleCubic3(seed, x, y, z);
-    double amp = 1.0;
-    int i = 0;
+    var seed = this.seed, i = 0;
+    var sum = singleCubic3(seed, x, y, z), amp = 1.0;
 
     while (++i < octaves) {
       x *= lacunarity;
@@ -57,10 +55,8 @@ class CubicNoise {
   }
 
   double singleCubicFractalBillow3(double x, double y, double z) {
-    int seed = this.seed;
-    double sum = singleCubic3(seed, x, y, z).abs() * 2 - 1;
-    double amp = 1.0;
-    int i = 0;
+    var seed = this.seed, i = 0;
+    var sum = singleCubic3(seed, x, y, z).abs() * 2 - 1, amp = 1.0;
 
     while (++i < octaves) {
       x *= lacunarity;
@@ -75,10 +71,8 @@ class CubicNoise {
   }
 
   double singleCubicFractalRigidMulti3(double x, double y, double z) {
-    int seed = this.seed;
-    double sum = 1.0 - singleCubic3(seed, x, y, z).abs();
-    double amp = 1.0;
-    int i = 0;
+    var seed = this.seed, i = 0;
+    var sum = 1.0 - singleCubic3(seed, x, y, z).abs(), amp = 1.0;
 
     while (++i < octaves) {
       x *= lacunarity;
@@ -98,9 +92,8 @@ class CubicNoise {
   static const double CUBIC_3D_BOUNDING = 1.0 / (1.5 * 1.5 * 1.5);
 
   double singleCubic3(int seed, double x, double y, double z) {
-    int x1 = fastFloor(x), y1 = fastFloor(y), z1 = fastFloor(z);
-
-    int x0 = x1 - 1,
+    final x1 = fastFloor(x), y1 = fastFloor(y), z1 = fastFloor(z);
+    final x0 = x1 - 1,
         y0 = y1 - 1,
         z0 = z1 - 1,
         x2 = x1 + 1,
@@ -109,8 +102,7 @@ class CubicNoise {
         x3 = x1 + 2,
         y3 = y1 + 2,
         z3 = z1 + 2;
-
-    double xs = x - x1, ys = y - y1, zs = z - z1;
+    final xs = x - x1, ys = y - y1, zs = z - z1;
 
     return cubicLerp(
             cubicLerp(
@@ -238,10 +230,8 @@ class CubicNoise {
   }
 
   double singleCubicFractalFBM2(double x, double y) {
-    int seed = this.seed;
-    double sum = singleCubic2(seed, x, y);
-    double amp = 1.0;
-    int i = 0;
+    var seed = this.seed, i = 0;
+    var sum = singleCubic2(seed, x, y), amp = 1.0;
 
     while (++i < octaves) {
       x *= lacunarity;
@@ -255,10 +245,8 @@ class CubicNoise {
   }
 
   double singleCubicFractalBillow2(double x, double y) {
-    int seed = this.seed;
-    double sum = singleCubic2(seed, x, y).abs() * 2.0 - 1.0;
-    double amp = 1.0;
-    int i = 0;
+    var seed = this.seed, i = 0;
+    var sum = singleCubic2(seed, x, y).abs() * 2.0 - 1.0, amp = 1.0;
 
     while (++i < octaves) {
       x *= lacunarity;
@@ -272,10 +260,8 @@ class CubicNoise {
   }
 
   double singleCubicFractalRigidMulti2(double x, double y) {
-    int seed = this.seed;
-    double sum = 1 - singleCubic2(seed, x, y).abs();
-    double amp = 1.0;
-    int i = 0;
+    var seed = this.seed, i = 0;
+    var sum = 1 - singleCubic2(seed, x, y).abs(), amp = 1.0;
 
     while (++i < octaves) {
       x *= lacunarity;
@@ -298,16 +284,14 @@ class CubicNoise {
   static const double CUBIC_2D_BOUNDING = 1.0 / (1.5 * 1.5);
 
   double singleCubic2(int seed, double x, double y) {
-    int x1 = fastFloor(x), y1 = fastFloor(y);
-
-    int x0 = x1 - 1,
+    final x1 = fastFloor(x), y1 = fastFloor(y);
+    final x0 = x1 - 1,
         y0 = y1 - 1,
         x2 = x1 + 1,
         y2 = y1 + 1,
         x3 = x1 + 2,
         y3 = y1 + 2;
-
-    double xs = x - x1, ys = y - y1;
+    final xs = x - x1, ys = y - y1;
 
     return cubicLerp(
             cubicLerp(valCoord2D(seed, x0, y0), valCoord2D(seed, x1, y0),

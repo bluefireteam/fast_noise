@@ -6,18 +6,21 @@ class SimplexFractalBenchmark extends BenchmarkBase {
   const SimplexFractalBenchmark() : super('SimplexFractal');
 
   static void main() {
-    new SimplexFractalBenchmark().report();
+    SimplexFractalBenchmark().report();
   }
 
+  @override
   void run() {
     noise2(128, 128, noiseType: NoiseType.SimplexFractal);
   }
 
+  @override
   void setup() {}
 
+  @override
   void teardown() {}
 }
 
-main() {
+void main() {
   SimplexFractalBenchmark.main();
 }

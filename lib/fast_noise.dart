@@ -55,9 +55,9 @@ List<List<double>> noise2(int width, int height,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          double dx = x * frequency, dy = y * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          final dx = x * frequency, dy = y * frequency;
 
           switch (cellularReturnType) {
             case CellularReturnType.CellValue:
@@ -84,9 +84,9 @@ List<List<double>> noise2(int width, int height,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          double dx = x * frequency, dy = y * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          final dx = x * frequency, dy = y * frequency;
 
           map[x][y] = noise.singleCubic2(seed, dx, dy);
         }
@@ -105,9 +105,9 @@ List<List<double>> noise2(int width, int height,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          double dx = x * frequency, dy = y * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          final dx = x * frequency, dy = y * frequency;
 
           switch (fractalType) {
             case FractalType.FBM:
@@ -136,9 +136,9 @@ List<List<double>> noise2(int width, int height,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          double dx = x * frequency, dy = y * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          final dx = x * frequency, dy = y * frequency;
 
           map[x][y] = noise.singlePerlin2(seed, dx, dy);
         }
@@ -157,9 +157,9 @@ List<List<double>> noise2(int width, int height,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          double dx = x * frequency, dy = y * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          final dx = x * frequency, dy = y * frequency;
 
           switch (fractalType) {
             case FractalType.FBM:
@@ -188,9 +188,9 @@ List<List<double>> noise2(int width, int height,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          double dx = x * frequency, dy = y * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          final dx = x * frequency, dy = y * frequency;
 
           map[x][y] = noise.singleSimplex2(seed, dx, dy);
         }
@@ -209,9 +209,9 @@ List<List<double>> noise2(int width, int height,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          double dx = x * frequency, dy = y * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          final dx = x * frequency, dy = y * frequency;
 
           switch (fractalType) {
             case FractalType.FBM:
@@ -240,9 +240,9 @@ List<List<double>> noise2(int width, int height,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          double dx = x * frequency, dy = y * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          final dx = x * frequency, dy = y * frequency;
 
           map[x][y] = noise.singleValue2(seed, dx, dy);
         }
@@ -261,9 +261,9 @@ List<List<double>> noise2(int width, int height,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          double dx = x * frequency, dy = y * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          final dx = x * frequency, dy = y * frequency;
 
           switch (fractalType) {
             case FractalType.FBM:
@@ -284,9 +284,9 @@ List<List<double>> noise2(int width, int height,
     case NoiseType.WhiteNoise:
       final noise = WhiteNoise(seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          double dx = x * frequency, dy = y * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          final dx = x * frequency, dy = y * frequency;
 
           map[x][y] = noise.getWhiteNoise2(dx.toInt(), dy.toInt());
         }
@@ -328,10 +328,10 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          for (int z = 0; z < height; z++) {
-            double dx = x * frequency, dy = y * frequency, dz = z * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          for (var z = 0; z < height; z++) {
+            final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
             switch (cellularReturnType) {
               case CellularReturnType.CellValue:
@@ -359,10 +359,10 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          for (int z = 0; z < height; z++) {
-            double dx = x * frequency, dy = y * frequency, dz = z * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          for (var z = 0; z < height; z++) {
+            final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
             map[x][y][z] = noise.singleCubic3(seed, dx, dy, dz);
           }
@@ -382,10 +382,10 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          for (int z = 0; z < height; z++) {
-            double dx = x * frequency, dy = y * frequency, dz = z * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          for (var z = 0; z < height; z++) {
+            final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
             switch (fractalType) {
               case FractalType.FBM:
@@ -415,10 +415,10 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          for (int z = 0; z < height; z++) {
-            double dx = x * frequency, dy = y * frequency, dz = z * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          for (var z = 0; z < height; z++) {
+            final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
             map[x][y][z] = noise.singlePerlin3(seed, dx, dy, dz);
           }
@@ -438,10 +438,10 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          for (int z = 0; z < height; z++) {
-            double dx = x * frequency, dy = y * frequency, dz = z * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          for (var z = 0; z < height; z++) {
+            final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
             switch (fractalType) {
               case FractalType.FBM:
@@ -471,10 +471,10 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          for (int z = 0; z < height; z++) {
-            double dx = x * frequency, dy = y * frequency, dz = z * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          for (var z = 0; z < height; z++) {
+            final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
             map[x][y][z] = noise.singleSimplex3(seed, dx, dy, dz);
           }
@@ -494,10 +494,10 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          for (int z = 0; z < height; z++) {
-            double dx = x * frequency, dy = y * frequency, dz = z * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          for (var z = 0; z < height; z++) {
+            final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
             switch (fractalType) {
               case FractalType.FBM:
@@ -528,10 +528,10 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          for (int z = 0; z < height; z++) {
-            double dx = x * frequency, dy = y * frequency, dz = z * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          for (var z = 0; z < height; z++) {
+            final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
             map[x][y][z] = noise.singleValue3(seed, dx, dy, dz);
           }
@@ -551,10 +551,10 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           octaves: octaves,
           seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          for (int z = 0; z < height; z++) {
-            double dx = x * frequency, dy = y * frequency, dz = z * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          for (var z = 0; z < height; z++) {
+            final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
             switch (fractalType) {
               case FractalType.FBM:
@@ -576,10 +576,10 @@ List<List<List<double>>> noise3(int width, int height, int depth,
     case NoiseType.WhiteNoise:
       final noise = WhiteNoise(seed: seed);
 
-      for (int x = 0; x < width; x++) {
-        for (int y = 0; y < height; y++) {
-          for (int z = 0; z < height; z++) {
-            double dx = x * frequency, dy = y * frequency, dz = z * frequency;
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < height; y++) {
+          for (var z = 0; z < height; z++) {
+            final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
             map[x][y][z] =
                 noise.getWhiteNoise3(dx.toInt(), dy.toInt(), dz.toInt());

@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="scaffolded-by" content="https://github.com/google/stagehand">
     <title>Preview</title>
-    <script defer src="preview.dart" type="application/dart"></script>
-    <script defer src="packages/browser/dart.js"></script>
+    <script defer src="preview.dart.js"></script>
     <link rel="stylesheet" href="preview.css">
 </head>
 <body>
@@ -23,15 +22,15 @@
             </li>
             <li>
                 <label for="input-freq">Frequency:&nbsp;</label>
-                <input id="input-freq" type="number" value="0.01" step="0.001">
+                <input id="input-freq" type="number" value="0.015" step="0.001">
             </li>
             <li>
                 <label for="input-gain">Gain:&nbsp;</label>
-                <input id="input-gain" type="number" value="0.5" step="0.025">
+                <input id="input-gain" type="number" value="0.3" step="0.025">
             </li>
             <li>
                 <label for="input-lacunarity">Lacunarity:&nbsp;</label>
-                <input id="input-lacunarity" type="number" value="2.0" step="0.5">
+                <input id="input-lacunarity" type="number" value="2.5" step="0.5">
             </li>
             <li>
                 <label for="input-octaves">Octaves:&nbsp;</label>
@@ -46,7 +45,7 @@
                     <option>Perlin</option>
                     <option>PerlinFractal</option>
                     <option>Simplex</option>
-                    <option>SimplexFractal</option>
+                    <option selected>SimplexFractal</option>
                     <option>Value</option>
                     <option>ValueFractal</option>
                     <option>WhiteNoise</option>
@@ -55,7 +54,7 @@
             <li>
                 <label for="select-fractal-type">Fractal Type:&nbsp;</label>
                 <select id="select-fractal-type">
-                    <option>FBM</option>
+                    <option selected>FBM</option>
                     <option>Billow</option>
                     <option>RigidMulti</option>
                 </select>
@@ -65,13 +64,13 @@
                 <select id="select-interp">
                     <option>Linear</option>
                     <option>Hermite</option>
-                    <option>Quintic</option>
+                    <option selected>Quintic</option>
                 </select>
             </li>
             <li>
                 <label for="select-cellular-distance-fnc">Cellular Distance Function:&nbsp;</label>
                 <select id="select-cellular-distance-fnc">
-                    <option>Euclidean</option>
+                    <option selected>Euclidean</option>
                     <option>Manhattan</option>
                     <option>Natural</option>
                 </select>
@@ -81,7 +80,7 @@
                 <select id="select-cellular-return-type">
                     <option>CellValue</option>
                     <option>Distance</option>
-                    <option>Distance2</option>
+                    <option selected>Distance2</option>
                     <option>Distance2Add</option>
                     <option>Distance2Sub</option>
                     <option>Distance2Mul</option>

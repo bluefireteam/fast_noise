@@ -19,7 +19,7 @@ class PerlinNoise {
       this.gain = .5,
       this.fractalType = FractalType.FBM,
       this.cellularReturnType = CellularReturnType.CellValue})
-      : this.fractalBounding = calculateFractalBounding(gain, octaves);
+      : fractalBounding = calculateFractalBounding(gain, octaves);
 
   double getPerlinFractal3(double x, double y, double z) {
     x *= frequency;
@@ -39,11 +39,10 @@ class PerlinNoise {
   }
 
   double singlePerlinFractalFBM3(double x, double y, double z) {
-    int seed = this.seed;
-    double sum = singlePerlin3(seed, x, y, z);
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = singlePerlin3(seed, x, y, z), amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
       z *= lacunarity;
@@ -56,11 +55,10 @@ class PerlinNoise {
   }
 
   double singlePerlinFractalBillow3(double x, double y, double z) {
-    int seed = this.seed;
-    double sum = singlePerlin3(seed, x, y, z).abs() * 2.0 - 1.0;
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = singlePerlin3(seed, x, y, z).abs() * 2.0 - 1.0, amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
       z *= lacunarity;
@@ -73,11 +71,10 @@ class PerlinNoise {
   }
 
   double singlePerlinFractalRigidMulti3(double x, double y, double z) {
-    int seed = this.seed;
-    double sum = 1.0 - singlePerlin3(seed, x, y, z).abs();
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = 1.0 - singlePerlin3(seed, x, y, z).abs(), amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
       z *= lacunarity;
@@ -89,19 +86,18 @@ class PerlinNoise {
     return sum;
   }
 
-  double getPerlin3(double x, double y, double z) {
-    return singlePerlin3(seed, x * frequency, y * frequency, z * frequency);
-  }
+  double getPerlin3(double x, double y, double z) =>
+      singlePerlin3(seed, x * frequency, y * frequency, z * frequency);
 
   double singlePerlin3(int seed, double x, double y, double z) {
-    int x0 = fastFloor(x);
-    int y0 = fastFloor(y);
-    int z0 = fastFloor(z);
-    int x1 = x0 + 1;
-    int y1 = y0 + 1;
-    int z1 = z0 + 1;
-
+    final x0 = fastFloor(x),
+        y0 = fastFloor(y),
+        z0 = fastFloor(z),
+        x1 = x0 + 1,
+        y1 = y0 + 1,
+        z1 = z0 + 1;
     double xs, ys, zs;
+
     switch (interp) {
       case Interp.Linear:
         xs = x - x0;
@@ -120,26 +116,22 @@ class PerlinNoise {
         break;
     }
 
-    double xd0 = x - x0;
-    double yd0 = y - y0;
-    double zd0 = z - z0;
-    double xd1 = xd0 - 1;
-    double yd1 = yd0 - 1;
-    double zd1 = zd0 - 1;
+    final xd0 = x - x0,
+        yd0 = y - y0,
+        zd0 = z - z0,
+        xd1 = xd0 - 1,
+        yd1 = yd0 - 1,
+        zd1 = zd0 - 1,
+        xf00 = lerp(gradCoord3D(seed, x0, y0, z0, xd0, yd0, zd0),
+            gradCoord3D(seed, x1, y0, z0, xd1, yd0, zd0), xs),
+        xf10 = lerp(gradCoord3D(seed, x0, y1, z0, xd0, yd1, zd0),
+            gradCoord3D(seed, x1, y1, z0, xd1, yd1, zd0), xs),
+        xf01 = lerp(gradCoord3D(seed, x0, y0, z1, xd0, yd0, zd1),
+            gradCoord3D(seed, x1, y0, z1, xd1, yd0, zd1), xs),
+        xf11 = lerp(gradCoord3D(seed, x0, y1, z1, xd0, yd1, zd1),
+            gradCoord3D(seed, x1, y1, z1, xd1, yd1, zd1), xs);
 
-    double xf00 = lerp(gradCoord3D(seed, x0, y0, z0, xd0, yd0, zd0),
-        gradCoord3D(seed, x1, y0, z0, xd1, yd0, zd0), xs);
-    double xf10 = lerp(gradCoord3D(seed, x0, y1, z0, xd0, yd1, zd0),
-        gradCoord3D(seed, x1, y1, z0, xd1, yd1, zd0), xs);
-    double xf01 = lerp(gradCoord3D(seed, x0, y0, z1, xd0, yd0, zd1),
-        gradCoord3D(seed, x1, y0, z1, xd1, yd0, zd1), xs);
-    double xf11 = lerp(gradCoord3D(seed, x0, y1, z1, xd0, yd1, zd1),
-        gradCoord3D(seed, x1, y1, z1, xd1, yd1, zd1), xs);
-
-    double yf0 = lerp(xf00, xf10, ys);
-    double yf1 = lerp(xf01, xf11, ys);
-
-    return lerp(yf0, yf1, zs);
+    return lerp(lerp(xf00, xf10, ys), lerp(xf01, xf11, ys), zs);
   }
 
   double getPerlinFractal2(double x, double y) {
@@ -159,11 +151,10 @@ class PerlinNoise {
   }
 
   double singlePerlinFractalFBM2(double x, double y) {
-    int seed = this.seed;
-    double sum = singlePerlin2(seed, x, y);
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = singlePerlin2(seed, x, y), amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
 
@@ -175,11 +166,10 @@ class PerlinNoise {
   }
 
   double singlePerlinFractalBillow2(double x, double y) {
-    int seed = this.seed;
-    double sum = singlePerlin2(seed, x, y).abs() * 2.0 - 1.0;
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = singlePerlin2(seed, x, y).abs() * 2.0 - 1.0, amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
 
@@ -191,11 +181,10 @@ class PerlinNoise {
   }
 
   double singlePerlinFractalRigidMulti2(double x, double y) {
-    int seed = this.seed;
-    double sum = 1.0 - singlePerlin2(seed, x, y).abs();
-    double amp = 1.0;
+    var seed = this.seed;
+    var sum = 1.0 - singlePerlin2(seed, x, y).abs(), amp = 1.0;
 
-    for (int i = 1; i < octaves; i++) {
+    for (var i = 1; i < octaves; i++) {
       x *= lacunarity;
       y *= lacunarity;
 
@@ -210,12 +199,9 @@ class PerlinNoise {
       singlePerlin2(seed, x * frequency, y * frequency);
 
   double singlePerlin2(int seed, double x, double y) {
-    int x0 = fastFloor(x);
-    int y0 = fastFloor(y);
-    int x1 = x0 + 1;
-    int y1 = y0 + 1;
-
+    final x0 = fastFloor(x), y0 = fastFloor(y), x1 = x0 + 1, y1 = y0 + 1;
     double xs, ys;
+
     switch (interp) {
       case Interp.Linear:
         xs = x - x0;
@@ -231,16 +217,13 @@ class PerlinNoise {
         break;
     }
 
-    double xd0 = x - x0;
-    double yd0 = y - y0;
-    double xd1 = xd0 - 1;
-    double yd1 = yd0 - 1;
+    final xd0 = x - x0, yd0 = y - y0, xd1 = xd0 - 1, yd1 = yd0 - 1;
 
-    double xf0 = lerp(gradCoord2D(seed, x0, y0, xd0, yd0),
-        gradCoord2D(seed, x1, y0, xd1, yd0), xs);
-    double xf1 = lerp(gradCoord2D(seed, x0, y1, xd0, yd1),
-        gradCoord2D(seed, x1, y1, xd1, yd1), xs);
-
-    return lerp(xf0, xf1, ys);
+    return lerp(
+        lerp(gradCoord2D(seed, x0, y0, xd0, yd0),
+            gradCoord2D(seed, x1, y0, xd1, yd0), xs),
+        lerp(gradCoord2D(seed, x0, y1, xd0, yd1),
+            gradCoord2D(seed, x1, y1, xd1, yd1), xs),
+        ys);
   }
 }
