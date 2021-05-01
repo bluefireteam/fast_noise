@@ -3,37 +3,34 @@ import 'dart:html';
 import 'package:fast_noise/fast_noise.dart';
 
 void main() {
-  var sizeInput = querySelector('#input-size') as InputElement;
-  var seedInput = querySelector('#input-seed') as InputElement;
-  var freqInput = querySelector('#input-freq') as InputElement;
-  var gainInput = querySelector('#input-gain') as InputElement;
-  var lacunarityInput = querySelector('#input-lacunarity') as InputElement;
-  var octavesInput = querySelector('#input-octaves') as InputElement;
+  var sizeInput = querySelector('#input-size') as InputElement?;
+  var seedInput = querySelector('#input-seed') as InputElement?;
+  var freqInput = querySelector('#input-freq') as InputElement?;
+  var gainInput = querySelector('#input-gain') as InputElement?;
+  var lacunarityInput = querySelector('#input-lacunarity') as InputElement?;
+  var octavesInput = querySelector('#input-octaves') as InputElement?;
 
-  var noiseTypeSelect = querySelector('#select-noise-type') as SelectElement;
-  var fractalTypeSelect =
-      querySelector('#select-fractal-type') as SelectElement;
-  var interpTypeSelect = querySelector('#select-interp') as SelectElement;
-  var cellDistFnSelect =
-      querySelector('#select-cellular-distance-fnc') as SelectElement;
-  var cellRetTypeSelect =
-      querySelector('#select-cellular-return-type') as SelectElement;
-  var renderButton = querySelector('#render-now');
+  var noiseTypeSelect = querySelector('#select-noise-type') as SelectElement?;
+  var fractalTypeSelect = querySelector('#select-fractal-type') as SelectElement?;
+  var interpTypeSelect = querySelector('#select-interp') as SelectElement?;
+  var cellDistFnSelect = querySelector('#select-cellular-distance-fnc') as SelectElement?;
+  var cellRetTypeSelect = querySelector('#select-cellular-return-type') as SelectElement?;
+  var renderButton = querySelector('#render-now')!;
 
   renderButton.onClick.listen((_) {
-    final size = int.parse(sizeInput.value),
-        seed = int.parse(seedInput.value),
-        freq = double.parse(freqInput.value),
-        gain = double.parse(gainInput.value),
-        lacunarity = double.parse(lacunarityInput.value),
-        octaves = int.parse(octavesInput.value);
-    NoiseType noiseType;
-    FractalType fractalType;
-    Interp interp;
-    CellularReturnType cellularReturnType;
-    CellularDistanceFunction cellularDistanceFunction;
+    final size = int.parse(sizeInput!.value!),
+        seed = int.parse(seedInput!.value!),
+        freq = double.parse(freqInput!.value!) as int,
+        gain = double.parse(gainInput!.value!) as int,
+        lacunarity = double.parse(lacunarityInput!.value!) as int,
+        octaves = int.parse(octavesInput!.value!);
+    NoiseType? noiseType;
+    FractalType? fractalType;
+    Interp? interp;
+    CellularReturnType? cellularReturnType;
+    CellularDistanceFunction? cellularDistanceFunction;
 
-    switch (noiseTypeSelect.value) {
+    switch (noiseTypeSelect!.value) {
       case 'Cellular':
         noiseType = NoiseType.Cellular;
         break;
@@ -66,7 +63,7 @@ void main() {
         break;
     }
 
-    switch (fractalTypeSelect.value) {
+    switch (fractalTypeSelect!.value) {
       case 'FBM':
         fractalType = FractalType.FBM;
         break;
@@ -78,7 +75,7 @@ void main() {
         break;
     }
 
-    switch (interpTypeSelect.value) {
+    switch (interpTypeSelect!.value) {
       case 'Hermite':
         interp = Interp.Hermite;
         break;
@@ -90,7 +87,7 @@ void main() {
         break;
     }
 
-    switch (cellRetTypeSelect.value) {
+    switch (cellRetTypeSelect!.value) {
       case 'Distance':
         cellularReturnType = CellularReturnType.Distance;
         break;
@@ -114,7 +111,7 @@ void main() {
         break;
     }
 
-    switch (cellDistFnSelect.value) {
+    switch (cellDistFnSelect!.value) {
       case 'Natural':
         cellularDistanceFunction = CellularDistanceFunction.Natural;
         break;
@@ -129,14 +126,14 @@ void main() {
     render(
         noise2(size, size,
             seed: seed,
-            frequency: freq,
-            gain: gain,
+            frequency: freq as double,
+            gain: gain as double,
             octaves: octaves,
             fractalType: fractalType,
             interp: interp,
             cellularReturnType: cellularReturnType,
             cellularDistanceFunction: cellularDistanceFunction,
-            lacunarity: lacunarity,
+            lacunarity: lacunarity as double,
             noiseType: noiseType),
         size,
         size);
@@ -144,7 +141,7 @@ void main() {
 }
 
 void render(List<List<double>> map, int w, int h) {
-  final container = querySelector('#canvas-container');
+  final container = querySelector('#canvas-container')!;
   final canvas = CanvasElement(width: w, height: h);
   final context = canvas.getContext('2d') as CanvasRenderingContext2D;
   final imageData = context.createImageData(w, h);

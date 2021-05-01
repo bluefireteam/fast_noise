@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:fast_noise/src/utils.dart';
 
 import 'package:fast_noise/src/noise/enums.dart';
