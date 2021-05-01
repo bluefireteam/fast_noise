@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:fast_noise/src/utils.dart';
 
 import 'package:fast_noise/src/noise/enums.dart';
@@ -222,10 +220,10 @@ class PerlinNoise {
     final xd0 = x - x0, yd0 = y - y0, xd1 = xd0 - 1, yd1 = yd0 - 1;
 
     return lerp(
-        lerp(gradCoord2D(seed, x0, y0, xd0, yd0),
-            gradCoord2D(seed, x1, y0, xd1, yd0), xs),
-        lerp(gradCoord2D(seed, x0, y1, xd0, yd1),
-            gradCoord2D(seed, x1, y1, xd1, yd1), xs),
+        lerp(
+            gradCoord2D(seed, x0, y0, xd0, yd0), gradCoord2D(seed, x1, y0, xd1, yd0), xs),
+        lerp(
+            gradCoord2D(seed, x0, y1, xd0, yd1), gradCoord2D(seed, x1, y1, xd1, yd1), xs),
         ys);
   }
 }

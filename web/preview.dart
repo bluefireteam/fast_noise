@@ -129,12 +129,12 @@ void main() {
             frequency: freq as double,
             gain: gain as double,
             octaves: octaves,
-            fractalType: fractalType,
-            interp: interp,
-            cellularReturnType: cellularReturnType,
-            cellularDistanceFunction: cellularDistanceFunction,
+            fractalType: fractalType!,
+            interp: interp!,
+            cellularReturnType: cellularReturnType!,
+            cellularDistanceFunction: cellularDistanceFunction!,
             lacunarity: lacunarity as double,
-            noiseType: noiseType),
+            noiseType: noiseType!),
         size,
         size);
   });

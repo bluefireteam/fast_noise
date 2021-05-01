@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'dart:math' as math;
 
 import 'package:fast_noise/src/types.dart';
@@ -263,8 +261,7 @@ class CellularNoise {
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
-                newDistance =
-                    (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
+                newDistance = (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
 
             if (newDistance < distance) {
               distance = newDistance;
@@ -327,8 +324,7 @@ class CellularNoise {
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
-                newDistance =
-                    (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
+                newDistance = (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
 
             distance2 = math.max(math.min(distance2, newDistance), distance);
             distance = math.min(distance, newDistance);

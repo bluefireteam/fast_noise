@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:fast_noise/src/utils.dart';
 
 import 'package:fast_noise/src/noise/enums.dart';
@@ -117,14 +115,10 @@ class ValueNoise {
         break;
     }
 
-    final xf00 = lerp(
-            valCoord3D(seed, x0, y0, z0), valCoord3D(seed, x1, y0, z0), xs),
-        xf10 = lerp(
-            valCoord3D(seed, x0, y1, z0), valCoord3D(seed, x1, y1, z0), xs),
-        xf01 = lerp(
-            valCoord3D(seed, x0, y0, z1), valCoord3D(seed, x1, y0, z1), xs),
-        xf11 = lerp(
-            valCoord3D(seed, x0, y1, z1), valCoord3D(seed, x1, y1, z1), xs);
+    final xf00 = lerp(valCoord3D(seed, x0, y0, z0), valCoord3D(seed, x1, y0, z0), xs),
+        xf10 = lerp(valCoord3D(seed, x0, y1, z0), valCoord3D(seed, x1, y1, z0), xs),
+        xf01 = lerp(valCoord3D(seed, x0, y0, z1), valCoord3D(seed, x1, y0, z1), xs),
+        xf11 = lerp(valCoord3D(seed, x0, y1, z1), valCoord3D(seed, x1, y1, z1), xs);
 
     return lerp(lerp(xf00, xf10, ys), lerp(xf01, xf11, ys), zs);
   }
