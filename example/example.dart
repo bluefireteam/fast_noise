@@ -1,31 +1,22 @@
-// @dart=2.9
+import 'dart:io';
 
-import 'dart:html';
-
+import 'package:image/image.dart' as img;
 import 'package:fast_noise/fast_noise.dart';
 
 void main() {
   const w = 512, h = 512;
-  final canvas = CanvasElement(width: w, height: h);
   final map = _getCellular(w, h);
-  final context = canvas.getContext('2d') as CanvasRenderingContext2D;
-  final imageData = context.createImageData(w, h);
-
-  context.imageSmoothingEnabled = false;
+  final image = img.Image.rgb(w, h);
 
   for (var x = 0; x < w; x++) {
     for (var y = 0; y < h; y++) {
-      var s = 4 * (y * h + x);
-      var value = (128 + 128 * map[x][y]).floor();
+      var value = (0x80 + 0x80 * map[x][y]).floor(); // grayscale
 
-      imageData.data[s] = imageData.data[s + 1] = imageData.data[s + 2] = value;
-      imageData.data[s + 3] = 255;
+      image.setPixelRgba(x, y, value, value, value, 0xff);
     }
   }
 
-  context.putImageData(imageData, 0, 0, 0, 0, w, h);
-
-  document.body.append(canvas);
+  File('./example/noise.png').writeAsBytesSync(img.encodePng(image));
 }
 
 List<List<double>> _getCellular(int w, int h) => noise2(w, h,

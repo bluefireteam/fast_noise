@@ -4,7 +4,12 @@
 library fast_noise;
 
 import 'package:fast_noise/src/noise/enums.dart'
-    show CellularDistanceFunction, CellularReturnType, FractalType, Interp, NoiseType;
+    show
+        CellularDistanceFunction,
+        CellularReturnType,
+        FractalType,
+        Interp,
+        NoiseType;
 
 import 'package:fast_noise/src/noise/cellular.dart' show CellularNoise;
 import 'package:fast_noise/src/noise/cubic.dart' show CubicNoise;
@@ -33,9 +38,10 @@ List<List<double>> noise2(int width, int height,
     final FractalType fractalType = FractalType.FBM,
     final CellularDistanceFunction cellularDistanceFunction =
         CellularDistanceFunction.Euclidean,
-    final CellularReturnType cellularReturnType = CellularReturnType.CellValue}) {
-  final map =
-      List<List<double>>.generate(width, (_) => List<double>.generate(height, (_) => .0));
+    final CellularReturnType cellularReturnType =
+        CellularReturnType.CellValue}) {
+  final map = List<List<double>>.generate(
+      width, (_) => List<double>.generate(height, (_) => .0));
 
   switch (noiseType) {
     case NoiseType.Cellular:
@@ -186,7 +192,7 @@ List<List<double>> noise2(int width, int height,
         for (var y = 0; y < height; y++) {
           final dx = x * frequency, dy = y * frequency;
 
-          map[x][y] = noise.singleSimplex2(seed, dx, dy);
+          map[x][y] = noise.singleSimplex2(seed, dx.toInt(), dy.toInt());
         }
       }
 
@@ -209,13 +215,16 @@ List<List<double>> noise2(int width, int height,
 
           switch (fractalType) {
             case FractalType.FBM:
-              map[x][y] = noise.singleSimplexFractalFBM2(dx, dy);
+              map[x][y] =
+                  noise.singleSimplexFractalFBM2(dx.toInt(), dy.toInt());
               break;
             case FractalType.Billow:
-              map[x][y] = noise.singleSimplexFractalBillow2(dx, dy);
+              map[x][y] =
+                  noise.singleSimplexFractalBillow2(dx.toInt(), dy.toInt());
               break;
             case FractalType.RigidMulti:
-              map[x][y] = noise.singleSimplexFractalRigidMulti2(dx, dy);
+              map[x][y] =
+                  noise.singleSimplexFractalRigidMulti2(dx.toInt(), dy.toInt());
               break;
           }
         }
@@ -301,7 +310,8 @@ List<List<List<double>>> noise3(int width, int height, int depth,
     final FractalType fractalType = FractalType.FBM,
     final CellularDistanceFunction cellularDistanceFunction =
         CellularDistanceFunction.Euclidean,
-    final CellularReturnType cellularReturnType = CellularReturnType.CellValue}) {
+    final CellularReturnType cellularReturnType =
+        CellularReturnType.CellValue}) {
   final map = List<List<List<double>>>.generate(
       width,
       (_) => List<List<double>>.generate(
@@ -467,7 +477,8 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           for (var z = 0; z < height; z++) {
             final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
-            map[x][y][z] = noise.singleSimplex3(seed, dx, dy, dz);
+            map[x][y][z] =
+                noise.singleSimplex3(seed, dx.toInt(), dy.toInt(), dz.toInt());
           }
         }
       }
@@ -492,13 +503,16 @@ List<List<List<double>>> noise3(int width, int height, int depth,
 
             switch (fractalType) {
               case FractalType.FBM:
-                map[x][y][z] = noise.singleSimplexFractalFBM3(dx, dy, dz);
+                map[x][y][z] = noise.singleSimplexFractalFBM3(
+                    dx.toInt(), dy.toInt(), dz.toInt());
                 break;
               case FractalType.Billow:
-                map[x][y][z] = noise.singleSimplexFractalBillow3(dx, dy, dz);
+                map[x][y][z] = noise.singleSimplexFractalBillow3(
+                    dx.toInt(), dy.toInt(), dz.toInt());
                 break;
               case FractalType.RigidMulti:
-                map[x][y][z] = noise.singleSimplexFractalRigidMulti3(dx, dy, dz);
+                map[x][y][z] = noise.singleSimplexFractalRigidMulti3(
+                    dx.toInt(), dy.toInt(), dz.toInt());
                 break;
             }
           }
@@ -571,7 +585,8 @@ List<List<List<double>>> noise3(int width, int height, int depth,
           for (var z = 0; z < height; z++) {
             final dx = x * frequency, dy = y * frequency, dz = z * frequency;
 
-            map[x][y][z] = noise.getWhiteNoise3(dx.toInt(), dy.toInt(), dz.toInt());
+            map[x][y][z] =
+                noise.getWhiteNoise3(dx.toInt(), dy.toInt(), dz.toInt());
           }
         }
       }

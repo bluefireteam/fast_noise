@@ -41,7 +41,7 @@ class CellularNoise {
   }
 
   double singleCellular3(double x, double y, double z) {
-    final xr = fastRound(x), yr = fastRound(y), zr = fastRound(z);
+    final xr = x.round(), yr = y.round(), zr = z.round();
 
     var distance = 999999.0;
     var xc = 0, yc = 0, zc = 0;
@@ -125,7 +125,7 @@ class CellularNoise {
   }
 
   double singleCellular2Edge3(double x, double y, double z) {
-    final xr = fastRound(x), yr = fastRound(y), zr = fastRound(z);
+    final xr = x.round(), yr = y.round(), zr = z.round();
     var distance = 999999.0, distance2 = 999999.0;
 
     switch (cellularDistanceFunction) {
@@ -215,7 +215,7 @@ class CellularNoise {
   }
 
   double singleCellular2(double x, double y) {
-    final xr = fastRound(x), yr = fastRound(y);
+    final xr = x.round(), yr = y.round();
     var distance = 999999.0;
     var xc = 0, yc = 0;
 
@@ -261,7 +261,8 @@ class CellularNoise {
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
-                newDistance = (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
+                newDistance =
+                    (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
 
             if (newDistance < distance) {
               distance = newDistance;
@@ -285,7 +286,7 @@ class CellularNoise {
   }
 
   double singleCellular2Edge2(double x, double y) {
-    final xr = fastRound(x), yr = fastRound(y);
+    final xr = x.round(), yr = y.round();
     var distance = 999999.0, distance2 = 999999.0;
 
     switch (cellularDistanceFunction) {
@@ -324,7 +325,8 @@ class CellularNoise {
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
-                newDistance = (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
+                newDistance =
+                    (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
 
             distance2 = math.max(math.min(distance2, newDistance), distance);
             distance = math.min(distance, newDistance);
@@ -368,9 +370,9 @@ class CellularNoise {
   void singleGradientPerturb3(
       int seed, double perturbAmp, double frequency, Vector3f v3) {
     final xf = v3.x * frequency, yf = v3.y * frequency, zf = v3.z * frequency;
-    var x0 = fastFloor(xf),
-        y0 = fastFloor(yf),
-        z0 = fastFloor(zf),
+    var x0 = xf.floor(),
+        y0 = yf.floor(),
+        z0 = zf.floor(),
         x1 = x0 + 1,
         y1 = y0 + 1,
         z1 = z0 + 1;
@@ -449,7 +451,7 @@ class CellularNoise {
   void singleGradientPerturb2(
       int seed, double perturbAmp, double frequency, Vector2f v2) {
     final xf = v2.x * frequency, yf = v2.y * frequency;
-    final x0 = fastFloor(xf), y0 = fastFloor(yf), x1 = x0 + 1, y1 = y0 + 1;
+    final x0 = xf.floor(), y0 = yf.floor(), x1 = x0 + 1, y1 = y0 + 1;
 
     double xs, ys;
     switch (interp) {

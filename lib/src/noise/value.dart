@@ -88,9 +88,9 @@ class ValueNoise {
       singleValue3(seed, x * frequency, y * frequency, z * frequency);
 
   double singleValue3(int seed, double x, double y, double z) {
-    final x0 = fastFloor(x),
-        y0 = fastFloor(y),
-        z0 = fastFloor(z),
+    final x0 = x.floor(),
+        y0 = y.floor(),
+        z0 = z.floor(),
         x1 = x0 + 1,
         y1 = y0 + 1,
         z1 = z0 + 1;
@@ -114,10 +114,14 @@ class ValueNoise {
         break;
     }
 
-    final xf00 = lerp(valCoord3D(seed, x0, y0, z0), valCoord3D(seed, x1, y0, z0), xs),
-        xf10 = lerp(valCoord3D(seed, x0, y1, z0), valCoord3D(seed, x1, y1, z0), xs),
-        xf01 = lerp(valCoord3D(seed, x0, y0, z1), valCoord3D(seed, x1, y0, z1), xs),
-        xf11 = lerp(valCoord3D(seed, x0, y1, z1), valCoord3D(seed, x1, y1, z1), xs);
+    final xf00 = lerp(
+            valCoord3D(seed, x0, y0, z0), valCoord3D(seed, x1, y0, z0), xs),
+        xf10 = lerp(
+            valCoord3D(seed, x0, y1, z0), valCoord3D(seed, x1, y1, z0), xs),
+        xf01 = lerp(
+            valCoord3D(seed, x0, y0, z1), valCoord3D(seed, x1, y0, z1), xs),
+        xf11 = lerp(
+            valCoord3D(seed, x0, y1, z1), valCoord3D(seed, x1, y1, z1), xs);
 
     return lerp(lerp(xf00, xf10, ys), lerp(xf01, xf11, ys), zs);
   }
@@ -184,7 +188,7 @@ class ValueNoise {
       singleValue2(seed, x * frequency, y * frequency);
 
   double singleValue2(int seed, double x, double y) {
-    final x0 = fastFloor(x), y0 = fastFloor(y), x1 = x0 + 1, y1 = y0 + 1;
+    final x0 = x.floor(), y0 = y.floor(), x1 = x0 + 1, y1 = y0 + 1;
     double xs, ys;
 
     switch (interp) {

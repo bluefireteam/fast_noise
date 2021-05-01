@@ -88,9 +88,9 @@ class PerlinNoise {
       singlePerlin3(seed, x * frequency, y * frequency, z * frequency);
 
   double singlePerlin3(int seed, double x, double y, double z) {
-    final x0 = fastFloor(x),
-        y0 = fastFloor(y),
-        z0 = fastFloor(z),
+    final x0 = x.floor(),
+        y0 = y.floor(),
+        z0 = z.floor(),
         x1 = x0 + 1,
         y1 = y0 + 1,
         z1 = z0 + 1;
@@ -195,7 +195,7 @@ class PerlinNoise {
       singlePerlin2(seed, x * frequency, y * frequency);
 
   double singlePerlin2(int seed, double x, double y) {
-    final x0 = fastFloor(x), y0 = fastFloor(y), x1 = x0 + 1, y1 = y0 + 1;
+    final x0 = x.floor(), y0 = y.floor(), x1 = x0 + 1, y1 = y0 + 1;
     double xs, ys;
 
     switch (interp) {
@@ -216,10 +216,10 @@ class PerlinNoise {
     final xd0 = x - x0, yd0 = y - y0, xd1 = xd0 - 1, yd1 = yd0 - 1;
 
     return lerp(
-        lerp(
-            gradCoord2D(seed, x0, y0, xd0, yd0), gradCoord2D(seed, x1, y0, xd1, yd0), xs),
-        lerp(
-            gradCoord2D(seed, x0, y1, xd0, yd1), gradCoord2D(seed, x1, y1, xd1, yd1), xs),
+        lerp(gradCoord2D(seed, x0, y0, xd0, yd0),
+            gradCoord2D(seed, x1, y0, xd1, yd0), xs),
+        lerp(gradCoord2D(seed, x0, y1, xd0, yd1),
+            gradCoord2D(seed, x1, y1, xd1, yd1), xs),
         ys);
   }
 }

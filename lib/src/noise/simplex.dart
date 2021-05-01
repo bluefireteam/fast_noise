@@ -21,79 +21,94 @@ class SimplexNoise {
       this.cellularReturnType = CellularReturnType.CellValue})
       : fractalBounding = calculateFractalBounding(gain, octaves);
 
-  double getSimplexFractal3(double x, double y, double z) {
-    x *= frequency;
-    y *= frequency;
-    z *= frequency;
+  double getSimplexFractal3(int x, int y, int z) {
+    var x1 = x.toDouble(), y1 = y.toDouble(), z1 = z.toDouble();
+
+    x1 *= frequency;
+    y1 *= frequency;
+    z1 *= frequency;
 
     switch (fractalType) {
       case FractalType.FBM:
-        return singleSimplexFractalFBM3(x, y, z);
+        return singleSimplexFractalFBM3(x1.toInt(), y1.toInt(), z1.toInt());
       case FractalType.Billow:
-        return singleSimplexFractalBillow3(x, y, z);
+        return singleSimplexFractalBillow3(x1.toInt(), y1.toInt(), z1.toInt());
       case FractalType.RigidMulti:
-        return singleSimplexFractalRigidMulti3(x, y, z);
+        return singleSimplexFractalRigidMulti3(
+            x1.toInt(), y1.toInt(), z1.toInt());
     }
   }
 
-  double singleSimplexFractalFBM3(double x, double y, double z) {
+  double singleSimplexFractalFBM3(int x, int y, int z) {
     var seed = this.seed;
     var sum = singleSimplex3(seed, x, y, z), amp = 1.0;
+    var x1 = x.toDouble(), y1 = y.toDouble(), z1 = z.toDouble();
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
-      z *= lacunarity;
+      x1 *= lacunarity;
+      y1 *= lacunarity;
+      z1 *= lacunarity;
 
       amp *= gain;
-      sum += singleSimplex3(++seed, x, y, z) * amp;
+      sum += singleSimplex3(++seed, x1.toInt(), y1.toInt(), z1.toInt()) * amp;
     }
 
     return sum * fractalBounding;
   }
 
-  double singleSimplexFractalBillow3(double x, double y, double z) {
+  double singleSimplexFractalBillow3(int x, int y, int z) {
     var seed = this.seed;
     var sum = singleSimplex3(seed, x, y, z).abs() * 2.0 - 1.0, amp = 1.0;
+    var x1 = x.toDouble(), y1 = y.toDouble(), z1 = z.toDouble();
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
-      z *= lacunarity;
+      x1 *= lacunarity;
+      y1 *= lacunarity;
+      z1 *= lacunarity;
 
       amp *= gain;
-      sum += (singleSimplex3(++seed, x, y, z).abs() * 2.0 - 1.0) * amp;
+      sum += (singleSimplex3(++seed, x1.toInt(), y1.toInt(), z1.toInt()).abs() *
+                  2.0 -
+              1.0) *
+          amp;
     }
 
     return sum * fractalBounding;
   }
 
-  double singleSimplexFractalRigidMulti3(double x, double y, double z) {
+  double singleSimplexFractalRigidMulti3(int x, int y, int z) {
     var seed = this.seed;
     var sum = 1.0 - singleSimplex3(seed, x, y, z).abs(), amp = 1.0;
+    var x1 = x.toDouble(), y1 = y.toDouble(), z1 = z.toDouble();
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
-      z *= lacunarity;
+      x1 *= lacunarity;
+      y1 *= lacunarity;
+      z1 *= lacunarity;
 
       amp *= gain;
-      sum -= (1.0 - singleSimplex3(++seed, x, y, z).abs()) * amp;
+      sum -= (1.0 -
+              singleSimplex3(++seed, x1.toInt(), y1.toInt(), z1.toInt())
+                  .abs()) *
+          amp;
     }
 
     return sum;
   }
 
-  double getSimplex3(double x, double y, double z) =>
-      singleSimplex3(seed, x * frequency, y * frequency, z * frequency);
+  double getSimplex3(int x, int y, int z) => singleSimplex3(
+      seed,
+      (x * frequency).toInt(),
+      (y * frequency).toInt(),
+      (z * frequency).toInt());
 
   static const double F3 = 1.0 / 3.0;
   static const double G3 = 1.0 / 6.0;
   static const double G33 = G3 * 3.0 - 1.0;
 
-  double singleSimplex3(int seed, double x, double y, double z) {
+  double singleSimplex3(int seed, int x, int y, int z) {
     var t = (x + y + z) * F3;
-    final i = fastFloor(x + t), j = fastFloor(y + t), k = fastFloor(z + t);
+    final i = x + t.floor(), j = y + t.floor(), k = z + t.floor();
 
     t = (i + j + k) * G3;
 
@@ -202,74 +217,78 @@ class SimplexNoise {
     return 32 * (n0 + n1 + n2 + n3);
   }
 
-  double getSimplexFractal2(double x, double y) {
-    x *= frequency;
-    y *= frequency;
+  double getSimplexFractal2(int x, int y) {
+    final x1 = x * frequency, y1 = y * frequency;
 
     switch (fractalType) {
       case FractalType.FBM:
-        return singleSimplexFractalFBM2(x, y);
+        return singleSimplexFractalFBM2(x1.toInt(), y1.toInt());
       case FractalType.Billow:
-        return singleSimplexFractalBillow2(x, y);
+        return singleSimplexFractalBillow2(x1.toInt(), y1.toInt());
       case FractalType.RigidMulti:
-        return singleSimplexFractalRigidMulti2(x, y);
+        return singleSimplexFractalRigidMulti2(x1.toInt(), y1.toInt());
     }
   }
 
-  double singleSimplexFractalFBM2(double x, double y) {
+  double singleSimplexFractalFBM2(int x, int y) {
     var seed = this.seed;
     var sum = singleSimplex2(seed, x, y), amp = 1.0;
+    var x1 = x.toDouble(), y1 = y.toDouble();
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
+      x1 *= lacunarity;
+      y1 *= lacunarity;
 
       amp *= gain;
-      sum += singleSimplex2(++seed, x, y) * amp;
+      sum += singleSimplex2(++seed, x1.toInt(), y1.toInt()) * amp;
     }
 
     return sum * fractalBounding;
   }
 
-  double singleSimplexFractalBillow2(double x, double y) {
+  double singleSimplexFractalBillow2(int x, int y) {
     var seed = this.seed;
     var sum = singleSimplex2(seed, x, y).abs() * 2.0 - 1.0, amp = 1.0;
+    var x1 = x.toDouble(), y1 = y.toDouble();
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
+      x1 *= lacunarity;
+      y1 *= lacunarity;
 
       amp *= gain;
-      sum += (singleSimplex2(++seed, x, y).abs() * 2.0 - 1.0) * amp;
+      sum +=
+          (singleSimplex2(++seed, x1.toInt(), y1.toInt()).abs() * 2.0 - 1.0) *
+              amp;
     }
 
     return sum * fractalBounding;
   }
 
-  double singleSimplexFractalRigidMulti2(double x, double y) {
+  double singleSimplexFractalRigidMulti2(int x, int y) {
     var seed = this.seed;
     var sum = 1.0 - singleSimplex2(seed, x, y).abs(), amp = 1.0;
+    var x1 = x.toDouble(), y1 = y.toDouble();
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
+      x1 *= lacunarity;
+      y1 *= lacunarity;
 
       amp *= gain;
-      sum -= (1.0 - singleSimplex2(++seed, x, y).abs()) * amp;
+      sum -= (1.0 - singleSimplex2(++seed, x1.toInt(), y1.toInt()).abs()) * amp;
     }
 
     return sum;
   }
 
   double getSimplex2(double x, double y) =>
-      singleSimplex2(seed, x * frequency, y * frequency);
+      singleSimplex2(seed, (x * frequency).toInt(), (y * frequency).toInt());
 
   static const double F2 = 1.0 / 2.0;
   static const double G2 = 1.0 / 4.0;
 
-  double singleSimplex2(int seed, double x, double y) {
+  double singleSimplex2(int seed, int x, int y) {
     var t = (x + y) * F2;
-    final i = fastFloor(x + t), j = fastFloor(y + t);
+    final i = x + t.floor(), j = y + t.floor();
 
     t = (i + j) * G2;
 
@@ -322,8 +341,12 @@ class SimplexNoise {
     return 50 * (n0 + n1 + n2);
   }
 
-  double getSimplex4(double x, double y, double z, double w) =>
-      singleSimplex4(seed, x * frequency, y * frequency, z * frequency, w * frequency);
+  double getSimplex4(double x, double y, double z, double w) => singleSimplex4(
+      seed,
+      (x * frequency).toInt(),
+      (y * frequency).toInt(),
+      (z * frequency).toInt(),
+      (w * frequency).toInt());
 
   static const List<int> SIMPLEX_4D = [
     0,
@@ -587,12 +610,12 @@ class SimplexNoise {
   static const double F4 = (2.23606797 - 1.0) / 4.0;
   static const double G4 = (5.0 - 2.23606797) / 20.0;
 
-  double singleSimplex4(int seed, double x, double y, double z, double w) {
+  double singleSimplex4(int seed, int x, int y, int z, int w) {
     double n0, n1, n2, n3, n4, t = (x + y + z + w) * F4;
-    final i = fastFloor(x + t),
-        j = fastFloor(y + t),
-        k = fastFloor(z + t),
-        l = fastFloor(w + t);
+    final i = x + t.floor(),
+        j = y + t.floor(),
+        k = z + t.floor(),
+        l = w + t.floor();
 
     t = (i + j + k + l) * G4;
 
@@ -659,7 +682,9 @@ class SimplexNoise {
       n1 = .0;
     } else {
       t *= t;
-      n1 = t * t * gradCoord4D(seed, i + i1, j + j1, k + k1, l + l1, x1, y1, z1, w1);
+      n1 = t *
+          t *
+          gradCoord4D(seed, i + i1, j + j1, k + k1, l + l1, x1, y1, z1, w1);
     }
 
     t = 0.6 - x2 * x2 - y2 * y2 - z2 * z2 - w2 * w2;
@@ -668,7 +693,9 @@ class SimplexNoise {
       n2 = .0;
     } else {
       t *= t;
-      n2 = t * t * gradCoord4D(seed, i + i2, j + j2, k + k2, l + l2, x2, y2, z2, w2);
+      n2 = t *
+          t *
+          gradCoord4D(seed, i + i2, j + j2, k + k2, l + l2, x2, y2, z2, w2);
     }
 
     t = 0.6 - x3 * x3 - y3 * y3 - z3 * z3 - w3 * w3;
@@ -677,7 +704,9 @@ class SimplexNoise {
       n3 = .0;
     } else {
       t *= t;
-      n3 = t * t * gradCoord4D(seed, i + i3, j + j3, k + k3, l + l3, x3, y3, z3, w3);
+      n3 = t *
+          t *
+          gradCoord4D(seed, i + i3, j + j3, k + k3, l + l3, x3, y3, z3, w3);
     }
 
     t = 0.6 - x4 * x4 - y4 * y4 - z4 * z4 - w4 * w4;
@@ -686,7 +715,8 @@ class SimplexNoise {
       n4 = .0;
     } else {
       t *= t;
-      n4 = t * t * gradCoord4D(seed, i + 1, j + 1, k + 1, l + 1, x4, y4, z4, w4);
+      n4 =
+          t * t * gradCoord4D(seed, i + 1, j + 1, k + 1, l + 1, x4, y4, z4, w4);
     }
 
     return 27 * (n0 + n1 + n2 + n3 + n4);

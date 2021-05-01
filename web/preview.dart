@@ -11,10 +11,13 @@ void main() {
   var octavesInput = querySelector('#input-octaves') as InputElement?;
 
   var noiseTypeSelect = querySelector('#select-noise-type') as SelectElement?;
-  var fractalTypeSelect = querySelector('#select-fractal-type') as SelectElement?;
+  var fractalTypeSelect =
+      querySelector('#select-fractal-type') as SelectElement?;
   var interpTypeSelect = querySelector('#select-interp') as SelectElement?;
-  var cellDistFnSelect = querySelector('#select-cellular-distance-fnc') as SelectElement?;
-  var cellRetTypeSelect = querySelector('#select-cellular-return-type') as SelectElement?;
+  var cellDistFnSelect =
+      querySelector('#select-cellular-distance-fnc') as SelectElement?;
+  var cellRetTypeSelect =
+      querySelector('#select-cellular-return-type') as SelectElement?;
   var renderButton = querySelector('#render-now')!;
 
   renderButton.onClick.listen((_) {

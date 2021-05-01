@@ -14,10 +14,6 @@ double calculateFractalBounding(double gain, int octaves) {
   return 1.0 / ampFractal;
 }
 
-int fastFloor(double f) => f.floor();
-
-int fastRound(double f) => f.round();
-
 double lerp(double a, double b, double t) => a + t * (b - a);
 
 double interpHermiteFunc(double t) => t * t * (3 - 2 * t);
@@ -35,6 +31,7 @@ const int Y_PRIME = 31337;
 const int Z_PRIME = 6971;
 const int W_PRIME = 1013;
 
+@pragma('vm:prefer-inline')
 int hash2D(int seed, int x, int y) {
   IntX hash = Int32(seed);
   hash ^= X_PRIME * x;
@@ -46,6 +43,7 @@ int hash2D(int seed, int x, int y) {
   return hash.toInt();
 }
 
+@pragma('vm:prefer-inline')
 int hash3D(int seed, int x, int y, int z) {
   IntX hash = Int32(seed);
   hash ^= X_PRIME * x;
