@@ -34,8 +34,6 @@ class SimplexNoise {
       case FractalType.RigidMulti:
         return singleSimplexFractalRigidMulti3(x, y, z);
     }
-
-    return .0;
   }
 
   double singleSimplexFractalFBM3(double x, double y, double z) {
@@ -216,8 +214,6 @@ class SimplexNoise {
       case FractalType.RigidMulti:
         return singleSimplexFractalRigidMulti2(x, y);
     }
-
-    return .0;
   }
 
   double singleSimplexFractalFBM2(double x, double y) {

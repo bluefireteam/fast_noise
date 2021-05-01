@@ -34,7 +34,6 @@ class ValueNoise {
       case FractalType.RigidMulti:
         return singleValueFractalRigidMulti3(x, y, z);
     }
-    return .0;
   }
 
   double singleValueFractalFBM3(double x, double y, double z) {
@@ -135,7 +134,6 @@ class ValueNoise {
       case FractalType.RigidMulti:
         return singleValueFractalRigidMulti2(x, y);
     }
-    return .0;
   }
 
   double singleValueFractalFBM2(double x, double y) {

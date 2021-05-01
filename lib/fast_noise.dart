@@ -288,8 +288,6 @@ List<List<double>> noise2(int width, int height,
 
       return map;
   }
-
-  return map;
 }
 
 List<List<List<double>>> noise3(int width, int height, int depth,
@@ -580,6 +578,4 @@ List<List<List<double>>> noise3(int width, int height, int depth,
 
       return map;
   }
-
-  return map;
 }

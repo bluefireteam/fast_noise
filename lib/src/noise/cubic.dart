@@ -34,8 +34,6 @@ class CubicNoise {
       case FractalType.RigidMulti:
         return singleCubicFractalRigidMulti3(x, y, z);
     }
-
-    return .0;
   }
 
   double singleCubicFractalFBM3(double x, double y, double z) {
@@ -161,8 +159,6 @@ class CubicNoise {
       case FractalType.RigidMulti:
         return singleCubicFractalRigidMulti2(x, y);
     }
-
-    return .0;
   }
 
   double singleCubicFractalFBM2(double x, double y) {
