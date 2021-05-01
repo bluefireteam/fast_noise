@@ -326,8 +326,8 @@ class SimplexNoise {
     return 50 * (n0 + n1 + n2);
   }
 
-  double getSimplex4(double x, double y, double z, double w) => singleSimplex4(
-      seed, x * frequency, y * frequency, z * frequency, w * frequency);
+  double getSimplex4(double x, double y, double z, double w) =>
+      singleSimplex4(seed, x * frequency, y * frequency, z * frequency, w * frequency);
 
   static const List<int> SIMPLEX_4D = [
     0,
@@ -663,9 +663,7 @@ class SimplexNoise {
       n1 = .0;
     } else {
       t *= t;
-      n1 = t *
-          t *
-          gradCoord4D(seed, i + i1, j + j1, k + k1, l + l1, x1, y1, z1, w1);
+      n1 = t * t * gradCoord4D(seed, i + i1, j + j1, k + k1, l + l1, x1, y1, z1, w1);
     }
 
     t = 0.6 - x2 * x2 - y2 * y2 - z2 * z2 - w2 * w2;
@@ -674,9 +672,7 @@ class SimplexNoise {
       n2 = .0;
     } else {
       t *= t;
-      n2 = t *
-          t *
-          gradCoord4D(seed, i + i2, j + j2, k + k2, l + l2, x2, y2, z2, w2);
+      n2 = t * t * gradCoord4D(seed, i + i2, j + j2, k + k2, l + l2, x2, y2, z2, w2);
     }
 
     t = 0.6 - x3 * x3 - y3 * y3 - z3 * z3 - w3 * w3;
@@ -685,9 +681,7 @@ class SimplexNoise {
       n3 = .0;
     } else {
       t *= t;
-      n3 = t *
-          t *
-          gradCoord4D(seed, i + i3, j + j3, k + k3, l + l3, x3, y3, z3, w3);
+      n3 = t * t * gradCoord4D(seed, i + i3, j + j3, k + k3, l + l3, x3, y3, z3, w3);
     }
 
     t = 0.6 - x4 * x4 - y4 * y4 - z4 * z4 - w4 * w4;
@@ -696,8 +690,7 @@ class SimplexNoise {
       n4 = .0;
     } else {
       t *= t;
-      n4 =
-          t * t * gradCoord4D(seed, i + 1, j + 1, k + 1, l + 1, x4, y4, z4, w4);
+      n4 = t * t * gradCoord4D(seed, i + 1, j + 1, k + 1, l + 1, x4, y4, z4, w4);
     }
 
     return 27 * (n0 + n1 + n2 + n3 + n4);

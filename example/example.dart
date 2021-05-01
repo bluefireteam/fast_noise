@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'dart:html';
 
 import 'package:fast_noise/fast_noise.dart';
