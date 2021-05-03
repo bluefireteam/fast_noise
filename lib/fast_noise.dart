@@ -27,6 +27,7 @@ export 'package:fast_noise/src/noise/simplex.dart' show SimplexNoise;
 export 'package:fast_noise/src/noise/value.dart' show ValueNoise;
 export 'package:fast_noise/src/noise/white.dart' show WhiteNoise;
 
+/// Creates 2D noise
 List<List<double>> noise2(int width, int height,
     {final int seed = 1337,
     final double frequency = .01,
@@ -299,6 +300,7 @@ List<List<double>> noise2(int width, int height,
   }
 }
 
+/// Creates 3D noise
 List<List<List<double>>> noise3(int width, int height, int depth,
     {final int seed = 1337,
     final double frequency = .01,
