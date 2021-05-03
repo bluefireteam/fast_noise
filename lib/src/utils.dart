@@ -14,18 +14,6 @@ double calculateFractalBounding(double gain, int octaves) {
   return 1.0 / ampFractal;
 }
 
-double lerp(double a, double b, double t) => a + t * (b - a);
-
-double interpHermiteFunc(double t) => t * t * (3 - 2 * t);
-
-double interpQuinticFunc(double t) => t * t * t * (t * (t * 6 - 15) + 10);
-
-double cubicLerp(double a, double b, double c, double d, double t) {
-  final p = (d - c) - (a - b);
-
-  return t * t * t * p + t * t * ((a - b) - p) + t * (c - a) + b;
-}
-
 const int X_PRIME = 1619;
 const int Y_PRIME = 31337;
 const int Z_PRIME = 6971;
@@ -56,6 +44,7 @@ int hash3D(int seed, int x, int y, int z) {
   return hash.toInt();
 }
 
+@pragma('vm:prefer-inline')
 double valCoord2D(int seed, int x, int y) {
   var n = Int32(seed);
   n ^= X_PRIME * x;
@@ -64,6 +53,7 @@ double valCoord2D(int seed, int x, int y) {
   return (n * n * n * 60493).toDouble() / 2147483648;
 }
 
+@pragma('vm:prefer-inline')
 double valCoord3D(int seed, int x, int y, int z) {
   var n = Int32(seed);
   n ^= X_PRIME * x;
@@ -73,6 +63,7 @@ double valCoord3D(int seed, int x, int y, int z) {
   return (n * n * n * 60493).toDouble() / 2147483648;
 }
 
+@pragma('vm:prefer-inline')
 double valCoord4D(int seed, int x, int y, int z, int w) {
   var n = Int32(seed);
   n ^= X_PRIME * x;
@@ -83,6 +74,7 @@ double valCoord4D(int seed, int x, int y, int z, int w) {
   return (n * n * n * 60493).toDouble() / 2147483648;
 }
 
+@pragma('vm:prefer-inline')
 double gradCoord2D(int seed, int x, int y, double xd, double yd) {
   IntX hash = Int32(seed);
   hash ^= X_PRIME * x;
@@ -96,6 +88,7 @@ double gradCoord2D(int seed, int x, int y, double xd, double yd) {
   return xd * g.x + yd * g.y;
 }
 
+@pragma('vm:prefer-inline')
 double gradCoord3D(
     int seed, int x, int y, int z, double xd, double yd, double zd) {
   IntX hash = Int32(seed);
@@ -111,6 +104,7 @@ double gradCoord3D(
   return xd * g.x + yd * g.y + zd * g.z;
 }
 
+@pragma('vm:prefer-inline')
 double gradCoord4D(int seed, int x, int y, int z, int w, double xd, double yd,
     double zd, double wd) {
   IntX hash = Int32(seed);
@@ -144,4 +138,26 @@ double gradCoord4D(int seed, int x, int y, int z, int w, double xd, double yd,
   return ((hash & 4).toInt() == 0 ? -a : a) +
       ((hash & 2).toInt() == 0 ? -b : b) +
       ((hash & 1).toInt() == 0 ? -c : c);
+}
+
+extension DoubleExtension on double {
+  @pragma('vm:prefer-inline')
+  double lerp(double a, double b) => a + this * (b - a);
+
+  @pragma('vm:prefer-inline')
+  double get interpHermiteFunc => this * this * (3 - 2 * this);
+
+  @pragma('vm:prefer-inline')
+  double get interpQuinticFunc =>
+      this * this * this * (this * (this * 6 - 15) + 10);
+
+  @pragma('vm:prefer-inline')
+  double cubicLerp(double a, double b, double c, double d) {
+    final p = (d - c) - (a - b);
+
+    return this * this * this * p +
+        this * this * ((a - b) - p) +
+        this * (c - a) +
+        b;
+  }
 }

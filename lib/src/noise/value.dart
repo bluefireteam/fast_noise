@@ -103,27 +103,44 @@ class ValueNoise {
         zs = z - z0;
         break;
       case Interp.Hermite:
-        xs = interpHermiteFunc(x - x0);
-        ys = interpHermiteFunc(y - y0);
-        zs = interpHermiteFunc(z - z0);
+        xs = (x - x0).interpHermiteFunc;
+        ys = (y - y0).interpHermiteFunc;
+        zs = (z - z0).interpHermiteFunc;
         break;
       case Interp.Quintic:
-        xs = interpQuinticFunc(x - x0);
-        ys = interpQuinticFunc(y - y0);
-        zs = interpQuinticFunc(z - z0);
+        xs = (x - x0).interpQuinticFunc;
+        ys = (y - y0).interpQuinticFunc;
+        zs = (z - z0).interpQuinticFunc;
         break;
     }
 
-    final xf00 = lerp(
-            valCoord3D(seed, x0, y0, z0), valCoord3D(seed, x1, y0, z0), xs),
-        xf10 = lerp(
-            valCoord3D(seed, x0, y1, z0), valCoord3D(seed, x1, y1, z0), xs),
-        xf01 = lerp(
-            valCoord3D(seed, x0, y0, z1), valCoord3D(seed, x1, y0, z1), xs),
-        xf11 = lerp(
-            valCoord3D(seed, x0, y1, z1), valCoord3D(seed, x1, y1, z1), xs);
+    final xf00 = xs.lerp(
+          valCoord3D(seed, x0, y0, z0),
+          valCoord3D(seed, x1, y0, z0),
+        ),
+        xf10 = xs.lerp(
+          valCoord3D(seed, x0, y1, z0),
+          valCoord3D(seed, x1, y1, z0),
+        ),
+        xf01 = xs.lerp(
+          valCoord3D(seed, x0, y0, z1),
+          valCoord3D(seed, x1, y0, z1),
+        ),
+        xf11 = xs.lerp(
+          valCoord3D(seed, x0, y1, z1),
+          valCoord3D(seed, x1, y1, z1),
+        );
 
-    return lerp(lerp(xf00, xf10, ys), lerp(xf01, xf11, ys), zs);
+    return zs.lerp(
+      ys.lerp(
+        xf00,
+        xf10,
+      ),
+      ys.lerp(
+        xf01,
+        xf11,
+      ),
+    );
   }
 
   double getValueFractal2(double x, double y) {
@@ -197,16 +214,24 @@ class ValueNoise {
         ys = y - y0;
         break;
       case Interp.Hermite:
-        xs = interpHermiteFunc(x - x0);
-        ys = interpHermiteFunc(y - y0);
+        xs = (x - x0).interpHermiteFunc;
+        ys = (y - y0).interpHermiteFunc;
         break;
       case Interp.Quintic:
-        xs = interpQuinticFunc(x - x0);
-        ys = interpQuinticFunc(y - y0);
+        xs = (x - x0).interpQuinticFunc;
+        ys = (y - y0).interpQuinticFunc;
         break;
     }
 
-    return lerp(lerp(valCoord2D(seed, x0, y0), valCoord2D(seed, x1, y0), xs),
-        lerp(valCoord2D(seed, x0, y1), valCoord2D(seed, x1, y1), xs), ys);
+    return ys.lerp(
+      xs.lerp(
+        valCoord2D(seed, x0, y0),
+        valCoord2D(seed, x1, y0),
+      ),
+      xs.lerp(
+        valCoord2D(seed, x0, y1),
+        valCoord2D(seed, x1, y1),
+      ),
+    );
   }
 }

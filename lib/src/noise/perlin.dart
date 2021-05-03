@@ -103,14 +103,14 @@ class PerlinNoise {
         zs = z - z0;
         break;
       case Interp.Hermite:
-        xs = interpHermiteFunc(x - x0);
-        ys = interpHermiteFunc(y - y0);
-        zs = interpHermiteFunc(z - z0);
+        xs = (x - x0).interpHermiteFunc;
+        ys = (y - y0).interpHermiteFunc;
+        zs = (z - z0).interpHermiteFunc;
         break;
       case Interp.Quintic:
-        xs = interpQuinticFunc(x - x0);
-        ys = interpQuinticFunc(y - y0);
-        zs = interpQuinticFunc(z - z0);
+        xs = (x - x0).interpQuinticFunc;
+        ys = (y - y0).interpQuinticFunc;
+        zs = (z - z0).interpQuinticFunc;
         break;
     }
 
@@ -120,16 +120,33 @@ class PerlinNoise {
         xd1 = xd0 - 1,
         yd1 = yd0 - 1,
         zd1 = zd0 - 1,
-        xf00 = lerp(gradCoord3D(seed, x0, y0, z0, xd0, yd0, zd0),
-            gradCoord3D(seed, x1, y0, z0, xd1, yd0, zd0), xs),
-        xf10 = lerp(gradCoord3D(seed, x0, y1, z0, xd0, yd1, zd0),
-            gradCoord3D(seed, x1, y1, z0, xd1, yd1, zd0), xs),
-        xf01 = lerp(gradCoord3D(seed, x0, y0, z1, xd0, yd0, zd1),
-            gradCoord3D(seed, x1, y0, z1, xd1, yd0, zd1), xs),
-        xf11 = lerp(gradCoord3D(seed, x0, y1, z1, xd0, yd1, zd1),
-            gradCoord3D(seed, x1, y1, z1, xd1, yd1, zd1), xs);
+        xf00 = xs.lerp(
+          gradCoord3D(seed, x0, y0, z0, xd0, yd0, zd0),
+          gradCoord3D(seed, x1, y0, z0, xd1, yd0, zd0),
+        ),
+        xf10 = xs.lerp(
+          gradCoord3D(seed, x0, y1, z0, xd0, yd1, zd0),
+          gradCoord3D(seed, x1, y1, z0, xd1, yd1, zd0),
+        ),
+        xf01 = xs.lerp(
+          gradCoord3D(seed, x0, y0, z1, xd0, yd0, zd1),
+          gradCoord3D(seed, x1, y0, z1, xd1, yd0, zd1),
+        ),
+        xf11 = xs.lerp(
+          gradCoord3D(seed, x0, y1, z1, xd0, yd1, zd1),
+          gradCoord3D(seed, x1, y1, z1, xd1, yd1, zd1),
+        );
 
-    return lerp(lerp(xf00, xf10, ys), lerp(xf01, xf11, ys), zs);
+    return zs.lerp(
+      ys.lerp(
+        xf00,
+        xf10,
+      ),
+      ys.lerp(
+        xf01,
+        xf11,
+      ),
+    );
   }
 
   double getPerlinFractal2(double x, double y) {
@@ -204,22 +221,26 @@ class PerlinNoise {
         ys = y - y0;
         break;
       case Interp.Hermite:
-        xs = interpHermiteFunc(x - x0);
-        ys = interpHermiteFunc(y - y0);
+        xs = (x - x0).interpHermiteFunc;
+        ys = (y - y0).interpHermiteFunc;
         break;
       case Interp.Quintic:
-        xs = interpQuinticFunc(x - x0);
-        ys = interpQuinticFunc(y - y0);
+        xs = (x - x0).interpQuinticFunc;
+        ys = (y - y0).interpQuinticFunc;
         break;
     }
 
     final xd0 = x - x0, yd0 = y - y0, xd1 = xd0 - 1, yd1 = yd0 - 1;
 
-    return lerp(
-        lerp(gradCoord2D(seed, x0, y0, xd0, yd0),
-            gradCoord2D(seed, x1, y0, xd1, yd0), xs),
-        lerp(gradCoord2D(seed, x0, y1, xd0, yd1),
-            gradCoord2D(seed, x1, y1, xd1, yd1), xs),
-        ys);
+    return ys.lerp(
+      xs.lerp(
+        gradCoord2D(seed, x0, y0, xd0, yd0),
+        gradCoord2D(seed, x1, y0, xd1, yd0),
+      ),
+      xs.lerp(
+        gradCoord2D(seed, x0, y1, xd0, yd1),
+        gradCoord2D(seed, x1, y1, xd1, yd1),
+      ),
+    );
   }
 }

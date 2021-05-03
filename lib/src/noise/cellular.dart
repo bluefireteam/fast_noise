@@ -385,51 +385,51 @@ class CellularNoise {
         zs = zf - z0;
         break;
       case Interp.Hermite:
-        xs = interpHermiteFunc(xf - x0);
-        ys = interpHermiteFunc(yf - y0);
-        zs = interpHermiteFunc(zf - z0);
+        xs = (xf - x0).interpHermiteFunc;
+        ys = (yf - y0).interpHermiteFunc;
+        zs = (zf - z0).interpHermiteFunc;
         break;
       case Interp.Quintic:
-        xs = interpQuinticFunc(xf - x0);
-        ys = interpQuinticFunc(yf - y0);
-        zs = interpQuinticFunc(zf - z0);
+        xs = (xf - x0).interpQuinticFunc;
+        ys = (yf - y0).interpQuinticFunc;
+        zs = (zf - z0).interpQuinticFunc;
         break;
     }
 
     var vec0 = CELL_3D[hash3D(seed, x0, y0, z0) & 255],
         vec1 = CELL_3D[hash3D(seed, x1, y0, z0) & 255];
 
-    var lx0x = lerp(vec0.x, vec1.x, xs),
-        ly0x = lerp(vec0.y, vec1.y, xs),
-        lz0x = lerp(vec0.z, vec1.z, xs);
+    var lx0x = xs.lerp(vec0.x, vec1.x),
+        ly0x = xs.lerp(vec0.y, vec1.y),
+        lz0x = xs.lerp(vec0.z, vec1.z);
 
     vec0 = CELL_3D[hash3D(seed, x0, y1, z0) & 255];
     vec1 = CELL_3D[hash3D(seed, x1, y1, z0) & 255];
 
-    var lx1x = lerp(vec0.x, vec1.x, xs),
-        ly1x = lerp(vec0.y, vec1.y, xs),
-        lz1x = lerp(vec0.z, vec1.z, xs),
-        lx0y = lerp(lx0x, lx1x, ys),
-        ly0y = lerp(ly0x, ly1x, ys),
-        lz0y = lerp(lz0x, lz1x, ys);
+    var lx1x = xs.lerp(vec0.x, vec1.x),
+        ly1x = xs.lerp(vec0.y, vec1.y),
+        lz1x = xs.lerp(vec0.z, vec1.z),
+        lx0y = ys.lerp(lx0x, lx1x),
+        ly0y = ys.lerp(ly0x, ly1x),
+        lz0y = ys.lerp(lz0x, lz1x);
 
     vec0 = CELL_3D[hash3D(seed, x0, y0, z1) & 255];
     vec1 = CELL_3D[hash3D(seed, x1, y0, z1) & 255];
 
-    lx0x = lerp(vec0.x, vec1.x, xs);
-    ly0x = lerp(vec0.y, vec1.y, xs);
-    lz0x = lerp(vec0.z, vec1.z, xs);
+    lx0x = xs.lerp(vec0.x, vec1.x);
+    ly0x = xs.lerp(vec0.y, vec1.y);
+    lz0x = xs.lerp(vec0.z, vec1.z);
 
     vec0 = CELL_3D[hash3D(seed, x0, y1, z1) & 255];
     vec1 = CELL_3D[hash3D(seed, x1, y1, z1) & 255];
 
-    lx1x = lerp(vec0.x, vec1.x, xs);
-    ly1x = lerp(vec0.y, vec1.y, xs);
-    lz1x = lerp(vec0.z, vec1.z, xs);
+    lx1x = xs.lerp(vec0.x, vec1.x);
+    ly1x = xs.lerp(vec0.y, vec1.y);
+    lz1x = xs.lerp(vec0.z, vec1.z);
 
-    v3.x += lerp(lx0y, lerp(lx0x, lx1x, ys), zs) * perturbAmp;
-    v3.y += lerp(ly0y, lerp(ly0x, ly1x, ys), zs) * perturbAmp;
-    v3.z += lerp(lz0y, lerp(lz0x, lz1x, ys), zs) * perturbAmp;
+    v3.x += zs.lerp(lx0y, ys.lerp(lx0x, lx1x)) * perturbAmp;
+    v3.y += zs.lerp(ly0y, ys.lerp(ly0x, ly1x)) * perturbAmp;
+    v3.z += zs.lerp(lz0y, ys.lerp(lz0x, lz1x)) * perturbAmp;
   }
 
   void gradientPerturb2(Vector2f v2) =>
@@ -460,26 +460,26 @@ class CellularNoise {
         ys = yf - y0;
         break;
       case Interp.Hermite:
-        xs = interpHermiteFunc(xf - x0);
-        ys = interpHermiteFunc(yf - y0);
+        xs = (xf - x0).interpHermiteFunc;
+        ys = (yf - y0).interpHermiteFunc;
         break;
       case Interp.Quintic:
-        xs = interpQuinticFunc(xf - x0);
-        ys = interpQuinticFunc(yf - y0);
+        xs = (xf - x0).interpQuinticFunc;
+        ys = (yf - y0).interpQuinticFunc;
         break;
     }
 
     var vec0 = CELL_2D[hash2D(seed, x0, y0) & 255],
         vec1 = CELL_2D[hash2D(seed, x1, y0) & 255];
 
-    final lx0x = lerp(vec0.x, vec1.x, xs), ly0x = lerp(vec0.y, vec1.y, xs);
+    final lx0x = xs.lerp(vec0.x, vec1.x), ly0x = xs.lerp(vec0.y, vec1.y);
 
     vec0 = CELL_2D[hash2D(seed, x0, y1) & 255];
     vec1 = CELL_2D[hash2D(seed, x1, y1) & 255];
 
-    final lx1x = lerp(vec0.x, vec1.x, xs), ly1x = lerp(vec0.y, vec1.y, xs);
+    final lx1x = xs.lerp(vec0.x, vec1.x), ly1x = xs.lerp(vec0.y, vec1.y);
 
-    v2.x += lerp(lx0x, lx1x, ys) * perturbAmp;
-    v2.y += lerp(ly0x, ly1x, ys) * perturbAmp;
+    v2.x += ys.lerp(lx0x, lx1x) * perturbAmp;
+    v2.y += ys.lerp(ly0x, ly1x) * perturbAmp;
   }
 }
