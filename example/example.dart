@@ -10,7 +10,7 @@ void main() {
 
   for (var x = 0; x < w; x++) {
     for (var y = 0; y < h; y++) {
-      var value = (0x80 + 0x80 * map[x][y]).floor(); // grayscale
+      var value = (0x80 + 0x80 * map[x][y]).floor(); // gray-scale
 
       image.setPixelRgba(x, y, value, value, value, 0xff);
     }
@@ -19,9 +19,12 @@ void main() {
   File('./example/noise.png').writeAsBytesSync(img.encodePng(image));
 }
 
-List<List<double>> _getCellular(int w, int h) => noise2(w, h,
-    noiseType: NoiseType.Cellular,
-    octaves: 5,
-    frequency: 0.015,
-    cellularDistanceFunction: CellularDistanceFunction.Euclidean,
-    cellularReturnType: CellularReturnType.Distance2Add);
+List<List<double>> _getCellular(int w, int h) => noise2(
+      w,
+      h,
+      noiseType: NoiseType.Cellular,
+      octaves: 5,
+      frequency: 0.015,
+      cellularDistanceFunction: CellularDistanceFunction.Euclidean,
+      cellularReturnType: CellularReturnType.Distance2Add,
+    );
