@@ -8,6 +8,8 @@ export 'package:fast_noise/src/noise_helpers.dart';
 export 'package:fast_noise/src/enums.dart';
 export 'package:fast_noise/src/types.dart';
 
+export 'package:fast_noise/src/gradient/gradient_perturb.dart';
+
 export 'package:fast_noise/src/noise/cellular.dart';
 export 'package:fast_noise/src/noise/cubic.dart';
 export 'package:fast_noise/src/noise/cubic_fractal.dart';
