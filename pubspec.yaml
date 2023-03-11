@@ -2,7 +2,6 @@ name: fast_noise
 description: A port of the fast noise algorithms, featuring cellular_noise, cubic_noise, perlin_noise, simplex_noise, value_noise and white_noise
 version: 1.0.1
 homepage: https://github.com/frankpepermans/fast_noise
-author: Frank <frank@igindo.com>
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
