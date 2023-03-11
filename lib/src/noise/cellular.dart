@@ -1,10 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:fast_noise/src/noise/noise.dart';
-import 'package:fast_noise/src/types.dart';
-import 'package:fast_noise/src/utils.dart';
-
-import 'package:fast_noise/src/enums.dart';
+import 'package:fast_noise/fast_noise.dart';
 
 class CellularNoise implements Noise2And3 {
   final int seed, octaves;

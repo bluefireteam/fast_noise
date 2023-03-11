@@ -1,7 +1,4 @@
-import 'package:fast_noise/src/noise/noise.dart';
-import 'package:fast_noise/src/utils.dart';
-
-import 'package:fast_noise/src/enums.dart';
+import 'package:fast_noise/fast_noise.dart';
 
 class PerlinNoise implements Noise2And3 {
   final int seed;

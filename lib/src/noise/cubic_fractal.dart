@@ -1,6 +1,4 @@
 import 'package:fast_noise/fast_noise.dart';
-import 'package:fast_noise/src/noise/noise.dart';
-import 'package:fast_noise/src/utils.dart';
 
 class CubicFractalNoise implements Noise2And3 {
   final CubicNoise baseNoise;

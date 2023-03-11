@@ -1,7 +1,4 @@
-import 'package:fast_noise/src/noise/noise.dart';
-import 'package:fast_noise/src/utils.dart';
-
-import 'package:fast_noise/src/enums.dart';
+import 'package:fast_noise/fast_noise.dart';
 
 class SimplexNoise
     implements Noise2And3, Noise4, Noise2Int, Noise3Int, Noise4Int {

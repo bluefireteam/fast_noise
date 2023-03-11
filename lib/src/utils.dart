@@ -1,6 +1,6 @@
 import 'package:fixnum/fixnum.dart';
 
-import 'package:fast_noise/src/types.dart';
+import 'package:fast_noise/fast_noise.dart';
 
 @pragma('vm:prefer-inline')
 double calculateFractalBounding(double gain, int octaves) {

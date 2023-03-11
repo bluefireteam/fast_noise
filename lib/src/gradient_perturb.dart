@@ -1,6 +1,4 @@
 import 'package:fast_noise/fast_noise.dart';
-import 'package:fast_noise/src/types.dart';
-import 'package:fast_noise/src/utils.dart';
 
 class GradientPerturb {
   static const double gradientPerturbAmp = 1.0 / 0.45;

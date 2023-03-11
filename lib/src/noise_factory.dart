@@ -1,10 +1,4 @@
-import 'package:fast_noise/src/noise/noise.dart';
-
-import '../fast_noise.dart';
-import 'noise/cubic_fractal.dart';
-import 'noise/perlin_fractal.dart';
-import 'noise/simplex_fractal.dart';
-import 'noise/value_fractal.dart';
+import 'package:fast_noise/fast_noise.dart';
 
 Noise2And3 buildNoise({
   final int seed = 1337,
