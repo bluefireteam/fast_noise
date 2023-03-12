@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:fast_noise/fast_noise.dart';
@@ -42,7 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
   int width = 512;
   int height = 512;
   NoiseType noiseType = NoiseType.Cellular;
+  Interp interp = Interp.Quintic;
   int octaves = 5;
+  double lacunarity = 2.0;
+  double gain = .5;
+  FractalType fractalType = FractalType.FBM;
   double frequency = 0.015;
   CellularDistanceFunction cellularDistanceFunction =
       CellularDistanceFunction.Euclidean;
@@ -71,7 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text('Seed $seed'),
+                IntField(
+                  title: 'Seed',
+                  value: seed,
+                  setValue: (v) => setState(() => seed = v),
+                ),
                 IntField(
                   title: 'Width (pixels)',
                   value: width,
@@ -88,30 +97,48 @@ class _MyHomePageState extends State<MyHomePage> {
                   setValue: (NoiseType v) => setState(() => noiseType = v),
                   values: NoiseType.values,
                 ),
-                IntField(
-                  title: 'octaves (int)',
-                  value: octaves,
-                  setValue: (v) => setState(() => octaves = v),
-                ),
                 DoubleField(
                   title: 'frequency (double)',
                   value: frequency,
                   setValue: (v) => setState(() => frequency = v),
                 ),
+                DoubleField(
+                  title: 'lacunarity (double)',
+                  value: lacunarity,
+                  setValue: (v) => setState(() => lacunarity = v),
+                ),
+                DoubleField(
+                  title: 'gain (double)',
+                  value: gain,
+                  setValue: (v) => setState(() => gain = v),
+                ),
+                IntField(
+                  title: 'octaves (int)',
+                  value: octaves,
+                  setValue: (v) => setState(() => octaves = v),
+                ),
+                EnumField(
+                  title: 'Interp',
+                  value: interp,
+                  setValue: (v) => setState(() => interp = v),
+                  values: Interp.values,
+                ),
+                EnumField(
+                  title: 'Fractal Type',
+                  value: fractalType,
+                  setValue: (v) => setState(() => fractalType = v),
+                  values: FractalType.values,
+                ),
                 EnumField(
                   title: 'Cellular Dist Func',
                   value: cellularDistanceFunction,
-                  setValue: (CellularDistanceFunction v) {
-                    setState(() => cellularDistanceFunction = v);
-                  },
+                  setValue: (v) => setState(() => cellularDistanceFunction = v),
                   values: CellularDistanceFunction.values,
                 ),
                 EnumField(
                   title: 'Cellular Ret Type',
                   value: cellularReturnType,
-                  setValue: (CellularReturnType v) {
-                    setState(() => cellularReturnType = v);
-                  },
+                  setValue: (v) => setState(() => cellularReturnType = v),
                   values: CellularReturnType.values,
                 ),
                 TextButton(
@@ -123,8 +150,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: height,
                       seed: seed,
                       noiseType: noiseType,
-                      octaves: octaves,
                       frequency: frequency,
+                      interp: interp,
+                      octaves: octaves,
+                      fractalType: fractalType,
+                      gain: gain,
+                      lacunarity: lacunarity,
                       cellularDistanceFunction: cellularDistanceFunction,
                       cellularReturnType: cellularReturnType,
                     );
@@ -132,6 +163,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       _image = image;
                       _loading = false;
                     });
+                  },
+                ),
+                TextButton(
+                  child: const Text('Re-seed'),
+                  onPressed: () {
+                    final newSeed = Random().nextInt(100000);
+                    setState(() => seed = newSeed);
                   },
                 ),
               ],
