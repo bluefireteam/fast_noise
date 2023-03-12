@@ -104,11 +104,13 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
       z1 *= lacunarity;
 
       amp *= gain;
-      sum -= (1.0 -
-              baseNoise
-                  .singleSimplex3(++seed, x1.toInt(), y1.toInt(), z1.toInt())
-                  .abs()) *
-          amp;
+      final baseValue = baseNoise.singleSimplex3(
+        ++seed,
+        x1.toInt(),
+        y1.toInt(),
+        z1.toInt(),
+      );
+      sum -= (1.0 - baseValue.abs()) * amp;
     }
 
     return sum;
@@ -161,10 +163,12 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
       y1 *= lacunarity;
 
       amp *= gain;
-      sum += (baseNoise.singleSimplex2(++seed, x1.toInt(), y1.toInt()).abs() *
-                  2.0 -
-              1.0) *
-          amp;
+      final baseValue = baseNoise.singleSimplex2(
+        ++seed,
+        x1.toInt(),
+        y1.toInt(),
+      );
+      sum += (baseValue.abs() * 2.0 - 1.0) * amp;
     }
 
     return sum * fractalBounding;
@@ -180,9 +184,12 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
       y1 *= lacunarity;
 
       amp *= gain;
-      sum -= (1.0 -
-              baseNoise.singleSimplex2(++seed, x1.toInt(), y1.toInt()).abs()) *
-          amp;
+      final baseValue = baseNoise.singleSimplex2(
+        ++seed,
+        x1.toInt(),
+        y1.toInt(),
+      );
+      sum -= (1.0 - baseValue.abs()) * amp;
     }
 
     return sum;
