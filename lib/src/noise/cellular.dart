@@ -3,23 +3,17 @@ import 'dart:math' as math;
 import 'package:fast_noise/fast_noise.dart';
 
 class CellularNoise implements Noise2And3 {
-  final int seed, octaves;
-  final double frequency, lacunarity, gain;
-  final Interp interp;
+  final int seed;
+  final double frequency;
   final CellularDistanceFunction cellularDistanceFunction;
   final CellularReturnType cellularReturnType;
-  final double fractalBounding;
 
-  CellularNoise(
-      {this.seed = 1337,
-      this.frequency = .01,
-      this.interp = Interp.Quintic,
-      this.octaves = 3,
-      this.lacunarity = 2.0,
-      this.gain = .5,
-      this.cellularDistanceFunction = CellularDistanceFunction.Euclidean,
-      this.cellularReturnType = CellularReturnType.CellValue})
-      : fractalBounding = calculateFractalBounding(gain, octaves);
+  CellularNoise({
+    this.seed = 1337,
+    this.frequency = .01,
+    this.cellularDistanceFunction = CellularDistanceFunction.Euclidean,
+    this.cellularReturnType = CellularReturnType.CellValue,
+  });
 
   @override
   double getNoise3(double x, double y, double z) {

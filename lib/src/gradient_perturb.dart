@@ -3,27 +3,39 @@ import 'package:fast_noise/fast_noise.dart';
 class GradientPerturb {
   static const double gradientPerturbAmp = 1.0 / 0.45;
 
-  final CellularNoise baseNoise;
+  final int seed;
+  final double frequency;
+  final int octaves;
+  final double gain;
+  final double lacunarity;
+  final Interp interp;
+  final double fractalBounding;
 
-  GradientPerturb(this.baseNoise);
+  GradientPerturb({
+    this.seed = 1337,
+    this.frequency = .01,
+    this.gain = 0.5,
+    this.lacunarity = 2.0,
+    this.octaves = 3,
+    this.interp = Interp.Quintic,
+  }) : fractalBounding = calculateFractalBounding(octaves, gain);
 
   void gradientPerturb3(Vector3f v3) => singleGradientPerturb3(
-        baseNoise.seed,
+        seed,
         gradientPerturbAmp,
-        baseNoise.frequency,
+        frequency,
         v3,
       );
 
   void gradientPerturbFractal3(Vector3f v3) {
-    var seed = baseNoise.seed;
-    var amp = gradientPerturbAmp * baseNoise.fractalBounding,
-        freq = baseNoise.frequency;
+    var seed = this.seed;
+    var amp = gradientPerturbAmp * fractalBounding, freq = frequency;
 
-    singleGradientPerturb3(seed, amp, baseNoise.frequency, v3);
+    singleGradientPerturb3(seed, amp, frequency, v3);
 
-    for (var i = 1; i < baseNoise.octaves; i++) {
-      freq *= baseNoise.lacunarity;
-      amp *= baseNoise.gain;
+    for (var i = 1; i < octaves; i++) {
+      freq *= lacunarity;
+      amp *= gain;
       singleGradientPerturb3(++seed, amp, freq, v3);
     }
   }
@@ -39,7 +51,7 @@ class GradientPerturb {
         z1 = z0 + 1;
 
     double xs, ys, zs;
-    switch (baseNoise.interp) {
+    switch (interp) {
       case Interp.Linear:
         xs = xf - x0;
         ys = yf - y0;
@@ -94,22 +106,21 @@ class GradientPerturb {
   }
 
   void gradientPerturb2(Vector2f v2) => singleGradientPerturb2(
-        baseNoise.seed,
+        seed,
         gradientPerturbAmp,
-        baseNoise.frequency,
+        frequency,
         v2,
       );
 
   void gradientPerturbFractal2(Vector2f v2) {
-    var seed = baseNoise.seed;
-    var amp = gradientPerturbAmp * baseNoise.fractalBounding,
-        freq = baseNoise.frequency;
+    var seed = this.seed;
+    var amp = gradientPerturbAmp * fractalBounding, freq = frequency;
 
-    singleGradientPerturb2(seed, amp, baseNoise.frequency, v2);
+    singleGradientPerturb2(seed, amp, frequency, v2);
 
-    for (var i = 1; i < baseNoise.octaves; i++) {
-      freq *= baseNoise.lacunarity;
-      amp *= baseNoise.gain;
+    for (var i = 1; i < octaves; i++) {
+      freq *= lacunarity;
+      amp *= gain;
       singleGradientPerturb2(++seed, amp, freq, v2);
     }
   }
@@ -124,7 +135,7 @@ class GradientPerturb {
     final x0 = xf.floor(), y0 = yf.floor(), x1 = x0 + 1, y1 = y0 + 1;
 
     double xs, ys;
-    switch (baseNoise.interp) {
+    switch (interp) {
       case Interp.Linear:
         xs = xf - x0;
         ys = yf - y0;

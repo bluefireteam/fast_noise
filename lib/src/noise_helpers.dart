@@ -36,7 +36,7 @@ List<List<double>> noise2(
 
   for (var x = 0; x < width; x++) {
     for (var y = 0; y < height; y++) {
-      map[x][y] = noise.getNoise2(x.toDouble(), y.toDouble());
+      map[x][y] = noise.getNoise2(x.toDouble() / width, y.toDouble() / height);
     }
   }
 

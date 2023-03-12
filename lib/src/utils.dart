@@ -3,7 +3,7 @@ import 'package:fixnum/fixnum.dart';
 import 'package:fast_noise/fast_noise.dart';
 
 @pragma('vm:prefer-inline')
-double calculateFractalBounding(double gain, int octaves) {
+double calculateFractalBounding(int octaves, double gain) {
   var amp = gain, ampFractal = 1.0;
 
   for (var i = 1; i < octaves; i++) {

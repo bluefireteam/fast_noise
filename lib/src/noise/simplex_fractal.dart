@@ -2,29 +2,27 @@ import 'package:fast_noise/fast_noise.dart';
 
 class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
   final SimplexNoise baseNoise;
-  final int seed, octaves;
-  final double frequency, lacunarity, gain;
-  final Interp interp;
+
+  final int seed;
+  final double frequency;
   final FractalType fractalType;
+  final int octaves;
+  final double gain;
+  final double lacunarity;
   final double fractalBounding;
 
   SimplexFractalNoise({
     this.seed = 1337,
     this.frequency = .01,
-    this.interp = Interp.Quintic,
-    this.octaves = 3,
-    this.lacunarity = 2.0,
-    this.gain = .5,
     this.fractalType = FractalType.FBM,
+    this.octaves = 3,
+    this.gain = .5,
+    this.lacunarity = 2.0,
   })  : baseNoise = SimplexNoise(
-          seed: 1337,
-          frequency: .01,
-          interp: Interp.Quintic,
-          octaves: 3,
-          lacunarity: 2.0,
-          gain: .5,
+          seed: seed,
+          frequency: frequency,
         ),
-        fractalBounding = calculateFractalBounding(gain, octaves);
+        fractalBounding = calculateFractalBounding(octaves, gain);
 
   @override
   double getNoiseInt3(int x, int y, int z) {
@@ -118,12 +116,15 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   @override
   double getNoiseInt2(int x, int y) {
-    final xd = x * frequency, yd = y * frequency;
+    final xd = x.toDouble(), yd = y.toDouble();
     return getNoise2(xd, yd);
   }
 
   @override
   double getNoise2(double x, double y) {
+    x *= frequency;
+    y *= frequency;
+
     switch (fractalType) {
       case FractalType.FBM:
         return singleSimplexFractalFBM2(x.toInt(), y.toInt());

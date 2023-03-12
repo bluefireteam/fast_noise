@@ -16,83 +16,74 @@ Noise2And3 buildNoise({
   switch (noiseType) {
     case NoiseType.Cellular:
       return CellularNoise(
+        seed: seed,
+        frequency: frequency,
         cellularDistanceFunction: cellularDistanceFunction,
         cellularReturnType: cellularReturnType,
-        frequency: frequency,
-        gain: gain,
-        interp: interp,
-        lacunarity: lacunarity,
-        octaves: octaves,
-        seed: seed,
       );
     case NoiseType.Cubic:
       return CubicNoise(
-        frequency: frequency,
-        interp: interp,
         seed: seed,
+        frequency: frequency,
       );
     case NoiseType.CubicFractal:
       return CubicFractalNoise(
-        fractalType: fractalType,
-        frequency: frequency,
-        gain: gain,
-        interp: interp,
-        lacunarity: lacunarity,
-        octaves: octaves,
         seed: seed,
+        frequency: frequency,
+        fractalType: fractalType,
+        octaves: octaves,
+        gain: gain,
+        lacunarity: lacunarity,
       );
     case NoiseType.Perlin:
       return PerlinNoise(
+        seed: seed,
         frequency: frequency,
         interp: interp,
-        seed: seed,
       );
     case NoiseType.PerlinFractal:
       return PerlinFractalNoise(
-        fractalType: fractalType,
-        frequency: frequency,
-        gain: gain,
-        interp: interp,
-        lacunarity: lacunarity,
-        octaves: octaves,
         seed: seed,
+        frequency: frequency,
+        interp: interp,
+        fractalType: fractalType,
+        octaves: octaves,
+        gain: gain,
+        lacunarity: lacunarity,
       );
     case NoiseType.Simplex:
       return SimplexNoise(
-        frequency: frequency,
-        gain: gain,
-        interp: interp,
-        lacunarity: lacunarity,
-        octaves: octaves,
         seed: seed,
+        frequency: frequency,
       );
     case NoiseType.SimplexFractal:
       return SimplexFractalNoise(
-        fractalType: fractalType,
-        frequency: frequency,
-        gain: gain,
-        interp: interp,
-        lacunarity: lacunarity,
-        octaves: octaves,
         seed: seed,
+        frequency: frequency,
+        fractalType: fractalType,
+        octaves: octaves,
+        gain: gain,
+        lacunarity: lacunarity,
       );
     case NoiseType.Value:
       return ValueNoise(
+        seed: seed,
         frequency: frequency,
         interp: interp,
-        seed: seed,
       );
     case NoiseType.ValueFractal:
       return ValueFractalNoise(
-        fractalType: fractalType,
-        frequency: frequency,
-        gain: gain,
-        interp: interp,
-        lacunarity: lacunarity,
-        octaves: octaves,
         seed: seed,
+        frequency: frequency,
+        interp: interp,
+        fractalType: fractalType,
+        octaves: octaves,
+        gain: gain,
+        lacunarity: lacunarity,
       );
     case NoiseType.WhiteNoise:
-      return WhiteNoise(seed: seed);
+      return WhiteNoise(
+        seed: seed,
+      );
   }
 }

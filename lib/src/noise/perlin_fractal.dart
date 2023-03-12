@@ -4,24 +4,24 @@ class PerlinFractalNoise implements Noise2And3 {
   final PerlinNoise baseNoise;
   final FractalType fractalType;
   final int octaves;
-  final double lacunarity;
   final double gain;
+  final double lacunarity;
   final double fractalBounding;
 
   PerlinFractalNoise({
     int seed = 1337,
     double frequency = .01,
     Interp interp = Interp.Quintic,
-    this.octaves = 3,
-    this.lacunarity = 2.0,
-    this.gain = .5,
     this.fractalType = FractalType.FBM,
+    this.octaves = 3,
+    this.gain = .5,
+    this.lacunarity = 2.0,
   })  : baseNoise = PerlinNoise(
           seed: seed,
           frequency: frequency,
           interp: interp,
         ),
-        fractalBounding = calculateFractalBounding(gain, octaves);
+        fractalBounding = calculateFractalBounding(octaves, gain);
 
   @override
   double getNoise3(double x, double y, double z) {

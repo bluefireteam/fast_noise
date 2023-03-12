@@ -2,6 +2,7 @@ import 'package:fast_noise/fast_noise.dart';
 
 class CubicFractalNoise implements Noise2And3 {
   final CubicNoise baseNoise;
+
   final FractalType fractalType;
   final int octaves;
   final double lacunarity;
@@ -11,17 +12,15 @@ class CubicFractalNoise implements Noise2And3 {
   CubicFractalNoise({
     int seed = 1337,
     double frequency = .01,
-    Interp interp = Interp.Quintic,
-    this.octaves = 3,
-    this.lacunarity = 2.0,
-    this.gain = .5,
     this.fractalType = FractalType.FBM,
+    this.octaves = 3,
+    this.gain = .5,
+    this.lacunarity = 2.0,
   })  : baseNoise = CubicNoise(
           seed: seed,
           frequency: frequency,
-          interp: interp,
         ),
-        fractalBounding = calculateFractalBounding(gain, octaves);
+        fractalBounding = calculateFractalBounding(octaves, gain);
 
   @override
   double getNoise3(double x, double y, double z) {

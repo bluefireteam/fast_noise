@@ -2,17 +2,12 @@ import 'package:fast_noise/fast_noise.dart';
 
 class SimplexNoise
     implements Noise2And3, Noise4, Noise2Int, Noise3Int, Noise4Int {
-  final int seed, octaves;
-  final double frequency, lacunarity, gain;
-  final Interp interp;
+  final int seed;
+  final double frequency;
 
   SimplexNoise({
     this.seed = 1337,
     this.frequency = .01,
-    this.interp = Interp.Quintic,
-    this.octaves = 3,
-    this.lacunarity = 2.0,
-    this.gain = .5,
   });
 
   @override

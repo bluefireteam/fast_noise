@@ -2,25 +2,27 @@ import 'package:fast_noise/fast_noise.dart';
 
 class ValueFractalNoise implements Noise2And3 {
   final ValueNoise baseNoise;
-  final int octaves;
-  final double lacunarity, gain;
+
   final FractalType fractalType;
+  final int octaves;
+  final double gain;
+  final double lacunarity;
   final double fractalBounding;
 
   ValueFractalNoise({
     int seed = 1337,
     double frequency = .01,
     Interp interp = Interp.Quintic,
-    this.octaves = 3,
-    this.lacunarity = 2.0,
-    this.gain = .5,
     this.fractalType = FractalType.FBM,
+    this.octaves = 3,
+    this.gain = .5,
+    this.lacunarity = 2.0,
   })  : baseNoise = ValueNoise(
           seed: seed,
           frequency: frequency,
           interp: interp,
         ),
-        fractalBounding = calculateFractalBounding(gain, octaves);
+        fractalBounding = calculateFractalBounding(octaves, gain);
 
   @override
   double getNoise3(double x, double y, double z) {

@@ -3,12 +3,10 @@ import 'package:fast_noise/fast_noise.dart';
 class CubicNoise implements Noise2And3 {
   final int seed;
   final double frequency;
-  final Interp interp;
 
   CubicNoise({
     this.seed = 1337,
     this.frequency = .01,
-    this.interp = Interp.Quintic,
   });
 
   @override
