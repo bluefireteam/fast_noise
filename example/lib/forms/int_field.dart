@@ -6,6 +6,7 @@ import 'string_field.dart';
 class IntField extends Field<int> {
   const IntField({
     super.key,
+    super.enabled,
     required super.title,
     required super.value,
     required super.setValue,
@@ -20,6 +21,7 @@ class IntFieldState extends State<IntField> {
   Widget build(BuildContext context) {
     return StringField(
       title: widget.title,
+      enabled: widget.enabled,
       value: widget.value.toString(),
       setValue: (v) => widget.setValue(int.parse(v)),
     );

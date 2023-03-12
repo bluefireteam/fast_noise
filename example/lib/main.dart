@@ -2,12 +2,14 @@ import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:fast_noise/fast_noise.dart';
+import 'package:fast_noise_flutter_example/parameter_names.dart';
 import 'package:flutter/material.dart';
 
 import 'forms/double_field.dart';
 import 'forms/enum_field.dart';
 import 'forms/int_field.dart';
 import 'generator.dart';
+import 'image_pane.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final validParameters = parametersPerNoiseType[noiseType]!;
     return Scaffold(
       appBar: AppBar(
         title: const Text('fast_noise'),
@@ -102,44 +105,55 @@ class _MyHomePageState extends State<MyHomePage> {
                   value: frequency,
                   setValue: (v) => setState(() => frequency = v),
                 ),
-                DoubleField(
-                  title: 'lacunarity (double)',
-                  value: lacunarity,
-                  setValue: (v) => setState(() => lacunarity = v),
-                ),
-                DoubleField(
-                  title: 'gain (double)',
-                  value: gain,
-                  setValue: (v) => setState(() => gain = v),
-                ),
-                IntField(
-                  title: 'octaves (int)',
-                  value: octaves,
-                  setValue: (v) => setState(() => octaves = v),
-                ),
                 EnumField(
                   title: 'Interp',
                   value: interp,
                   setValue: (v) => setState(() => interp = v),
                   values: Interp.values,
+                  enabled: validParameters.contains(ParameterNames.interp),
                 ),
                 EnumField(
                   title: 'Fractal Type',
                   value: fractalType,
                   setValue: (v) => setState(() => fractalType = v),
                   values: FractalType.values,
+                  enabled: validParameters.contains(ParameterNames.fractalType),
+                ),
+                IntField(
+                  title: 'octaves (int)',
+                  value: octaves,
+                  setValue: (v) => setState(() => octaves = v),
+                  enabled: validParameters.contains(ParameterNames.octaves),
+                ),
+                DoubleField(
+                  title: 'gain (double)',
+                  value: gain,
+                  setValue: (v) => setState(() => gain = v),
+                  enabled: validParameters.contains(ParameterNames.gain),
+                ),
+                DoubleField(
+                  title: 'lacunarity (double)',
+                  value: lacunarity,
+                  setValue: (v) => setState(() => lacunarity = v),
+                  enabled: validParameters.contains(ParameterNames.lacunarity),
                 ),
                 EnumField(
                   title: 'Cellular Dist Func',
                   value: cellularDistanceFunction,
                   setValue: (v) => setState(() => cellularDistanceFunction = v),
                   values: CellularDistanceFunction.values,
+                  enabled: validParameters.contains(
+                    ParameterNames.cellularDistanceFunction,
+                  ),
                 ),
                 EnumField(
                   title: 'Cellular Ret Type',
                   value: cellularReturnType,
                   setValue: (v) => setState(() => cellularReturnType = v),
                   values: CellularReturnType.values,
+                  enabled: validParameters.contains(
+                    ParameterNames.cellularDistanceFunction,
+                  ),
                 ),
                 TextButton(
                   child: const Text('Generate'),
@@ -184,70 +198,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               margin: const EdgeInsets.all(16.0),
               padding: const EdgeInsets.all(16.0),
-              child: _ImagePane(loading: _loading, image: _image),
+              child: ImagePane(loading: _loading, image: _image),
             ),
           )
         ],
       ),
     );
-  }
-}
-
-class _ImagePane extends StatelessWidget {
-  final bool loading;
-  final ui.Image? image;
-  const _ImagePane({required this.loading, required this.image});
-
-  @override
-  Widget build(BuildContext context) {
-    if (loading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-    final image = this.image;
-    if (image == null) {
-      return const Center(
-        child: Text('Click -generate- to generate a new image.'),
-      );
-    } else {
-      return CustomPaint(
-        painter: _CanvasScalePainter(image),
-      );
-    }
-  }
-}
-
-class _CanvasScalePainter extends CustomPainter {
-  _CanvasScalePainter(this.image);
-
-  final ui.Image image;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final srcSize = Size(
-      image.width.toDouble(),
-      image.height.toDouble(),
-    );
-    final xScale = size.width / srcSize.width;
-    final yScale = size.height / srcSize.height;
-    final scale = min(xScale, yScale);
-    final destSize = Size(
-      srcSize.width * scale,
-      srcSize.height * scale,
-    );
-    canvas.drawImageRect(
-      image,
-      Offset.zero & srcSize,
-      Offset.zero & destSize,
-      Paint()
-        ..filterQuality = FilterQuality.high
-        ..isAntiAlias = true,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }

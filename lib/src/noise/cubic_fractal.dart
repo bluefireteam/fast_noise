@@ -5,8 +5,8 @@ class CubicFractalNoise implements Noise2And3 {
 
   final FractalType fractalType;
   final int octaves;
-  final double lacunarity;
   final double gain;
+  final double lacunarity;
   final double fractalBounding;
 
   CubicFractalNoise({

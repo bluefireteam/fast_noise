@@ -8,6 +8,7 @@ class EnumField<T extends Enum> extends Field<T> {
 
   const EnumField({
     super.key,
+    super.enabled,
     required super.title,
     required super.value,
     required super.setValue,
@@ -24,6 +25,7 @@ class EnumFieldState<T extends Enum> extends State<EnumField<T>> {
     return FieldWrapper(
       title: widget.title,
       child: DropdownButton<T>(
+        isExpanded: true,
         value: widget.value,
         items: widget.values
             .map(
@@ -33,7 +35,7 @@ class EnumFieldState<T extends Enum> extends State<EnumField<T>> {
               ),
             )
             .toList(),
-        onChanged: (v) => widget.setValue(v as T),
+        onChanged: widget.enabled ? (v) => widget.setValue(v!) : null,
       ),
     );
   }

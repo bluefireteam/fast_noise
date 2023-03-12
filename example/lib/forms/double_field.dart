@@ -6,6 +6,7 @@ import 'string_field.dart';
 class DoubleField extends Field<double> {
   const DoubleField({
     super.key,
+    super.enabled,
     required super.title,
     required super.value,
     required super.setValue,
@@ -20,6 +21,7 @@ class DoubleFieldState extends State<DoubleField> {
   Widget build(BuildContext context) {
     return StringField(
       title: widget.title,
+      enabled: widget.enabled,
       value: widget.value.toString(),
       setValue: (v) => widget.setValue(double.parse(v)),
     );

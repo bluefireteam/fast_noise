@@ -6,6 +6,7 @@ import 'field_wrapper.dart';
 class StringField extends Field<String> {
   const StringField({
     super.key,
+    super.enabled,
     required super.title,
     required super.value,
     required super.setValue,
@@ -23,7 +24,11 @@ class StringFieldState extends State<StringField> {
     super.initState();
 
     _controller.text = widget.value;
-    _controller.addListener(() => widget.setValue(_controller.text));
+    _controller.addListener(() {
+      if (widget.enabled) {
+        widget.setValue(_controller.text);
+      }
+    });
   }
 
   @override
@@ -37,8 +42,16 @@ class StringFieldState extends State<StringField> {
     return FieldWrapper(
       title: widget.title,
       child: TextField(
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
+        enabled: widget.enabled,
+        readOnly: !widget.enabled,
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          fillColor: Colors.grey,
+          filled: !widget.enabled,
+          disabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+          enabled: widget.enabled,
         ),
         controller: _controller,
       ),
