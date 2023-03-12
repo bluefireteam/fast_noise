@@ -11,7 +11,7 @@ class SimplexFractalBenchmark extends BenchmarkBase {
 
   @override
   void run() {
-    noise2(128, 128, noiseType: NoiseType.SimplexFractal);
+    noise2(128, 128, noiseType: NoiseType.simplexFractal);
   }
 
   @override

@@ -18,17 +18,17 @@ final _fractalParameters = {
 };
 
 final Map<NoiseType, Set<ParameterNames>> parametersPerNoiseType = {
-  NoiseType.Cellular: {
+  NoiseType.cellular: {
     ParameterNames.cellularDistanceFunction,
     ParameterNames.cellularReturnType,
   },
-  NoiseType.Cubic: {},
-  NoiseType.CubicFractal: _fractalParameters,
-  NoiseType.Perlin: {ParameterNames.interp},
-  NoiseType.PerlinFractal: {ParameterNames.interp, ..._fractalParameters},
-  NoiseType.Simplex: {},
-  NoiseType.SimplexFractal: _fractalParameters,
-  NoiseType.Value: {ParameterNames.interp},
-  NoiseType.ValueFractal: {ParameterNames.interp, ..._fractalParameters},
-  NoiseType.WhiteNoise: {},
+  NoiseType.cubic: {},
+  NoiseType.cubicFractal: _fractalParameters,
+  NoiseType.perlin: {ParameterNames.interp},
+  NoiseType.perlinFractal: {ParameterNames.interp, ..._fractalParameters},
+  NoiseType.simplex: {},
+  NoiseType.simplexFractal: _fractalParameters,
+  NoiseType.value: {ParameterNames.interp},
+  NoiseType.valueFractal: {ParameterNames.interp, ..._fractalParameters},
+  NoiseType.whiteNoise: {},
 };

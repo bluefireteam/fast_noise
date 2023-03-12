@@ -6,21 +6,16 @@ List<List<double>> noise2(
   int height, {
   int seed = 1337,
   double frequency = .01,
-  Interp interp = Interp.Quintic,
-  NoiseType noiseType = NoiseType.Simplex,
+  Interp interp = Interp.quintic,
+  NoiseType noiseType = NoiseType.simplex,
   int octaves = 3,
   double lacunarity = 2.0,
   double gain = .5,
-  FractalType fractalType = FractalType.FBM,
+  FractalType fractalType = FractalType.fbm,
   CellularDistanceFunction cellularDistanceFunction =
-      CellularDistanceFunction.Euclidean,
-  CellularReturnType cellularReturnType = CellularReturnType.CellValue,
+      CellularDistanceFunction.euclidean,
+  CellularReturnType cellularReturnType = CellularReturnType.cellValue,
 }) {
-  final map = List<List<double>>.generate(
-    width,
-    (_) => List<double>.generate(height, (_) => .0),
-  );
-
   final noise = buildNoise(
     seed: seed,
     frequency: frequency,
@@ -34,13 +29,13 @@ List<List<double>> noise2(
     cellularReturnType: cellularReturnType,
   );
 
-  for (var x = 0; x < width; x++) {
-    for (var y = 0; y < height; y++) {
-      map[x][y] = noise.getNoise2(x.toDouble(), y.toDouble());
-    }
-  }
-
-  return map;
+  return List<List<double>>.generate(
+    width,
+    (x) => List<double>.generate(
+      height,
+      (y) => noise.getNoise2(x.toDouble(), y.toDouble()),
+    ),
+  );
 }
 
 /// Creates 3D noise
@@ -50,24 +45,16 @@ List<List<List<double>>> noise3(
   int depth, {
   int seed = 1337,
   double frequency = .01,
-  Interp interp = Interp.Quintic,
-  NoiseType noiseType = NoiseType.Simplex,
+  Interp interp = Interp.quintic,
+  NoiseType noiseType = NoiseType.simplex,
   int octaves = 3,
   double lacunarity = 2.0,
   double gain = .5,
-  FractalType fractalType = FractalType.FBM,
+  FractalType fractalType = FractalType.fbm,
   CellularDistanceFunction cellularDistanceFunction =
-      CellularDistanceFunction.Euclidean,
-  CellularReturnType cellularReturnType = CellularReturnType.CellValue,
+      CellularDistanceFunction.euclidean,
+  CellularReturnType cellularReturnType = CellularReturnType.cellValue,
 }) {
-  final map = List<List<List<double>>>.generate(
-    width,
-    (_) => List<List<double>>.generate(
-      height,
-      (_) => List<double>.generate(depth, (_) => .0),
-    ),
-  );
-
   final noise = buildNoise(
     seed: seed,
     frequency: frequency,
@@ -81,13 +68,14 @@ List<List<List<double>>> noise3(
     cellularReturnType: cellularReturnType,
   );
 
-  for (var x = 0; x < width; x++) {
-    for (var y = 0; y < height; y++) {
-      for (var z = 0; z < height; z++) {
-        noise.getNoise3(x.toDouble(), y.toDouble(), z.toDouble());
-      }
-    }
-  }
-
-  return map;
+  return List<List<List<double>>>.generate(
+    width,
+    (x) => List<List<double>>.generate(
+      height,
+      (y) => List<double>.generate(
+        depth,
+        (z) => noise.getNoise3(x.toDouble(), y.toDouble(), z.toDouble()),
+      ),
+    ),
+  );
 }

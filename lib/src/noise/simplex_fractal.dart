@@ -14,7 +14,7 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
   SimplexFractalNoise({
     this.seed = 1337,
     this.frequency = .01,
-    this.fractalType = FractalType.FBM,
+    this.fractalType = FractalType.fbm,
     this.octaves = 3,
     this.gain = .5,
     this.lacunarity = 2.0,
@@ -37,11 +37,11 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
     final dz = (z * frequency).toInt();
 
     switch (fractalType) {
-      case FractalType.FBM:
+      case FractalType.fbm:
         return singleSimplexFractalFBM3(dx, dy, dz);
-      case FractalType.Billow:
+      case FractalType.billow:
         return singleSimplexFractalBillow3(dx, dy, dz);
-      case FractalType.RigidMulti:
+      case FractalType.rigidMulti:
         return singleSimplexFractalRigidMulti3(dx, dy, dz);
     }
   }
@@ -114,10 +114,6 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
     return sum;
   }
 
-  static const double F3 = 1.0 / 3.0;
-  static const double G3 = 1.0 / 6.0;
-  static const double G33 = G3 * 3.0 - 1.0;
-
   @override
   double getNoiseInt2(int x, int y) {
     final xd = x.toDouble(), yd = y.toDouble();
@@ -130,11 +126,11 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
     final dy = (y * frequency).toInt();
 
     switch (fractalType) {
-      case FractalType.FBM:
+      case FractalType.fbm:
         return singleSimplexFractalFBM2(dx, dy);
-      case FractalType.Billow:
+      case FractalType.billow:
         return singleSimplexFractalBillow2(dx, dy);
-      case FractalType.RigidMulti:
+      case FractalType.rigidMulti:
         return singleSimplexFractalRigidMulti2(dx, dy);
     }
   }

@@ -35,94 +35,94 @@ void main() {
 
     switch (noiseTypeSelect!.value) {
       case 'Cellular':
-        noiseType = NoiseType.Cellular;
+        noiseType = NoiseType.cellular;
         break;
       case 'Cubic':
-        noiseType = NoiseType.Cubic;
+        noiseType = NoiseType.cubic;
         break;
       case 'CubicFractal':
-        noiseType = NoiseType.CubicFractal;
+        noiseType = NoiseType.cubicFractal;
         break;
       case 'Perlin':
-        noiseType = NoiseType.Perlin;
+        noiseType = NoiseType.perlin;
         break;
       case 'PerlinFractal':
-        noiseType = NoiseType.PerlinFractal;
+        noiseType = NoiseType.perlinFractal;
         break;
       case 'Simplex':
-        noiseType = NoiseType.Simplex;
+        noiseType = NoiseType.simplex;
         break;
       case 'SimplexFractal':
-        noiseType = NoiseType.SimplexFractal;
+        noiseType = NoiseType.simplexFractal;
         break;
       case 'Value':
-        noiseType = NoiseType.Value;
+        noiseType = NoiseType.value;
         break;
       case 'ValueFractal':
-        noiseType = NoiseType.ValueFractal;
+        noiseType = NoiseType.valueFractal;
         break;
       case 'WhiteNoise':
-        noiseType = NoiseType.WhiteNoise;
+        noiseType = NoiseType.whiteNoise;
         break;
     }
 
     switch (fractalTypeSelect!.value) {
       case 'FBM':
-        fractalType = FractalType.FBM;
+        fractalType = FractalType.fbm;
         break;
       case 'Billow':
-        fractalType = FractalType.Billow;
+        fractalType = FractalType.billow;
         break;
       case 'RigidMulti':
-        fractalType = FractalType.RigidMulti;
+        fractalType = FractalType.rigidMulti;
         break;
     }
 
     switch (interpTypeSelect!.value) {
       case 'Hermite':
-        interp = Interp.Hermite;
+        interp = Interp.hermite;
         break;
       case 'Linear':
-        interp = Interp.Linear;
+        interp = Interp.linear;
         break;
       case 'Quintic':
-        interp = Interp.Quintic;
+        interp = Interp.quintic;
         break;
     }
 
     switch (cellRetTypeSelect!.value) {
       case 'Distance':
-        cellularReturnType = CellularReturnType.Distance;
+        cellularReturnType = CellularReturnType.distance;
         break;
       case 'Distance2Add':
-        cellularReturnType = CellularReturnType.Distance2Add;
+        cellularReturnType = CellularReturnType.distance2Add;
         break;
       case 'Distance2':
-        cellularReturnType = CellularReturnType.Distance2;
+        cellularReturnType = CellularReturnType.distance2;
         break;
       case 'Distance2Div':
-        cellularReturnType = CellularReturnType.Distance2Div;
+        cellularReturnType = CellularReturnType.distance2Div;
         break;
       case 'Distance2Mul':
-        cellularReturnType = CellularReturnType.Distance2Mul;
+        cellularReturnType = CellularReturnType.distance2Mul;
         break;
       case 'Distance2Sub':
-        cellularReturnType = CellularReturnType.Distance2Sub;
+        cellularReturnType = CellularReturnType.distance2Sub;
         break;
       case 'CellValue':
-        cellularReturnType = CellularReturnType.CellValue;
+        cellularReturnType = CellularReturnType.cellValue;
         break;
     }
 
     switch (cellDistFnSelect!.value) {
       case 'Natural':
-        cellularDistanceFunction = CellularDistanceFunction.Natural;
+        cellularDistanceFunction = CellularDistanceFunction.natural;
         break;
       case 'Euclidean':
-        cellularDistanceFunction = CellularDistanceFunction.Euclidean;
+        cellularDistanceFunction = CellularDistanceFunction.euclidean;
         break;
       case 'Manhattan':
-        cellularDistanceFunction = CellularDistanceFunction.Manhattan;
+        cellularDistanceFunction = CellularDistanceFunction.manhattan;
         break;
     }
 

@@ -8,7 +8,7 @@ class PerlinNoise implements Noise2And3 {
   PerlinNoise({
     this.seed = 1337,
     this.frequency = .01,
-    this.interp = Interp.Quintic,
+    this.interp = Interp.quintic,
   });
 
   @override
@@ -25,17 +25,17 @@ class PerlinNoise implements Noise2And3 {
     double xs, ys, zs;
 
     switch (interp) {
-      case Interp.Linear:
+      case Interp.linear:
         xs = x - x0;
         ys = y - y0;
         zs = z - z0;
         break;
-      case Interp.Hermite:
+      case Interp.hermite:
         xs = (x - x0).interpHermiteFunc;
         ys = (y - y0).interpHermiteFunc;
         zs = (z - z0).interpHermiteFunc;
         break;
-      case Interp.Quintic:
+      case Interp.quintic:
         xs = (x - x0).interpQuinticFunc;
         ys = (y - y0).interpQuinticFunc;
         zs = (z - z0).interpQuinticFunc;
@@ -86,15 +86,15 @@ class PerlinNoise implements Noise2And3 {
     double xs, ys;
 
     switch (interp) {
-      case Interp.Linear:
+      case Interp.linear:
         xs = x - x0;
         ys = y - y0;
         break;
-      case Interp.Hermite:
+      case Interp.hermite:
         xs = (x - x0).interpHermiteFunc;
         ys = (y - y0).interpHermiteFunc;
         break;
-      case Interp.Quintic:
+      case Interp.quintic:
         xs = (x - x0).interpQuinticFunc;
         ys = (y - y0).interpQuinticFunc;
         break;

@@ -21,15 +21,15 @@ class SimplexNoise
         (z * frequency).toInt(),
       );
 
-  static const double F3 = 1.0 / 3.0;
-  static const double G3 = 1.0 / 6.0;
-  static const double G33 = G3 * 3.0 - 1.0;
+  static const double _f3 = 1.0 / 3.0;
+  static const double _g3 = 1.0 / 6.0;
+  static const double _g33 = _g3 * 3.0 - 1.0;
 
   double singleSimplex3(int seed, int x, int y, int z) {
-    var t = (x + y + z) * F3;
+    var t = (x + y + z) * _f3;
     final i = x + t.floor(), j = y + t.floor(), k = z + t.floor();
 
-    t = (i + j + k) * G3;
+    t = (i + j + k) * _g3;
 
     final x0 = x - (i - t), y0 = y - (j - t), z0 = z - (k - t);
 
@@ -86,15 +86,15 @@ class SimplexNoise
       }
     }
 
-    double x1 = x0 - i1 + G3,
-        y1 = y0 - j1 + G3,
-        z1 = z0 - k1 + G3,
-        x2 = x0 - i2 + F3,
-        y2 = y0 - j2 + F3,
-        z2 = z0 - k2 + F3,
-        x3 = x0 + G33,
-        y3 = y0 + G33,
-        z3 = z0 + G33,
+    double x1 = x0 - i1 + _g3,
+        y1 = y0 - j1 + _g3,
+        z1 = z0 - k1 + _g3,
+        x2 = x0 - i2 + _f3,
+        y2 = y0 - j2 + _f3,
+        z2 = z0 - k2 + _f3,
+        x3 = x0 + _g33,
+        y3 = y0 + _g33,
+        z3 = z0 + _g33,
         n0,
         n1,
         n2,
@@ -143,14 +143,14 @@ class SimplexNoise
   @override
   double getNoiseInt2(int x, int y) => singleSimplex2(seed, x, y);
 
-  static const double F2 = 1.0 / 2.0;
-  static const double G2 = 1.0 / 4.0;
+  static const double _f2 = 1.0 / 2.0;
+  static const double _g2 = 1.0 / 4.0;
 
   double singleSimplex2(int seed, int x, int y) {
-    var t = (x + y) * F2;
+    var t = (x + y) * _f2;
     final i = x + t.floor(), j = y + t.floor();
 
-    t = (i + j) * G2;
+    t = (i + j) * _g2;
 
     final x0 = x - (i - t);
     final y0 = y - (j - t);
@@ -164,10 +164,10 @@ class SimplexNoise
       j1 = 1;
     }
 
-    double x1 = x0 - i1 + G2,
-        y1 = y0 - j1 + G2,
-        x2 = x0 - 1 + F2,
-        y2 = y0 - 1 + F2,
+    double x1 = x0 - i1 + _g2,
+        y1 = y0 - j1 + _g2,
+        x2 = x0 - 1 + _f2,
+        y2 = y0 - 1 + _f2,
         n0,
         n1,
         n2;
@@ -215,7 +215,7 @@ class SimplexNoise
   double getNoiseInt4(int x, int y, int z, int w) =>
       singleSimplex4(seed, x, y, z, w);
 
-  static const List<int> SIMPLEX_4D = [
+  static const List<int> _simplex4d = [
     0,
     1,
     2,
@@ -474,17 +474,17 @@ class SimplexNoise
     0
   ];
 
-  static const double F4 = (2.23606797 - 1.0) / 4.0;
-  static const double G4 = (5.0 - 2.23606797) / 20.0;
+  static const double _f4 = (2.23606797 - 1.0) / 4.0;
+  static const double _g4 = (5.0 - 2.23606797) / 20.0;
 
   double singleSimplex4(int seed, int x, int y, int z, int w) {
-    double n0, n1, n2, n3, n4, t = (x + y + z + w) * F4;
+    double n0, n1, n2, n3, n4, t = (x + y + z + w) * _f4;
     final i = x + t.floor(),
         j = y + t.floor(),
         k = z + t.floor(),
         l = w + t.floor();
 
-    t = (i + j + k + l) * G4;
+    t = (i + j + k + l) * _g4;
 
     final x0 = x - (i - t);
     final y0 = y - (j - t);
@@ -500,35 +500,35 @@ class SimplexNoise
     c += (z0 > w0) ? 1 : 0;
     c <<= 2;
 
-    final i1 = SIMPLEX_4D[c] >= 3 ? 1 : 0,
-        i2 = SIMPLEX_4D[c] >= 2 ? 1 : 0,
-        i3 = SIMPLEX_4D[c++] >= 1 ? 1 : 0,
-        j1 = SIMPLEX_4D[c] >= 3 ? 1 : 0,
-        j2 = SIMPLEX_4D[c] >= 2 ? 1 : 0,
-        j3 = SIMPLEX_4D[c++] >= 1 ? 1 : 0,
-        k1 = SIMPLEX_4D[c] >= 3 ? 1 : 0,
-        k2 = SIMPLEX_4D[c] >= 2 ? 1 : 0,
-        k3 = SIMPLEX_4D[c++] >= 1 ? 1 : 0,
-        l1 = SIMPLEX_4D[c] >= 3 ? 1 : 0,
-        l2 = SIMPLEX_4D[c] >= 2 ? 1 : 0,
-        l3 = SIMPLEX_4D[c] >= 1 ? 1 : 0;
+    final i1 = _simplex4d[c] >= 3 ? 1 : 0,
+        i2 = _simplex4d[c] >= 2 ? 1 : 0,
+        i3 = _simplex4d[c++] >= 1 ? 1 : 0,
+        j1 = _simplex4d[c] >= 3 ? 1 : 0,
+        j2 = _simplex4d[c] >= 2 ? 1 : 0,
+        j3 = _simplex4d[c++] >= 1 ? 1 : 0,
+        k1 = _simplex4d[c] >= 3 ? 1 : 0,
+        k2 = _simplex4d[c] >= 2 ? 1 : 0,
+        k3 = _simplex4d[c++] >= 1 ? 1 : 0,
+        l1 = _simplex4d[c] >= 3 ? 1 : 0,
+        l2 = _simplex4d[c] >= 2 ? 1 : 0,
+        l3 = _simplex4d[c] >= 1 ? 1 : 0;
 
-    final x1 = x0 - i1 + G4,
-        y1 = y0 - j1 + G4,
-        z1 = z0 - k1 + G4,
-        w1 = w0 - l1 + G4,
-        x2 = x0 - i2 + 2 * G4,
-        y2 = y0 - j2 + 2 * G4,
-        z2 = z0 - k2 + 2 * G4,
-        w2 = w0 - l2 + 2 * G4,
-        x3 = x0 - i3 + 3 * G4,
-        y3 = y0 - j3 + 3 * G4,
-        z3 = z0 - k3 + 3 * G4,
-        w3 = w0 - l3 + 3 * G4,
-        x4 = x0 - 1 + 4 * G4,
-        y4 = y0 - 1 + 4 * G4,
-        z4 = z0 - 1 + 4 * G4,
-        w4 = w0 - 1 + 4 * G4;
+    final x1 = x0 - i1 + _g4,
+        y1 = y0 - j1 + _g4,
+        z1 = z0 - k1 + _g4,
+        w1 = w0 - l1 + _g4,
+        x2 = x0 - i2 + 2 * _g4,
+        y2 = y0 - j2 + 2 * _g4,
+        z2 = z0 - k2 + 2 * _g4,
+        w2 = w0 - l2 + 2 * _g4,
+        x3 = x0 - i3 + 3 * _g4,
+        y3 = y0 - j3 + 3 * _g4,
+        z3 = z0 - k3 + 3 * _g4,
+        w3 = w0 - l3 + 3 * _g4,
+        x4 = x0 - 1 + 4 * _g4,
+        y4 = y0 - 1 + 4 * _g4,
+        z4 = z0 - 1 + 4 * _g4,
+        w4 = w0 - 1 + 4 * _g4;
 
     t = 0.6 - x0 * x0 - y0 * y0 - z0 * z0 - w0 * w0;
 

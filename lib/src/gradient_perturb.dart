@@ -17,7 +17,7 @@ class GradientPerturb {
     this.gain = 0.5,
     this.lacunarity = 2.0,
     this.octaves = 3,
-    this.interp = Interp.Quintic,
+    this.interp = Interp.quintic,
   }) : fractalBounding = calculateFractalBounding(octaves, gain);
 
   void gradientPerturb3(Vector3f v3) => singleGradientPerturb3(
@@ -56,32 +56,32 @@ class GradientPerturb {
 
     double xs, ys, zs;
     switch (interp) {
-      case Interp.Linear:
+      case Interp.linear:
         xs = xf - x0;
         ys = yf - y0;
         zs = zf - z0;
         break;
-      case Interp.Hermite:
+      case Interp.hermite:
         xs = (xf - x0).interpHermiteFunc;
         ys = (yf - y0).interpHermiteFunc;
         zs = (zf - z0).interpHermiteFunc;
         break;
-      case Interp.Quintic:
+      case Interp.quintic:
         xs = (xf - x0).interpQuinticFunc;
         ys = (yf - y0).interpQuinticFunc;
         zs = (zf - z0).interpQuinticFunc;
         break;
     }
 
-    var vec0 = CELL_3D[hash3D(seed, x0, y0, z0) & 255],
-        vec1 = CELL_3D[hash3D(seed, x1, y0, z0) & 255];
+    var vec0 = cell3d[hash3D(seed, x0, y0, z0) & 255],
+        vec1 = cell3d[hash3D(seed, x1, y0, z0) & 255];
 
     var lx0x = xs.lerp(vec0.x, vec1.x),
         ly0x = xs.lerp(vec0.y, vec1.y),
         lz0x = xs.lerp(vec0.z, vec1.z);
 
-    vec0 = CELL_3D[hash3D(seed, x0, y1, z0) & 255];
-    vec1 = CELL_3D[hash3D(seed, x1, y1, z0) & 255];
+    vec0 = cell3d[hash3D(seed, x0, y1, z0) & 255];
+    vec1 = cell3d[hash3D(seed, x1, y1, z0) & 255];
 
     var lx1x = xs.lerp(vec0.x, vec1.x),
         ly1x = xs.lerp(vec0.y, vec1.y),
@@ -90,15 +90,15 @@ class GradientPerturb {
         ly0y = ys.lerp(ly0x, ly1x),
         lz0y = ys.lerp(lz0x, lz1x);
 
-    vec0 = CELL_3D[hash3D(seed, x0, y0, z1) & 255];
-    vec1 = CELL_3D[hash3D(seed, x1, y0, z1) & 255];
+    vec0 = cell3d[hash3D(seed, x0, y0, z1) & 255];
+    vec1 = cell3d[hash3D(seed, x1, y0, z1) & 255];
 
     lx0x = xs.lerp(vec0.x, vec1.x);
     ly0x = xs.lerp(vec0.y, vec1.y);
     lz0x = xs.lerp(vec0.z, vec1.z);
 
-    vec0 = CELL_3D[hash3D(seed, x0, y1, z1) & 255];
-    vec1 = CELL_3D[hash3D(seed, x1, y1, z1) & 255];
+    vec0 = cell3d[hash3D(seed, x0, y1, z1) & 255];
+    vec1 = cell3d[hash3D(seed, x1, y1, z1) & 255];
 
     lx1x = xs.lerp(vec0.x, vec1.x);
     ly1x = xs.lerp(vec0.y, vec1.y);
@@ -140,27 +140,27 @@ class GradientPerturb {
 
     double xs, ys;
     switch (interp) {
-      case Interp.Linear:
+      case Interp.linear:
         xs = xf - x0;
         ys = yf - y0;
         break;
-      case Interp.Hermite:
+      case Interp.hermite:
         xs = (xf - x0).interpHermiteFunc;
         ys = (yf - y0).interpHermiteFunc;
         break;
-      case Interp.Quintic:
+      case Interp.quintic:
         xs = (xf - x0).interpQuinticFunc;
         ys = (yf - y0).interpQuinticFunc;
         break;
     }
 
-    var vec0 = CELL_2D[hash2D(seed, x0, y0) & 255],
-        vec1 = CELL_2D[hash2D(seed, x1, y0) & 255];
+    var vec0 = cell2d[hash2D(seed, x0, y0) & 255],
+        vec1 = cell2d[hash2D(seed, x1, y0) & 255];
 
     final lx0x = xs.lerp(vec0.x, vec1.x), ly0x = xs.lerp(vec0.y, vec1.y);
 
-    vec0 = CELL_2D[hash2D(seed, x0, y1) & 255];
-    vec1 = CELL_2D[hash2D(seed, x1, y1) & 255];
+    vec0 = cell2d[hash2D(seed, x0, y1) & 255];
+    vec1 = cell2d[hash2D(seed, x1, y1) & 255];
 
     final lx1x = xs.lerp(vec0.x, vec1.x), ly1x = xs.lerp(vec0.y, vec1.y);
 

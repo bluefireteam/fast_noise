@@ -11,8 +11,8 @@ class CellularNoise implements Noise2And3 {
   CellularNoise({
     this.seed = 1337,
     this.frequency = .01,
-    this.cellularDistanceFunction = CellularDistanceFunction.Euclidean,
-    this.cellularReturnType = CellularReturnType.CellValue,
+    this.cellularDistanceFunction = CellularDistanceFunction.euclidean,
+    this.cellularReturnType = CellularReturnType.cellValue,
   });
 
   @override
@@ -22,8 +22,8 @@ class CellularNoise implements Noise2And3 {
     final dz = z * frequency;
 
     switch (cellularReturnType) {
-      case CellularReturnType.CellValue:
-      case CellularReturnType.Distance:
+      case CellularReturnType.cellValue:
+      case CellularReturnType.distance:
         return singleCellular3(dx, dy, dz);
       default:
         return singleCellular2Edge3(dx, dy, dz);
@@ -37,11 +37,11 @@ class CellularNoise implements Noise2And3 {
     var xc = 0, yc = 0, zc = 0;
 
     switch (cellularDistanceFunction) {
-      case CellularDistanceFunction.Euclidean:
+      case CellularDistanceFunction.euclidean:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
-              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+              final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
               final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
@@ -58,11 +58,11 @@ class CellularNoise implements Noise2And3 {
           }
         }
         break;
-      case CellularDistanceFunction.Manhattan:
+      case CellularDistanceFunction.manhattan:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
-              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+              final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
               final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
@@ -79,11 +79,11 @@ class CellularNoise implements Noise2And3 {
           }
         }
         break;
-      case CellularDistanceFunction.Natural:
+      case CellularDistanceFunction.natural:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
-              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+              final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
               final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
@@ -104,10 +104,10 @@ class CellularNoise implements Noise2And3 {
     }
 
     switch (cellularReturnType) {
-      case CellularReturnType.CellValue:
+      case CellularReturnType.cellValue:
         return valCoord3D(0, xc, yc, zc);
 
-      case CellularReturnType.Distance:
+      case CellularReturnType.distance:
         return distance - 1.0;
       default:
         return .0;
@@ -119,11 +119,11 @@ class CellularNoise implements Noise2And3 {
     var distance = 999999.0, distance2 = 999999.0;
 
     switch (cellularDistanceFunction) {
-      case CellularDistanceFunction.Euclidean:
+      case CellularDistanceFunction.euclidean:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
-              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+              final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
               final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
@@ -136,11 +136,11 @@ class CellularNoise implements Noise2And3 {
           }
         }
         break;
-      case CellularDistanceFunction.Manhattan:
+      case CellularDistanceFunction.manhattan:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
-              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+              final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
               final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
@@ -153,11 +153,11 @@ class CellularNoise implements Noise2And3 {
           }
         }
         break;
-      case CellularDistanceFunction.Natural:
+      case CellularDistanceFunction.natural:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
-              final vec = CELL_3D[hash3D(seed, xi, yi, zi) & 255];
+              final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
               final vecX = xi - x + vec.x,
                   vecY = yi - y + vec.y,
@@ -176,15 +176,15 @@ class CellularNoise implements Noise2And3 {
     }
 
     switch (cellularReturnType) {
-      case CellularReturnType.Distance2:
+      case CellularReturnType.distance2:
         return distance2 - 1.0;
-      case CellularReturnType.Distance2Add:
+      case CellularReturnType.distance2Add:
         return distance2 + distance - 1.0;
-      case CellularReturnType.Distance2Sub:
+      case CellularReturnType.distance2Sub:
         return distance2 - distance - 1.0;
-      case CellularReturnType.Distance2Mul:
+      case CellularReturnType.distance2Mul:
         return distance2 * distance - 1.0;
-      case CellularReturnType.Distance2Div:
+      case CellularReturnType.distance2Div:
         return distance / distance2 - 1.0;
       default:
         return .0;
@@ -197,8 +197,8 @@ class CellularNoise implements Noise2And3 {
     final dy = y * frequency;
 
     switch (cellularReturnType) {
-      case CellularReturnType.CellValue:
-      case CellularReturnType.Distance:
+      case CellularReturnType.cellValue:
+      case CellularReturnType.distance:
         return singleCellular2(dx, dy);
       default:
         return singleCellular2Edge2(dx, dy);
@@ -211,10 +211,10 @@ class CellularNoise implements Noise2And3 {
     var xc = 0, yc = 0;
 
     switch (cellularDistanceFunction) {
-      case CellularDistanceFunction.Euclidean:
+      case CellularDistanceFunction.euclidean:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
-            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+            final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
@@ -228,10 +228,10 @@ class CellularNoise implements Noise2And3 {
           }
         }
         break;
-      case CellularDistanceFunction.Manhattan:
+      case CellularDistanceFunction.manhattan:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
-            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+            final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
@@ -245,10 +245,10 @@ class CellularNoise implements Noise2And3 {
           }
         }
         break;
-      case CellularDistanceFunction.Natural:
+      case CellularDistanceFunction.natural:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
-            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+            final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
@@ -266,10 +266,10 @@ class CellularNoise implements Noise2And3 {
     }
 
     switch (cellularReturnType) {
-      case CellularReturnType.CellValue:
+      case CellularReturnType.cellValue:
         return valCoord2D(0, xc, yc);
 
-      case CellularReturnType.Distance:
+      case CellularReturnType.distance:
         return distance - 1.0;
       default:
         return .0;
@@ -281,10 +281,10 @@ class CellularNoise implements Noise2And3 {
     var distance = 999999.0, distance2 = 999999.0;
 
     switch (cellularDistanceFunction) {
-      case CellularDistanceFunction.Euclidean:
+      case CellularDistanceFunction.euclidean:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
-            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+            final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
@@ -295,10 +295,10 @@ class CellularNoise implements Noise2And3 {
           }
         }
         break;
-      case CellularDistanceFunction.Manhattan:
+      case CellularDistanceFunction.manhattan:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
-            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+            final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
@@ -309,10 +309,10 @@ class CellularNoise implements Noise2And3 {
           }
         }
         break;
-      case CellularDistanceFunction.Natural:
+      case CellularDistanceFunction.natural:
         for (var xi = xr - 1; xi <= xr + 1; xi++) {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
-            final vec = CELL_2D[hash2D(seed, xi, yi) & 255];
+            final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
@@ -327,15 +327,15 @@ class CellularNoise implements Noise2And3 {
     }
 
     switch (cellularReturnType) {
-      case CellularReturnType.Distance2:
+      case CellularReturnType.distance2:
         return distance2 - 1.0;
-      case CellularReturnType.Distance2Add:
+      case CellularReturnType.distance2Add:
         return distance2 + distance - 1.0;
-      case CellularReturnType.Distance2Sub:
+      case CellularReturnType.distance2Sub:
         return distance2 - distance - 1.0;
-      case CellularReturnType.Distance2Mul:
+      case CellularReturnType.distance2Mul:
         return distance2 * distance - 1.0;
-      case CellularReturnType.Distance2Div:
+      case CellularReturnType.distance2Div:
         return distance / distance2 - 1.0;
       default:
         return .0;

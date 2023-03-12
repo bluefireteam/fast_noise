@@ -11,8 +11,8 @@ class PerlinFractalNoise implements Noise2And3 {
   PerlinFractalNoise({
     int seed = 1337,
     double frequency = .01,
-    Interp interp = Interp.Quintic,
-    this.fractalType = FractalType.FBM,
+    Interp interp = Interp.quintic,
+    this.fractalType = FractalType.fbm,
     this.octaves = 3,
     this.gain = .5,
     this.lacunarity = 2.0,
@@ -30,11 +30,11 @@ class PerlinFractalNoise implements Noise2And3 {
     final dz = z * baseNoise.frequency;
 
     switch (fractalType) {
-      case FractalType.FBM:
+      case FractalType.fbm:
         return singlePerlinFractalFBM3(dx, dy, dz);
-      case FractalType.Billow:
+      case FractalType.billow:
         return singlePerlinFractalBillow3(dx, dy, dz);
-      case FractalType.RigidMulti:
+      case FractalType.rigidMulti:
         return singlePerlinFractalRigidMulti3(dx, dy, dz);
     }
   }
@@ -98,11 +98,11 @@ class PerlinFractalNoise implements Noise2And3 {
     final dy = y * baseNoise.frequency;
 
     switch (fractalType) {
-      case FractalType.FBM:
+      case FractalType.fbm:
         return singlePerlinFractalFBM2(dx, dy);
-      case FractalType.Billow:
+      case FractalType.billow:
         return singlePerlinFractalBillow2(dx, dy);
-      case FractalType.RigidMulti:
+      case FractalType.rigidMulti:
         return singlePerlinFractalRigidMulti2(dx, dy);
     }
   }

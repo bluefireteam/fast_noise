@@ -1,28 +1,28 @@
 enum NoiseType {
-  Value,
-  ValueFractal,
-  Perlin,
-  PerlinFractal,
-  Simplex,
-  SimplexFractal,
-  Cellular,
-  WhiteNoise,
-  Cubic,
-  CubicFractal
+  cellular,
+  cubic,
+  cubicFractal,
+  perlin,
+  perlinFractal,
+  simplex,
+  simplexFractal,
+  value,
+  valueFractal,
+  whiteNoise,
 }
 
-enum Interp { Linear, Hermite, Quintic }
+enum Interp { linear, hermite, quintic }
 
-enum FractalType { FBM, Billow, RigidMulti }
+enum FractalType { fbm, billow, rigidMulti }
 
-enum CellularDistanceFunction { Euclidean, Manhattan, Natural }
+enum CellularDistanceFunction { euclidean, manhattan, natural }
 
 enum CellularReturnType {
-  CellValue,
-  Distance,
-  Distance2,
-  Distance2Add,
-  Distance2Sub,
-  Distance2Mul,
-  Distance2Div
+  cellValue,
+  distance,
+  distance2,
+  distance2Add,
+  distance2Sub,
+  distance2Mul,
+  distance2Div
 }

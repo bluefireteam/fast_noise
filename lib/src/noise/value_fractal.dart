@@ -12,8 +12,8 @@ class ValueFractalNoise implements Noise2And3 {
   ValueFractalNoise({
     int seed = 1337,
     double frequency = .01,
-    Interp interp = Interp.Quintic,
-    this.fractalType = FractalType.FBM,
+    Interp interp = Interp.quintic,
+    this.fractalType = FractalType.fbm,
     this.octaves = 3,
     this.gain = .5,
     this.lacunarity = 2.0,
@@ -31,11 +31,11 @@ class ValueFractalNoise implements Noise2And3 {
     final dz = z * baseNoise.frequency;
 
     switch (fractalType) {
-      case FractalType.FBM:
+      case FractalType.fbm:
         return singleValueFractalFBM3(dx, dy, dz);
-      case FractalType.Billow:
+      case FractalType.billow:
         return singleValueFractalBillow3(dx, dy, dz);
-      case FractalType.RigidMulti:
+      case FractalType.rigidMulti:
         return singleValueFractalRigidMulti3(dx, dy, dz);
     }
   }
@@ -99,11 +99,11 @@ class ValueFractalNoise implements Noise2And3 {
     final dy = y * baseNoise.frequency;
 
     switch (fractalType) {
-      case FractalType.FBM:
+      case FractalType.fbm:
         return singleValueFractalFBM2(dx, dy);
-      case FractalType.Billow:
+      case FractalType.billow:
         return singleValueFractalBillow2(dx, dy);
-      case FractalType.RigidMulti:
+      case FractalType.rigidMulti:
         return singleValueFractalRigidMulti2(dx, dy);
     }
   }

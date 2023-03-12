@@ -43,16 +43,16 @@ class _MyHomePageState extends State<MyHomePage> {
   int seed = 1337;
   int width = 512;
   int height = 512;
-  NoiseType noiseType = NoiseType.Cellular;
-  Interp interp = Interp.Quintic;
+  NoiseType noiseType = NoiseType.cellular;
+  Interp interp = Interp.quintic;
   int octaves = 5;
   double lacunarity = 2.0;
   double gain = .5;
-  FractalType fractalType = FractalType.FBM;
+  FractalType fractalType = FractalType.fbm;
   double frequency = 0.015;
   CellularDistanceFunction cellularDistanceFunction =
-      CellularDistanceFunction.Euclidean;
-  CellularReturnType cellularReturnType = CellularReturnType.Distance2Add;
+      CellularDistanceFunction.euclidean;
+  CellularReturnType cellularReturnType = CellularReturnType.distance2Add;
 
   @override
   Widget build(BuildContext context) {

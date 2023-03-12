@@ -13,7 +13,7 @@ class CubicNoise implements Noise2And3 {
   double getNoise3(double x, double y, double z) =>
       singleCubic3(seed, x * frequency, y * frequency, z * frequency);
 
-  static const double CUBIC_3D_BOUNDING = 1.0 / (1.5 * 1.5 * 1.5);
+  static const double _cubic3dBounding = 1.0 / (1.5 * 1.5 * 1.5);
 
   double singleCubic3(int seed, double x, double y, double z) {
     final x1 = x.floor(), y1 = y.floor(), z1 = z.floor();
@@ -134,7 +134,7 @@ class CubicNoise implements Noise2And3 {
             ),
           ),
         ) *
-        CUBIC_3D_BOUNDING;
+        _cubic3dBounding;
   }
 
   @override
@@ -145,7 +145,7 @@ class CubicNoise implements Noise2And3 {
     return singleCubic2(seed, dx, dy);
   }
 
-  static const double CUBIC_2D_BOUNDING = 1.0 / (1.5 * 1.5);
+  static const double _cubic2dBounding = 1.0 / (1.5 * 1.5);
 
   double singleCubic2(int seed, double x, double y) {
     final x1 = x.floor(), y1 = y.floor();
@@ -183,6 +183,6 @@ class CubicNoise implements Noise2And3 {
             valCoord2D(seed, x3, y3),
           ),
         ) *
-        CUBIC_2D_BOUNDING;
+        _cubic2dBounding;
   }
 }

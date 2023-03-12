@@ -12,7 +12,7 @@ class CubicFractalNoise implements Noise2And3 {
   CubicFractalNoise({
     int seed = 1337,
     double frequency = .01,
-    this.fractalType = FractalType.FBM,
+    this.fractalType = FractalType.fbm,
     this.octaves = 3,
     this.gain = .5,
     this.lacunarity = 2.0,
@@ -29,11 +29,11 @@ class CubicFractalNoise implements Noise2And3 {
     final dz = z * baseNoise.frequency;
 
     switch (fractalType) {
-      case FractalType.FBM:
+      case FractalType.fbm:
         return singleCubicFractalFBM3(dx, dy, dz);
-      case FractalType.Billow:
+      case FractalType.billow:
         return singleCubicFractalBillow3(dx, dy, dz);
-      case FractalType.RigidMulti:
+      case FractalType.rigidMulti:
         return singleCubicFractalRigidMulti3(dx, dy, dz);
     }
   }
@@ -96,11 +96,11 @@ class CubicFractalNoise implements Noise2And3 {
     final dy = y * baseNoise.frequency;
 
     switch (fractalType) {
-      case FractalType.FBM:
+      case FractalType.fbm:
         return singleCubicFractalFBM2(dx, dy);
-      case FractalType.Billow:
+      case FractalType.billow:
         return singleCubicFractalBillow2(dx, dy);
-      case FractalType.RigidMulti:
+      case FractalType.rigidMulti:
         return singleCubicFractalRigidMulti2(dx, dy);
     }
   }

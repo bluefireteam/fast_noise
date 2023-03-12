@@ -84,7 +84,7 @@ void main() {
     test('perlin', () {
       final perlin = PerlinNoise(
         seed: _testSeed,
-        interp: Interp.Linear,
+        interp: Interp.linear,
         frequency: 0.2,
       );
 
@@ -108,7 +108,7 @@ void main() {
     test('perlin fractal', () {
       final perlinFractal = PerlinFractalNoise(
         seed: _testSeed,
-        interp: Interp.Linear,
+        interp: Interp.linear,
         frequency: 0.2,
       );
 

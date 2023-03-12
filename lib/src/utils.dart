@@ -13,16 +13,16 @@ double calculateFractalBounding(int octaves, double gain) {
   return 1.0 / ampFractal;
 }
 
-const int X_PRIME = 1619;
-const int Y_PRIME = 31337;
-const int Z_PRIME = 6971;
-const int W_PRIME = 1013;
+const int _xPrime = 1619;
+const int _yPrime = 31337;
+const int _zPrime = 6971;
+const int _wPrime = 1013;
 
 @pragma('vm:prefer-inline')
 int hash2D(int seed, int x, int y) {
   IntX hash = Int32(seed);
-  hash ^= X_PRIME * x;
-  hash ^= Y_PRIME * y;
+  hash ^= _xPrime * x;
+  hash ^= _yPrime * y;
 
   hash = hash * hash * hash * 60493;
   hash = (hash >> 13) ^ hash;
@@ -33,9 +33,9 @@ int hash2D(int seed, int x, int y) {
 @pragma('vm:prefer-inline')
 int hash3D(int seed, int x, int y, int z) {
   IntX hash = Int32(seed);
-  hash ^= X_PRIME * x;
-  hash ^= Y_PRIME * y;
-  hash ^= Z_PRIME * z;
+  hash ^= _xPrime * x;
+  hash ^= _yPrime * y;
+  hash ^= _zPrime * z;
 
   hash = hash * hash * hash * 60493;
   hash = (hash >> 13) ^ hash;
@@ -46,8 +46,8 @@ int hash3D(int seed, int x, int y, int z) {
 @pragma('vm:prefer-inline')
 double valCoord2D(int seed, int x, int y) {
   var n = Int32(seed);
-  n ^= X_PRIME * x;
-  n ^= Y_PRIME * y;
+  n ^= _xPrime * x;
+  n ^= _yPrime * y;
 
   return (n * n * n * 60493).toDouble() / 2147483648;
 }
@@ -55,9 +55,9 @@ double valCoord2D(int seed, int x, int y) {
 @pragma('vm:prefer-inline')
 double valCoord3D(int seed, int x, int y, int z) {
   var n = Int32(seed);
-  n ^= X_PRIME * x;
-  n ^= Y_PRIME * y;
-  n ^= Z_PRIME * z;
+  n ^= _xPrime * x;
+  n ^= _yPrime * y;
+  n ^= _zPrime * z;
 
   return (n * n * n * 60493).toDouble() / 2147483648;
 }
@@ -65,10 +65,10 @@ double valCoord3D(int seed, int x, int y, int z) {
 @pragma('vm:prefer-inline')
 double valCoord4D(int seed, int x, int y, int z, int w) {
   var n = Int32(seed);
-  n ^= X_PRIME * x;
-  n ^= Y_PRIME * y;
-  n ^= Z_PRIME * z;
-  n ^= W_PRIME * w;
+  n ^= _xPrime * x;
+  n ^= _yPrime * y;
+  n ^= _zPrime * z;
+  n ^= _wPrime * w;
 
   return (n * n * n * 60493).toDouble() / 2147483648;
 }
@@ -76,13 +76,13 @@ double valCoord4D(int seed, int x, int y, int z, int w) {
 @pragma('vm:prefer-inline')
 double gradCoord2D(int seed, int x, int y, double xd, double yd) {
   IntX hash = Int32(seed);
-  hash ^= X_PRIME * x;
-  hash ^= Y_PRIME * y;
+  hash ^= _xPrime * x;
+  hash ^= _yPrime * y;
 
   hash = hash * hash * hash * 60493;
   hash = (hash >> 13) ^ hash;
 
-  final g = GRAD_2D[hash.toInt() & 7];
+  final g = gradient2d[hash.toInt() & 7];
 
   return xd * g.x + yd * g.y;
 }
@@ -98,14 +98,14 @@ double gradCoord3D(
   double zd,
 ) {
   IntX hash = Int32(seed);
-  hash ^= X_PRIME * x;
-  hash ^= Y_PRIME * y;
-  hash ^= Z_PRIME * z;
+  hash ^= _xPrime * x;
+  hash ^= _yPrime * y;
+  hash ^= _zPrime * z;
 
   hash = hash * hash * hash * 60493;
   hash = (hash >> 13) ^ hash;
 
-  final g = GRAD_3D[hash.toInt() & 15];
+  final g = gradient3d[hash.toInt() & 15];
 
   return xd * g.x + yd * g.y + zd * g.z;
 }
@@ -123,10 +123,10 @@ double gradCoord4D(
   double wd,
 ) {
   IntX hash = Int32(seed);
-  hash ^= X_PRIME * x;
-  hash ^= Y_PRIME * y;
-  hash ^= Z_PRIME * z;
-  hash ^= W_PRIME * w;
+  hash ^= _xPrime * x;
+  hash ^= _yPrime * y;
+  hash ^= _zPrime * z;
+  hash ^= _wPrime * w;
 
   hash = hash * hash * hash * 60493;
   hash = (hash >> 13) ^ hash;
