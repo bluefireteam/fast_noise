@@ -23,37 +23,49 @@ Try out some settings [here][preview]
     import 'package:fast_noise/fast_noise.dart';
 
     main() {
-      var arr2d = noise2(w, h,
-          noiseType: NoiseType.Cellular,
+      var arr2d = noise2(
+          width,
+          height,
+          noiseType: NoiseType.cellular,
           octaves: 5,
           frequency: 0.015,
-          cellularReturnType: CellularReturnType.Distance2Add);
+          cellularReturnType: CellularReturnType.distance2Add,
+      );
     }
+
 ![Cellular Noise](https://imgur.com/ajmSxvC.png)
 
     import 'package:fast_noise/fast_noise.dart';
 
     main() {
-      var arr2d = noise2(w, h,
-          noiseType: NoiseType.Perlin,
+      var arr2d = noise2(
+          width,
+          height,
+          noiseType: NoiseType.perlin,
           octaves: 3,
-          frequency: 0.05);
-          
+          frequency: 0.05,
+      );
+    }
+
 ![Perlin Noise](https://imgur.com/vUFS893.png)       
 
     import 'package:fast_noise/fast_noise.dart';
 
     main() {
-      var arr2d = noise2(w, h,
-          noiseType: NoiseType.SimplexFractal,
+      var arr2d = noise2(
+          width,
+          height,
+          noiseType: NoiseType.simplexFractal,
           octaves: 4,
-          frequency: 0.0075)
-          
+          frequency: 0.0075,
+      );
+    }
+
 ![Simplex Fractal Noise](https://imgur.com/PRSWv95.png)
 
 You can also call a noise type directly:
 
-      var noise = new ValueNoise(interp: Interp.Quintic, octaves: 5);
+      var noise = new ValueNoise(interp: Interp.quintic, octaves: 5);
       // generate 512x512  
       for (int x = 0; x < 512; x++) {
         for (int y = 0; y < 512; y++) {
