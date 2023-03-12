@@ -152,7 +152,8 @@ class SimplexNoise
 
     t = (i + j) * G2;
 
-    final X0 = i - t, Y0 = j - t, x0 = x - X0, y0 = y - Y0;
+    final x0 = x - (i - t);
+    final y0 = y - (j - t);
 
     int i1, j1;
     if (x0 > y0) {
@@ -485,14 +486,10 @@ class SimplexNoise
 
     t = (i + j + k + l) * G4;
 
-    final X0 = i - t,
-        Y0 = j - t,
-        Z0 = k - t,
-        W0 = l - t,
-        x0 = x - X0,
-        y0 = y - Y0,
-        z0 = z - Z0,
-        w0 = w - W0;
+    final x0 = x - (i - t);
+    final y0 = y - (j - t);
+    final z0 = z - (k - t);
+    final w0 = w - (l - t);
 
     var c = (x0 > y0) ? 32 : 0;
 

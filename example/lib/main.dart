@@ -2,14 +2,13 @@ import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:fast_noise/fast_noise.dart';
+import 'package:fast_noise_flutter_example/forms/double_field.dart';
+import 'package:fast_noise_flutter_example/forms/enum_field.dart';
+import 'package:fast_noise_flutter_example/forms/int_field.dart';
+import 'package:fast_noise_flutter_example/generator.dart';
+import 'package:fast_noise_flutter_example/image_pane.dart';
 import 'package:fast_noise_flutter_example/parameter_names.dart';
 import 'package:flutter/material.dart';
-
-import 'forms/double_field.dart';
-import 'forms/enum_field.dart';
-import 'forms/int_field.dart';
-import 'generator.dart';
-import 'image_pane.dart';
 
 void main() {
   runApp(const MyApp());
@@ -76,7 +75,6 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(16.0),
             width: 512,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 IntField(

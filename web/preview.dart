@@ -3,22 +3,22 @@ import 'dart:html';
 import 'package:fast_noise/fast_noise.dart';
 
 void main() {
-  var sizeInput = querySelector('#input-size') as InputElement?;
-  var seedInput = querySelector('#input-seed') as InputElement?;
-  var freqInput = querySelector('#input-freq') as InputElement?;
-  var gainInput = querySelector('#input-gain') as InputElement?;
-  var lacunarityInput = querySelector('#input-lacunarity') as InputElement?;
-  var octavesInput = querySelector('#input-octaves') as InputElement?;
+  final sizeInput = querySelector('#input-size') as InputElement?;
+  final seedInput = querySelector('#input-seed') as InputElement?;
+  final freqInput = querySelector('#input-freq') as InputElement?;
+  final gainInput = querySelector('#input-gain') as InputElement?;
+  final lacunarityInput = querySelector('#input-lacunarity') as InputElement?;
+  final octavesInput = querySelector('#input-octaves') as InputElement?;
 
-  var noiseTypeSelect = querySelector('#select-noise-type') as SelectElement?;
-  var fractalTypeSelect =
+  final noiseTypeSelect = querySelector('#select-noise-type') as SelectElement?;
+  final fractalTypeSelect =
       querySelector('#select-fractal-type') as SelectElement?;
-  var interpTypeSelect = querySelector('#select-interp') as SelectElement?;
-  var cellDistFnSelect =
+  final interpTypeSelect = querySelector('#select-interp') as SelectElement?;
+  final cellDistFnSelect =
       querySelector('#select-cellular-distance-fnc') as SelectElement?;
-  var cellRetTypeSelect =
+  final cellRetTypeSelect =
       querySelector('#select-cellular-return-type') as SelectElement?;
-  var renderButton = querySelector('#render-now')!;
+  final renderButton = querySelector('#render-now')!;
 
   renderButton.onClick.listen((_) {
     final size = int.parse(sizeInput!.value!),
@@ -127,32 +127,36 @@ void main() {
     }
 
     render(
-        noise2(size, size,
-            seed: seed,
-            frequency: freq as double,
-            gain: gain as double,
-            octaves: octaves,
-            fractalType: fractalType!,
-            interp: interp!,
-            cellularReturnType: cellularReturnType!,
-            cellularDistanceFunction: cellularDistanceFunction!,
-            lacunarity: lacunarity as double,
-            noiseType: noiseType!),
+      noise2(
         size,
-        size);
+        size,
+        seed: seed,
+        frequency: freq as double,
+        gain: gain as double,
+        octaves: octaves,
+        fractalType: fractalType!,
+        interp: interp!,
+        cellularReturnType: cellularReturnType!,
+        cellularDistanceFunction: cellularDistanceFunction!,
+        lacunarity: lacunarity as double,
+        noiseType: noiseType!,
+      ),
+      size,
+      size,
+    );
   });
 }
 
 void render(List<List<double>> map, int w, int h) {
   final container = querySelector('#canvas-container')!;
   final canvas = CanvasElement(width: w, height: h);
-  final context = canvas.getContext('2d') as CanvasRenderingContext2D;
+  final context = canvas.getContext('2d')! as CanvasRenderingContext2D;
   final imageData = context.createImageData(w, h);
 
   for (var x = 0; x < w; x++) {
     for (var y = 0; y < h; y++) {
-      var s = 4 * (y * h + x);
-      var value = (128 + 128 * map[x][y]).floor();
+      final s = 4 * (y * h + x);
+      final value = (128 + 128 * map[x][y]).floor();
 
       imageData.data[s] = imageData.data[s + 1] = imageData.data[s + 2] = value;
       imageData.data[s + 3] = 255;
@@ -161,7 +165,9 @@ void render(List<List<double>> map, int w, int h) {
 
   context.putImageData(imageData, 0, 0, 0, 0, w, h);
 
-  if (container.children.isNotEmpty) container.children.first.remove();
+  if (container.children.isNotEmpty) {
+    container.children.first.remove();
+  }
 
   container.append(canvas);
 }

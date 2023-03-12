@@ -139,10 +139,10 @@ class CubicNoise implements Noise2And3 {
 
   @override
   double getNoise2(double x, double y) {
-    x *= frequency;
-    y *= frequency;
+    final dx = x * frequency;
+    final dy = y * frequency;
 
-    return singleCubic2(seed, x, y);
+    return singleCubic2(seed, dx, dy);
   }
 
   static const double CUBIC_2D_BOUNDING = 1.0 / (1.5 * 1.5);

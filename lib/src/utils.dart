@@ -1,6 +1,5 @@
-import 'package:fixnum/fixnum.dart';
-
 import 'package:fast_noise/fast_noise.dart';
+import 'package:fixnum/fixnum.dart';
 
 @pragma('vm:prefer-inline')
 double calculateFractalBounding(int octaves, double gain) {
@@ -90,7 +89,14 @@ double gradCoord2D(int seed, int x, int y, double xd, double yd) {
 
 @pragma('vm:prefer-inline')
 double gradCoord3D(
-    int seed, int x, int y, int z, double xd, double yd, double zd) {
+  int seed,
+  int x,
+  int y,
+  int z,
+  double xd,
+  double yd,
+  double zd,
+) {
   IntX hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;
@@ -105,8 +111,17 @@ double gradCoord3D(
 }
 
 @pragma('vm:prefer-inline')
-double gradCoord4D(int seed, int x, int y, int z, int w, double xd, double yd,
-    double zd, double wd) {
+double gradCoord4D(
+  int seed,
+  int x,
+  int y,
+  int z,
+  int w,
+  double xd,
+  double yd,
+  double zd,
+  double wd,
+) {
   IntX hash = Int32(seed);
   hash ^= X_PRIME * x;
   hash ^= Y_PRIME * y;

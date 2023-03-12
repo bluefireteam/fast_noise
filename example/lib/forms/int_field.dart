@@ -1,7 +1,6 @@
+import 'package:fast_noise_flutter_example/forms/field.dart';
+import 'package:fast_noise_flutter_example/forms/string_field.dart';
 import 'package:flutter/material.dart';
-
-import 'field.dart';
-import 'string_field.dart';
 
 class IntField extends Field<int> {
   const IntField({

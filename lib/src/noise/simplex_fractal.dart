@@ -26,23 +26,23 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   @override
   double getNoiseInt3(int x, int y, int z) {
-    var xd = x.toDouble(), yd = y.toDouble(), zd = z.toDouble();
+    final xd = x.toDouble(), yd = y.toDouble(), zd = z.toDouble();
     return getNoise3(xd, yd, zd);
   }
 
   @override
   double getNoise3(double x, double y, double z) {
-    x *= frequency;
-    y *= frequency;
-    z *= frequency;
+    final dx = (x * frequency).toInt();
+    final dy = (y * frequency).toInt();
+    final dz = (z * frequency).toInt();
 
     switch (fractalType) {
       case FractalType.FBM:
-        return singleSimplexFractalFBM3(x.toInt(), y.toInt(), z.toInt());
+        return singleSimplexFractalFBM3(dx, dy, dz);
       case FractalType.Billow:
-        return singleSimplexFractalBillow3(x.toInt(), y.toInt(), z.toInt());
+        return singleSimplexFractalBillow3(dx, dy, dz);
       case FractalType.RigidMulti:
-        return singleSimplexFractalRigidMulti3(x.toInt(), y.toInt(), z.toInt());
+        return singleSimplexFractalRigidMulti3(dx, dy, dz);
     }
   }
 
@@ -79,7 +79,11 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
       amp *= gain;
       sum += (baseNoise
                       .singleSimplex3(
-                          ++seed, x1.toInt(), y1.toInt(), z1.toInt())
+                        ++seed,
+                        x1.toInt(),
+                        y1.toInt(),
+                        z1.toInt(),
+                      )
                       .abs() *
                   2.0 -
               1.0) *
@@ -122,16 +126,16 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   @override
   double getNoise2(double x, double y) {
-    x *= frequency;
-    y *= frequency;
+    final dx = (x * frequency).toInt();
+    final dy = (y * frequency).toInt();
 
     switch (fractalType) {
       case FractalType.FBM:
-        return singleSimplexFractalFBM2(x.toInt(), y.toInt());
+        return singleSimplexFractalFBM2(dx, dy);
       case FractalType.Billow:
-        return singleSimplexFractalBillow2(x.toInt(), y.toInt());
+        return singleSimplexFractalBillow2(dx, dy);
       case FractalType.RigidMulti:
-        return singleSimplexFractalRigidMulti2(x.toInt(), y.toInt());
+        return singleSimplexFractalRigidMulti2(dx, dy);
     }
   }
 

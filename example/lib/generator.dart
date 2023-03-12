@@ -60,35 +60,41 @@ Future<ui.Image> generate({
   return convertImageToFlutterUi(image);
 }
 
-Future<ui.Image> convertImageToFlutterUi(img.Image image) async {
-  if (image.format != img.Format.uint8 || image.numChannels != 4) {
+Future<img.Image> _convertToRgba8(img.Image genericImage) async {
+  if (genericImage.format != img.Format.uint8 ||
+      genericImage.numChannels != 4) {
     final cmd = img.Command()
-      ..image(image)
+      ..image(genericImage)
       ..convert(format: img.Format.uint8, numChannels: 4);
     final rgba8 = await cmd.getImageThread();
     if (rgba8 != null) {
-      image = rgba8;
+      return rgba8;
     }
   }
+  return genericImage;
+}
 
-  ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(
+Future<ui.Image> convertImageToFlutterUi(img.Image genericImage) async {
+  final image = await _convertToRgba8(genericImage);
+
+  final buffer = await ui.ImmutableBuffer.fromUint8List(
     image.toUint8List(),
   );
 
-  ui.ImageDescriptor id = ui.ImageDescriptor.raw(
+  final id = ui.ImageDescriptor.raw(
     buffer,
     height: image.height,
     width: image.width,
     pixelFormat: ui.PixelFormat.rgba8888,
   );
 
-  ui.Codec codec = await id.instantiateCodec(
+  final codec = await id.instantiateCodec(
     targetHeight: image.height,
     targetWidth: image.width,
   );
 
-  ui.FrameInfo fi = await codec.getNextFrame();
-  ui.Image uiImage = fi.image;
+  final fi = await codec.getNextFrame();
+  final uiImage = fi.image;
 
   return uiImage;
 }

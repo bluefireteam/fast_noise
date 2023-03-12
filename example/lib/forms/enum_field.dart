@@ -1,7 +1,6 @@
+import 'package:fast_noise_flutter_example/forms/field.dart';
+import 'package:fast_noise_flutter_example/forms/field_wrapper.dart';
 import 'package:flutter/material.dart';
-
-import 'field.dart';
-import 'field_wrapper.dart';
 
 class EnumField<T extends Enum> extends Field<T> {
   final List<T> values;

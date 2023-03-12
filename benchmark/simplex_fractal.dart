@@ -6,7 +6,7 @@ class SimplexFractalBenchmark extends BenchmarkBase {
   const SimplexFractalBenchmark() : super('SimplexFractal');
 
   static void main() {
-    SimplexFractalBenchmark().report();
+    const SimplexFractalBenchmark().report();
   }
 
   @override

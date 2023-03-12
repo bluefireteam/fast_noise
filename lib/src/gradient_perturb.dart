@@ -41,9 +41,13 @@ class GradientPerturb {
   }
 
   void singleGradientPerturb3(
-      int seed, double perturbAmp, double frequency, Vector3f v3) {
+    int seed,
+    double perturbAmp,
+    double frequency,
+    Vector3f v3,
+  ) {
     final xf = v3.x * frequency, yf = v3.y * frequency, zf = v3.z * frequency;
-    var x0 = xf.floor(),
+    final x0 = xf.floor(),
         y0 = yf.floor(),
         z0 = zf.floor(),
         x1 = x0 + 1,

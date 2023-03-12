@@ -24,31 +24,32 @@ class CubicFractalNoise implements Noise2And3 {
 
   @override
   double getNoise3(double x, double y, double z) {
-    x *= baseNoise.frequency;
-    y *= baseNoise.frequency;
-    z *= baseNoise.frequency;
+    final dx = x * baseNoise.frequency;
+    final dy = y * baseNoise.frequency;
+    final dz = z * baseNoise.frequency;
 
     switch (fractalType) {
       case FractalType.FBM:
-        return singleCubicFractalFBM3(x, y, z);
+        return singleCubicFractalFBM3(dx, dy, dz);
       case FractalType.Billow:
-        return singleCubicFractalBillow3(x, y, z);
+        return singleCubicFractalBillow3(dx, dy, dz);
       case FractalType.RigidMulti:
-        return singleCubicFractalRigidMulti3(x, y, z);
+        return singleCubicFractalRigidMulti3(dx, dy, dz);
     }
   }
 
   double singleCubicFractalFBM3(double x, double y, double z) {
     var seed = baseNoise.seed, i = 0;
-    var sum = baseNoise.singleCubic3(seed, x, y, z), amp = 1.0;
+    var dx = x, dy = y, dz = z;
+    var sum = baseNoise.singleCubic3(seed, dx, dy, dz), amp = 1.0;
 
     while (++i < octaves) {
-      x *= lacunarity;
-      y *= lacunarity;
-      z *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
+      dz *= lacunarity;
 
       amp *= gain;
-      sum += baseNoise.singleCubic3(++seed, x, y, z) * amp;
+      sum += baseNoise.singleCubic3(++seed, dx, dy, dz) * amp;
     }
 
     return sum * fractalBounding;
@@ -56,15 +57,17 @@ class CubicFractalNoise implements Noise2And3 {
 
   double singleCubicFractalBillow3(double x, double y, double z) {
     var seed = baseNoise.seed, i = 0;
-    var sum = baseNoise.singleCubic3(seed, x, y, z).abs() * 2 - 1, amp = 1.0;
+    var dx = x, dy = y, dz = z;
+    var sum = baseNoise.singleCubic3(seed, dx, dy, dz).abs() * 2 - 1, amp = 1.0;
 
     while (++i < octaves) {
-      x *= lacunarity;
-      y *= lacunarity;
-      z *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
+      dz *= lacunarity;
 
       amp *= gain;
-      sum += (baseNoise.singleCubic3(++seed, x, y, z).abs() * 2.0 - 1.0) * amp;
+      sum +=
+          (baseNoise.singleCubic3(++seed, dx, dy, dz).abs() * 2.0 - 1.0) * amp;
     }
 
     return sum * fractalBounding;
@@ -72,15 +75,16 @@ class CubicFractalNoise implements Noise2And3 {
 
   double singleCubicFractalRigidMulti3(double x, double y, double z) {
     var seed = baseNoise.seed, i = 0;
-    var sum = 1.0 - baseNoise.singleCubic3(seed, x, y, z).abs(), amp = 1.0;
+    var dx = x, dy = y, dz = z;
+    var sum = 1.0 - baseNoise.singleCubic3(seed, dx, dy, dz).abs(), amp = 1.0;
 
     while (++i < octaves) {
-      x *= lacunarity;
-      y *= lacunarity;
-      z *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
+      dz *= lacunarity;
 
       amp *= gain;
-      sum -= (1.0 - baseNoise.singleCubic3(++seed, x, y, z).abs()) * amp;
+      sum -= (1.0 - baseNoise.singleCubic3(++seed, dx, dy, dz).abs()) * amp;
     }
 
     return sum;
@@ -88,29 +92,30 @@ class CubicFractalNoise implements Noise2And3 {
 
   @override
   double getNoise2(double x, double y) {
-    x *= baseNoise.frequency;
-    y *= baseNoise.frequency;
+    final dx = x * baseNoise.frequency;
+    final dy = y * baseNoise.frequency;
 
     switch (fractalType) {
       case FractalType.FBM:
-        return singleCubicFractalFBM2(x, y);
+        return singleCubicFractalFBM2(dx, dy);
       case FractalType.Billow:
-        return singleCubicFractalBillow2(x, y);
+        return singleCubicFractalBillow2(dx, dy);
       case FractalType.RigidMulti:
-        return singleCubicFractalRigidMulti2(x, y);
+        return singleCubicFractalRigidMulti2(dx, dy);
     }
   }
 
   double singleCubicFractalFBM2(double x, double y) {
     var seed = baseNoise.seed, i = 0;
-    var sum = baseNoise.singleCubic2(seed, x, y), amp = 1.0;
+    var dx = x, dy = y;
+    var sum = baseNoise.singleCubic2(seed, dx, dy), amp = 1.0;
 
     while (++i < octaves) {
-      x *= lacunarity;
-      y *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
 
       amp *= gain;
-      sum += baseNoise.singleCubic2(++seed, x, y) * amp;
+      sum += baseNoise.singleCubic2(++seed, dx, dy) * amp;
     }
 
     return sum * fractalBounding;
@@ -118,14 +123,15 @@ class CubicFractalNoise implements Noise2And3 {
 
   double singleCubicFractalBillow2(double x, double y) {
     var seed = baseNoise.seed, i = 0;
-    var sum = baseNoise.singleCubic2(seed, x, y).abs() * 2.0 - 1.0, amp = 1.0;
+    var dx = x, dy = y;
+    var sum = baseNoise.singleCubic2(seed, dx, dy).abs() * 2.0 - 1.0, amp = 1.0;
 
     while (++i < octaves) {
-      x *= lacunarity;
-      y *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
 
       amp *= gain;
-      sum += (baseNoise.singleCubic2(++seed, x, y).abs() * 2.0 - 1.0) * amp;
+      sum += (baseNoise.singleCubic2(++seed, dx, dy).abs() * 2.0 - 1.0) * amp;
     }
 
     return sum * fractalBounding;
@@ -133,14 +139,15 @@ class CubicFractalNoise implements Noise2And3 {
 
   double singleCubicFractalRigidMulti2(double x, double y) {
     var seed = baseNoise.seed, i = 0;
-    var sum = 1 - baseNoise.singleCubic2(seed, x, y).abs(), amp = 1.0;
+    var dx = x, dy = y;
+    var sum = 1 - baseNoise.singleCubic2(seed, dx, dy).abs(), amp = 1.0;
 
     while (++i < octaves) {
-      x *= lacunarity;
-      y *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
 
       amp *= gain;
-      sum -= (1.0 - baseNoise.singleCubic2(++seed, x, y).abs()) * amp;
+      sum -= (1.0 - baseNoise.singleCubic2(++seed, dx, dy).abs()) * amp;
     }
 
     return sum;

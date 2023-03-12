@@ -26,31 +26,32 @@ class ValueFractalNoise implements Noise2And3 {
 
   @override
   double getNoise3(double x, double y, double z) {
-    x *= baseNoise.frequency;
-    y *= baseNoise.frequency;
-    z *= baseNoise.frequency;
+    final dx = x * baseNoise.frequency;
+    final dy = y * baseNoise.frequency;
+    final dz = z * baseNoise.frequency;
 
     switch (fractalType) {
       case FractalType.FBM:
-        return singleValueFractalFBM3(x, y, z);
+        return singleValueFractalFBM3(dx, dy, dz);
       case FractalType.Billow:
-        return singleValueFractalBillow3(x, y, z);
+        return singleValueFractalBillow3(dx, dy, dz);
       case FractalType.RigidMulti:
-        return singleValueFractalRigidMulti3(x, y, z);
+        return singleValueFractalRigidMulti3(dx, dy, dz);
     }
   }
 
   double singleValueFractalFBM3(double x, double y, double z) {
     var seed = baseNoise.seed;
-    var sum = baseNoise.singleValue3(seed, x, y, z), amp = 1.0;
+    var dx = x, dy = y, dz = z;
+    var sum = baseNoise.singleValue3(seed, dx, dy, dz), amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
-      z *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
+      dz *= lacunarity;
 
       amp *= gain;
-      sum += baseNoise.singleValue3(++seed, x, y, z) * amp;
+      sum += baseNoise.singleValue3(++seed, dx, dy, dz) * amp;
     }
 
     return sum * fractalBounding;
@@ -58,16 +59,18 @@ class ValueFractalNoise implements Noise2And3 {
 
   double singleValueFractalBillow3(double x, double y, double z) {
     var seed = baseNoise.seed;
-    var sum = baseNoise.singleValue3(seed, x, y, z).abs() * 2.0 - 1.0,
+    var dx = x, dy = y, dz = z;
+    var sum = baseNoise.singleValue3(seed, dx, dy, dz).abs() * 2.0 - 1.0,
         amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
-      z *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
+      dz *= lacunarity;
 
       amp *= gain;
-      sum += (baseNoise.singleValue3(++seed, x, y, z).abs() * 2.0 - 1.0) * amp;
+      sum +=
+          (baseNoise.singleValue3(++seed, dx, dy, dz).abs() * 2.0 - 1.0) * amp;
     }
 
     return sum * fractalBounding;
@@ -75,15 +78,16 @@ class ValueFractalNoise implements Noise2And3 {
 
   double singleValueFractalRigidMulti3(double x, double y, double z) {
     var seed = baseNoise.seed;
-    var sum = 1.0 - baseNoise.singleValue3(seed, x, y, z).abs(), amp = 1.0;
+    var dx = x, dy = y, dz = z;
+    var sum = 1.0 - baseNoise.singleValue3(seed, dx, dy, dz).abs(), amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
-      z *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
+      dz *= lacunarity;
 
       amp *= gain;
-      sum -= (1.0 - baseNoise.singleValue3(++seed, x, y, z).abs()) * amp;
+      sum -= (1.0 - baseNoise.singleValue3(++seed, dx, dy, dz).abs()) * amp;
     }
 
     return sum;
@@ -91,29 +95,30 @@ class ValueFractalNoise implements Noise2And3 {
 
   @override
   double getNoise2(double x, double y) {
-    x *= baseNoise.frequency;
-    y *= baseNoise.frequency;
+    final dx = x * baseNoise.frequency;
+    final dy = y * baseNoise.frequency;
 
     switch (fractalType) {
       case FractalType.FBM:
-        return singleValueFractalFBM2(x, y);
+        return singleValueFractalFBM2(dx, dy);
       case FractalType.Billow:
-        return singleValueFractalBillow2(x, y);
+        return singleValueFractalBillow2(dx, dy);
       case FractalType.RigidMulti:
-        return singleValueFractalRigidMulti2(x, y);
+        return singleValueFractalRigidMulti2(dx, dy);
     }
   }
 
   double singleValueFractalFBM2(double x, double y) {
     var seed = baseNoise.seed;
-    var sum = baseNoise.singleValue2(seed, x, y), amp = 1.0;
+    var dx = x, dy = y;
+    var sum = baseNoise.singleValue2(seed, dx, dy), amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
 
       amp *= gain;
-      sum += baseNoise.singleValue2(++seed, x, y) * amp;
+      sum += baseNoise.singleValue2(++seed, dx, dy) * amp;
     }
 
     return sum * fractalBounding;
@@ -121,13 +126,14 @@ class ValueFractalNoise implements Noise2And3 {
 
   double singleValueFractalBillow2(double x, double y) {
     var seed = baseNoise.seed;
-    var sum = baseNoise.singleValue2(seed, x, y).abs() * 2.0 - 1.0, amp = 1.0;
+    var dx = x, dy = y;
+    var sum = baseNoise.singleValue2(seed, dx, dy).abs() * 2.0 - 1.0, amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
       amp *= gain;
-      sum += (baseNoise.singleValue2(++seed, x, y).abs() * 2.0 - 1.0) * amp;
+      sum += (baseNoise.singleValue2(++seed, dx, dy).abs() * 2.0 - 1.0) * amp;
     }
 
     return sum * fractalBounding;
@@ -135,14 +141,15 @@ class ValueFractalNoise implements Noise2And3 {
 
   double singleValueFractalRigidMulti2(double x, double y) {
     var seed = baseNoise.seed;
-    var sum = 1.0 - baseNoise.singleValue2(seed, x, y).abs(), amp = 1.0;
+    var dx = x, dy = y;
+    var sum = 1.0 - baseNoise.singleValue2(seed, dx, dy).abs(), amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
-      x *= lacunarity;
-      y *= lacunarity;
+      dx *= lacunarity;
+      dy *= lacunarity;
 
       amp *= gain;
-      sum -= (1.0 - baseNoise.singleValue2(++seed, x, y).abs()) * amp;
+      sum -= (1.0 - baseNoise.singleValue2(++seed, dx, dy).abs()) * amp;
     }
 
     return sum;

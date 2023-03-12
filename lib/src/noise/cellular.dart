@@ -17,16 +17,16 @@ class CellularNoise implements Noise2And3 {
 
   @override
   double getNoise3(double x, double y, double z) {
-    x *= frequency;
-    y *= frequency;
-    z *= frequency;
+    final dx = x * frequency;
+    final dy = y * frequency;
+    final dz = z * frequency;
 
     switch (cellularReturnType) {
       case CellularReturnType.CellValue:
       case CellularReturnType.Distance:
-        return singleCellular3(x, y, z);
+        return singleCellular3(dx, dy, dz);
       default:
-        return singleCellular2Edge3(x, y, z);
+        return singleCellular2Edge3(dx, dy, dz);
     }
   }
 
@@ -193,15 +193,15 @@ class CellularNoise implements Noise2And3 {
 
   @override
   double getNoise2(double x, double y) {
-    x *= frequency;
-    y *= frequency;
+    final dx = x * frequency;
+    final dy = y * frequency;
 
     switch (cellularReturnType) {
       case CellularReturnType.CellValue:
       case CellularReturnType.Distance:
-        return singleCellular2(x, y);
+        return singleCellular2(dx, dy);
       default:
-        return singleCellular2Edge2(x, y);
+        return singleCellular2Edge2(dx, dy);
     }
   }
 
@@ -235,7 +235,7 @@ class CellularNoise implements Noise2And3 {
 
             final vecX = xi - x + vec.x,
                 vecY = yi - y + vec.y,
-                newDistance = (vecX.abs() + vecY.abs());
+                newDistance = vecX.abs() + vecY.abs();
 
             if (newDistance < distance) {
               distance = newDistance;

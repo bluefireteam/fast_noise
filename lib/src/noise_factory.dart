@@ -1,17 +1,17 @@
 import 'package:fast_noise/fast_noise.dart';
 
 Noise2And3 buildNoise({
-  final int seed = 1337,
-  final double frequency = .01,
-  final Interp interp = Interp.Quintic,
-  final NoiseType noiseType = NoiseType.Simplex,
-  final int octaves = 3,
-  final double lacunarity = 2.0,
-  final double gain = .5,
-  final FractalType fractalType = FractalType.FBM,
-  final CellularDistanceFunction cellularDistanceFunction =
+  int seed = 1337,
+  double frequency = .01,
+  Interp interp = Interp.Quintic,
+  NoiseType noiseType = NoiseType.Simplex,
+  int octaves = 3,
+  double lacunarity = 2.0,
+  double gain = .5,
+  FractalType fractalType = FractalType.FBM,
+  CellularDistanceFunction cellularDistanceFunction =
       CellularDistanceFunction.Euclidean,
-  final CellularReturnType cellularReturnType = CellularReturnType.CellValue,
+  CellularReturnType cellularReturnType = CellularReturnType.CellValue,
 }) {
   switch (noiseType) {
     case NoiseType.Cellular:
