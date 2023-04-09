@@ -1,0 +1,23 @@
+name: fast_noise_flutter_example
+description: A Flutter project showcasing the many functionality of the fast_noise package.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=2.19.4 <3.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  fast_noise:
+    path: ../
+  flutter:
+    sdk: flutter
+  image: ^4.0.15
+
+dev_dependencies:
+  flame_lint: ^0.2.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

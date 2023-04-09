@@ -22,7 +22,7 @@ class Float3 {
   const Float3(this.x, this.y, this.z);
 }
 
-const List<Float2> GRAD_2D = <Float2>[
+const List<Float2> gradient2d = <Float2>[
   Float2(-1.0, -1.0),
   Float2(1.0, -1.0),
   Float2(-1.0, 1.0),
@@ -33,7 +33,7 @@ const List<Float2> GRAD_2D = <Float2>[
   Float2(1.0, 0.0),
 ];
 
-const List<Float3> GRAD_3D = <Float3>[
+const List<Float3> gradient3d = <Float3>[
   Float3(1.0, 1.0, 0.0),
   Float3(-1.0, 1.0, 0.0),
   Float3(1.0, -1.0, 0.0),
@@ -52,7 +52,7 @@ const List<Float3> GRAD_3D = <Float3>[
   Float3(0.0, -1.0, -1.0),
 ];
 
-const List<Float2> CELL_2D = <Float2>[
+const List<Float2> cell2d = <Float2>[
   Float2(-0.4313539279, 0.1281943404),
   Float2(-0.1733316799, 0.415278375),
   Float2(-0.2821957395, -0.3505218461),
@@ -311,7 +311,7 @@ const List<Float2> CELL_2D = <Float2>[
   Float2(-0.4314509715, 0.12786735),
 ];
 
-const List<Float3> CELL_3D = <Float3>[
+const List<Float3> cell3d = <Float3>[
   Float3(0.1453787434, -0.4149781685, -0.0956981749),
   Float3(-0.01242829687, -0.1457918398, -0.4255470325),
   Float3(0.2877979582, -0.02606483451, -0.3449535616),
