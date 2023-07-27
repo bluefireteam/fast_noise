@@ -77,12 +77,12 @@ You can also call a noise type directly:
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: https://github.com/frankpepermans/fast_noise/issues
+[tracker]: https://github.com/bluefireteam/fast_noise/issues
 [auburns]: https://github.com/Auburns
 [preview]: http://igindo.com/fastnoise
-[cellular_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/cellular.dart
-[cubic_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/cubic.dart
-[perlin_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/perlin.dart
-[simplex_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/simplex.dart
-[value_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/value.dart
-[white_noise]: https://github.com/frankpepermans/fast_noise/blob/master/lib/src/noise/white.dart
+[cellular_noise]: https://github.com/bluefireteam/fast_noise/blob/main/lib/src/noise/cellular.dart
+[cubic_noise]: https://github.com/bluefireteam/fast_noise/blob/main/lib/src/noise/cubic.dart
+[perlin_noise]: https://github.com/bluefireteam/fast_noise/blob/main/lib/src/noise/perlin.dart
+[simplex_noise]: https://github.com/bluefireteam/fast_noise/blob/main/lib/src/noise/simplex.dart
+[value_noise]: https://github.com/bluefireteam/fast_noise/blob/main/lib/src/noise/value.dart
+[white_noise]: https://github.com/bluefireteam/fast_noise/blob/main/lib/src/noise/white.dart
