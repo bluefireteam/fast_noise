@@ -7,10 +7,10 @@ abstract class Field<T> extends StatefulWidget {
   final bool enabled;
 
   const Field({
-    super.key,
-    this.enabled = true,
     required this.title,
     required this.value,
     required this.setValue,
+    super.key,
+    this.enabled = true,
   });
 }

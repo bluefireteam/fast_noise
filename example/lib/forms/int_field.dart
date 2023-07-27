@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 class IntField extends Field<int> {
   const IntField({
-    super.key,
-    super.enabled,
     required super.title,
     required super.value,
     required super.setValue,
+    super.key,
+    super.enabled,
   });
 
   @override

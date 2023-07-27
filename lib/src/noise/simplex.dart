@@ -27,13 +27,22 @@ class SimplexNoise
 
   double singleSimplex3(int seed, int x, int y, int z) {
     var t = (x + y + z) * _f3;
-    final i = x + t.floor(), j = y + t.floor(), k = z + t.floor();
+    final i = x + t.floor();
+    final j = y + t.floor();
+    final k = z + t.floor();
 
     t = (i + j + k) * _g3;
 
-    final x0 = x - (i - t), y0 = y - (j - t), z0 = z - (k - t);
+    final x0 = x - (i - t);
+    final y0 = y - (j - t);
+    final z0 = z - (k - t);
 
-    int i1, j1, k1, i2, j2, k2;
+    int i1;
+    int j1;
+    int k1;
+    int i2;
+    int j2;
+    int k2;
 
     if (x0 >= y0) {
       if (y0 >= z0) {
@@ -86,19 +95,19 @@ class SimplexNoise
       }
     }
 
-    double x1 = x0 - i1 + _g3,
-        y1 = y0 - j1 + _g3,
-        z1 = z0 - k1 + _g3,
-        x2 = x0 - i2 + _f3,
-        y2 = y0 - j2 + _f3,
-        z2 = z0 - k2 + _f3,
-        x3 = x0 + _g33,
-        y3 = y0 + _g33,
-        z3 = z0 + _g33,
-        n0,
-        n1,
-        n2,
-        n3;
+    final x1 = x0 - i1 + _g3;
+    final y1 = y0 - j1 + _g3;
+    final z1 = z0 - k1 + _g3;
+    final x2 = x0 - i2 + _f3;
+    final y2 = y0 - j2 + _f3;
+    final z2 = z0 - k2 + _f3;
+    final x3 = x0 + _g33;
+    final y3 = y0 + _g33;
+    final z3 = z0 + _g33;
+    final double n0;
+    final double n1;
+    final double n2;
+    final double n3;
 
     t = 0.6 - x0 * x0 - y0 * y0 - z0 * z0;
 
@@ -148,14 +157,16 @@ class SimplexNoise
 
   double singleSimplex2(int seed, int x, int y) {
     var t = (x + y) * _f2;
-    final i = x + t.floor(), j = y + t.floor();
+    final i = x + t.floor();
+    final j = y + t.floor();
 
     t = (i + j) * _g2;
 
     final x0 = x - (i - t);
     final y0 = y - (j - t);
 
-    int i1, j1;
+    final int i1;
+    final int j1;
     if (x0 > y0) {
       i1 = 1;
       j1 = 0;
@@ -164,13 +175,13 @@ class SimplexNoise
       j1 = 1;
     }
 
-    double x1 = x0 - i1 + _g2,
-        y1 = y0 - j1 + _g2,
-        x2 = x0 - 1 + _f2,
-        y2 = y0 - 1 + _f2,
-        n0,
-        n1,
-        n2;
+    final x1 = x0 - i1 + _g2;
+    final y1 = y0 - j1 + _g2;
+    final x2 = x0 - 1 + _f2;
+    final y2 = y0 - 1 + _f2;
+    final double n0;
+    final double n1;
+    final double n2;
 
     t = 0.5 - x0 * x0 - y0 * y0;
 
@@ -478,11 +489,16 @@ class SimplexNoise
   static const double _g4 = (5.0 - 2.23606797) / 20.0;
 
   double singleSimplex4(int seed, int x, int y, int z, int w) {
-    double n0, n1, n2, n3, n4, t = (x + y + z + w) * _f4;
-    final i = x + t.floor(),
-        j = y + t.floor(),
-        k = z + t.floor(),
-        l = w + t.floor();
+    final double n0;
+    final double n1;
+    final double n2;
+    final double n3;
+    final double n4;
+    var t = (x + y + z + w) * _f4;
+    final i = x + t.floor();
+    final j = y + t.floor();
+    final k = z + t.floor();
+    final l = w + t.floor();
 
     t = (i + j + k + l) * _g4;
 
@@ -500,35 +516,35 @@ class SimplexNoise
     c += (z0 > w0) ? 1 : 0;
     c <<= 2;
 
-    final i1 = _simplex4d[c] >= 3 ? 1 : 0,
-        i2 = _simplex4d[c] >= 2 ? 1 : 0,
-        i3 = _simplex4d[c++] >= 1 ? 1 : 0,
-        j1 = _simplex4d[c] >= 3 ? 1 : 0,
-        j2 = _simplex4d[c] >= 2 ? 1 : 0,
-        j3 = _simplex4d[c++] >= 1 ? 1 : 0,
-        k1 = _simplex4d[c] >= 3 ? 1 : 0,
-        k2 = _simplex4d[c] >= 2 ? 1 : 0,
-        k3 = _simplex4d[c++] >= 1 ? 1 : 0,
-        l1 = _simplex4d[c] >= 3 ? 1 : 0,
-        l2 = _simplex4d[c] >= 2 ? 1 : 0,
-        l3 = _simplex4d[c] >= 1 ? 1 : 0;
+    final i1 = _simplex4d[c] >= 3 ? 1 : 0;
+    final i2 = _simplex4d[c] >= 2 ? 1 : 0;
+    final i3 = _simplex4d[c++] >= 1 ? 1 : 0;
+    final j1 = _simplex4d[c] >= 3 ? 1 : 0;
+    final j2 = _simplex4d[c] >= 2 ? 1 : 0;
+    final j3 = _simplex4d[c++] >= 1 ? 1 : 0;
+    final k1 = _simplex4d[c] >= 3 ? 1 : 0;
+    final k2 = _simplex4d[c] >= 2 ? 1 : 0;
+    final k3 = _simplex4d[c++] >= 1 ? 1 : 0;
+    final l1 = _simplex4d[c] >= 3 ? 1 : 0;
+    final l2 = _simplex4d[c] >= 2 ? 1 : 0;
+    final l3 = _simplex4d[c] >= 1 ? 1 : 0;
 
-    final x1 = x0 - i1 + _g4,
-        y1 = y0 - j1 + _g4,
-        z1 = z0 - k1 + _g4,
-        w1 = w0 - l1 + _g4,
-        x2 = x0 - i2 + 2 * _g4,
-        y2 = y0 - j2 + 2 * _g4,
-        z2 = z0 - k2 + 2 * _g4,
-        w2 = w0 - l2 + 2 * _g4,
-        x3 = x0 - i3 + 3 * _g4,
-        y3 = y0 - j3 + 3 * _g4,
-        z3 = z0 - k3 + 3 * _g4,
-        w3 = w0 - l3 + 3 * _g4,
-        x4 = x0 - 1 + 4 * _g4,
-        y4 = y0 - 1 + 4 * _g4,
-        z4 = z0 - 1 + 4 * _g4,
-        w4 = w0 - 1 + 4 * _g4;
+    final x1 = x0 - i1 + _g4;
+    final y1 = y0 - j1 + _g4;
+    final z1 = z0 - k1 + _g4;
+    final w1 = w0 - l1 + _g4;
+    final x2 = x0 - i2 + 2 * _g4;
+    final y2 = y0 - j2 + 2 * _g4;
+    final z2 = z0 - k2 + 2 * _g4;
+    final w2 = w0 - l2 + 2 * _g4;
+    final x3 = x0 - i3 + 3 * _g4;
+    final y3 = y0 - j3 + 3 * _g4;
+    final z3 = z0 - k3 + 3 * _g4;
+    final w3 = w0 - l3 + 3 * _g4;
+    final x4 = x0 - 1 + 4 * _g4;
+    final y4 = y0 - 1 + 4 * _g4;
+    final z4 = z0 - 1 + 4 * _g4;
+    final w4 = w0 - 1 + 4 * _g4;
 
     t = 0.6 - x0 * x0 - y0 * y0 - z0 * z0 - w0 * w0;
 

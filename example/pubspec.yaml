@@ -7,15 +7,15 @@ environment:
   sdk: '>=2.19.4 <3.0.0'
 
 dependencies:
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
   fast_noise:
     path: ../
   flutter:
     sdk: flutter
-  image: ^4.0.15
+  image: ^4.0.17
 
 dev_dependencies:
-  flame_lint: ^0.2.0
+  flame_lint: ^1.0.0
   flutter_test:
     sdk: flutter
 

@@ -16,13 +16,15 @@ class ValueNoise implements Noise2And3 {
       singleValue3(seed, x * frequency, y * frequency, z * frequency);
 
   double singleValue3(int seed, double x, double y, double z) {
-    final x0 = x.floor(),
-        y0 = y.floor(),
-        z0 = z.floor(),
-        x1 = x0 + 1,
-        y1 = y0 + 1,
-        z1 = z0 + 1;
-    double xs, ys, zs;
+    final x0 = x.floor();
+    final y0 = y.floor();
+    final z0 = z.floor();
+    final x1 = x0 + 1;
+    final y1 = y0 + 1;
+    final z1 = z0 + 1;
+    double xs;
+    double ys;
+    double zs;
 
     switch (interp) {
       case Interp.linear:
@@ -43,21 +45,21 @@ class ValueNoise implements Noise2And3 {
     }
 
     final xf00 = xs.lerp(
-          valCoord3D(seed, x0, y0, z0),
-          valCoord3D(seed, x1, y0, z0),
-        ),
-        xf10 = xs.lerp(
-          valCoord3D(seed, x0, y1, z0),
-          valCoord3D(seed, x1, y1, z0),
-        ),
-        xf01 = xs.lerp(
-          valCoord3D(seed, x0, y0, z1),
-          valCoord3D(seed, x1, y0, z1),
-        ),
-        xf11 = xs.lerp(
-          valCoord3D(seed, x0, y1, z1),
-          valCoord3D(seed, x1, y1, z1),
-        );
+      valCoord3D(seed, x0, y0, z0),
+      valCoord3D(seed, x1, y0, z0),
+    );
+    final xf10 = xs.lerp(
+      valCoord3D(seed, x0, y1, z0),
+      valCoord3D(seed, x1, y1, z0),
+    );
+    final xf01 = xs.lerp(
+      valCoord3D(seed, x0, y0, z1),
+      valCoord3D(seed, x1, y0, z1),
+    );
+    final xf11 = xs.lerp(
+      valCoord3D(seed, x0, y1, z1),
+      valCoord3D(seed, x1, y1, z1),
+    );
 
     return zs.lerp(
       ys.lerp(
@@ -76,8 +78,12 @@ class ValueNoise implements Noise2And3 {
       singleValue2(seed, x * frequency, y * frequency);
 
   double singleValue2(int seed, double x, double y) {
-    final x0 = x.floor(), y0 = y.floor(), x1 = x0 + 1, y1 = y0 + 1;
-    double xs, ys;
+    final x0 = x.floor();
+    final y0 = y.floor();
+    final x1 = x0 + 1;
+    final y1 = y0 + 1;
+    double xs;
+    double ys;
 
     switch (interp) {
       case Interp.linear:

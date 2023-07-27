@@ -5,9 +5,9 @@ class FieldWrapper extends StatelessWidget {
   final Widget child;
 
   const FieldWrapper({
-    super.key,
     required this.child,
     required this.title,
+    super.key,
   });
 
   @override

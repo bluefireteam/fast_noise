@@ -6,12 +6,12 @@ class EnumField<T extends Enum> extends Field<T> {
   final List<T> values;
 
   const EnumField({
-    super.key,
-    super.enabled,
     required super.title,
     required super.value,
     required super.setValue,
     required this.values,
+    super.key,
+    super.enabled,
   });
 
   @override

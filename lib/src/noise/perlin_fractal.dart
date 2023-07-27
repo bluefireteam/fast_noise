@@ -41,8 +41,11 @@ class PerlinFractalNoise implements Noise2And3 {
 
   double singlePerlinFractalFBM3(double x, double y, double z) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y, dz = z;
-    var sum = baseNoise.singlePerlin3(seed, dx, dy, dz), amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var dz = z;
+    var sum = baseNoise.singlePerlin3(seed, dx, dy, dz);
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;
@@ -58,9 +61,11 @@ class PerlinFractalNoise implements Noise2And3 {
 
   double singlePerlinFractalBillow3(double x, double y, double z) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y, dz = z;
-    var sum = baseNoise.singlePerlin3(seed, dx, dy, dz).abs() * 2.0 - 1.0,
-        amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var dz = z;
+    var sum = baseNoise.singlePerlin3(seed, dx, dy, dz).abs() * 2.0 - 1.0;
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;
@@ -77,8 +82,11 @@ class PerlinFractalNoise implements Noise2And3 {
 
   double singlePerlinFractalRigidMulti3(double x, double y, double z) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y, dz = z;
-    var sum = 1.0 - baseNoise.singlePerlin3(seed, dx, dy, dz).abs(), amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var dz = z;
+    var sum = 1.0 - baseNoise.singlePerlin3(seed, dx, dy, dz).abs();
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;
@@ -109,8 +117,10 @@ class PerlinFractalNoise implements Noise2And3 {
 
   double singlePerlinFractalFBM2(double x, double y) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y;
-    var sum = baseNoise.singlePerlin2(seed, dx, dy), amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var sum = baseNoise.singlePerlin2(seed, dx, dy);
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;
@@ -125,9 +135,10 @@ class PerlinFractalNoise implements Noise2And3 {
 
   double singlePerlinFractalBillow2(double x, double y) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y;
-    var sum = baseNoise.singlePerlin2(seed, dx, dy).abs() * 2.0 - 1.0,
-        amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var sum = baseNoise.singlePerlin2(seed, dx, dy).abs() * 2.0 - 1.0;
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;
@@ -142,8 +153,10 @@ class PerlinFractalNoise implements Noise2And3 {
 
   double singlePerlinFractalRigidMulti2(double x, double y) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y;
-    var sum = 1.0 - baseNoise.singlePerlin2(seed, dx, dy).abs(), amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var sum = 1.0 - baseNoise.singlePerlin2(seed, dx, dy).abs();
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;

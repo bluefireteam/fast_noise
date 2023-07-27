@@ -3,7 +3,8 @@ import 'package:fixnum/fixnum.dart';
 
 @pragma('vm:prefer-inline')
 double calculateFractalBounding(int octaves, double gain) {
-  var amp = gain, ampFractal = 1.0;
+  var amp = gain;
+  var ampFractal = 1.0;
 
   for (var i = 1; i < octaves; i++) {
     ampFractal += amp;
@@ -132,7 +133,9 @@ double gradCoord4D(
   hash = (hash >> 13) ^ hash;
 
   hash &= 31;
-  var a = yd, b = zd, c = wd;
+  var a = yd;
+  var b = zd;
+  var c = wd;
   switch (hash.toInt() >> 3) {
     case 1:
       a = wd;
