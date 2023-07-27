@@ -16,17 +16,21 @@ class CubicNoise implements Noise2And3 {
   static const double _cubic3dBounding = 1.0 / (1.5 * 1.5 * 1.5);
 
   double singleCubic3(int seed, double x, double y, double z) {
-    final x1 = x.floor(), y1 = y.floor(), z1 = z.floor();
-    final x0 = x1 - 1,
-        y0 = y1 - 1,
-        z0 = z1 - 1,
-        x2 = x1 + 1,
-        y2 = y1 + 1,
-        z2 = z1 + 1,
-        x3 = x1 + 2,
-        y3 = y1 + 2,
-        z3 = z1 + 2;
-    final xs = x - x1, ys = y - y1, zs = z - z1;
+    final x1 = x.floor();
+    final y1 = y.floor();
+    final z1 = z.floor();
+    final x0 = x1 - 1;
+    final y0 = y1 - 1;
+    final z0 = z1 - 1;
+    final x2 = x1 + 1;
+    final y2 = y1 + 1;
+    final z2 = z1 + 1;
+    final x3 = x1 + 2;
+    final y3 = y1 + 2;
+    final z3 = z1 + 2;
+    final xs = x - x1;
+    final ys = y - y1;
+    final zs = z - z1;
 
     return zs.cubicLerp(
           ys.cubicLerp(
@@ -148,14 +152,16 @@ class CubicNoise implements Noise2And3 {
   static const double _cubic2dBounding = 1.0 / (1.5 * 1.5);
 
   double singleCubic2(int seed, double x, double y) {
-    final x1 = x.floor(), y1 = y.floor();
-    final x0 = x1 - 1,
-        y0 = y1 - 1,
-        x2 = x1 + 1,
-        y2 = y1 + 1,
-        x3 = x1 + 2,
-        y3 = y1 + 2;
-    final xs = x - x1, ys = y - y1;
+    final x1 = x.floor();
+    final y1 = y.floor();
+    final x0 = x1 - 1;
+    final y0 = y1 - 1;
+    final x2 = x1 + 1;
+    final y2 = y1 + 1;
+    final x3 = x1 + 2;
+    final y3 = y1 + 2;
+    final xs = x - x1;
+    final ys = y - y1;
 
     return ys.cubicLerp(
           xs.cubicLerp(

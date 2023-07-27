@@ -9,22 +9,25 @@ class WhiteNoise
 
   @override
   double getNoise2(double x, double y) {
-    final dx = x * frequency, dy = y * frequency;
+    final dx = x * frequency;
+    final dy = y * frequency;
     return getNoiseInt2(dx.toInt(), dy.toInt());
   }
 
   @override
   double getNoise3(double x, double y, double z) {
-    final dx = x * frequency, dy = y * frequency, dz = z * frequency;
+    final dx = x * frequency;
+    final dy = y * frequency;
+    final dz = z * frequency;
     return getNoiseInt3(dx.toInt(), dy.toInt(), dz.toInt());
   }
 
   @override
   double getNoise4(double x, double y, double z, double w) {
-    final dx = x * frequency,
-        dy = y * frequency,
-        dz = z * frequency,
-        dw = w * frequency;
+    final dx = x * frequency;
+    final dy = y * frequency;
+    final dz = z * frequency;
+    final dw = w * frequency;
     return getNoiseInt4(dx.toInt(), dy.toInt(), dz.toInt(), dw.toInt());
   }
 

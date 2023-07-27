@@ -42,8 +42,11 @@ class ValueFractalNoise implements Noise2And3 {
 
   double singleValueFractalFBM3(double x, double y, double z) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y, dz = z;
-    var sum = baseNoise.singleValue3(seed, dx, dy, dz), amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var dz = z;
+    var sum = baseNoise.singleValue3(seed, dx, dy, dz);
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;
@@ -59,9 +62,11 @@ class ValueFractalNoise implements Noise2And3 {
 
   double singleValueFractalBillow3(double x, double y, double z) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y, dz = z;
-    var sum = baseNoise.singleValue3(seed, dx, dy, dz).abs() * 2.0 - 1.0,
-        amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var dz = z;
+    var sum = baseNoise.singleValue3(seed, dx, dy, dz).abs() * 2.0 - 1.0;
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;
@@ -78,8 +83,11 @@ class ValueFractalNoise implements Noise2And3 {
 
   double singleValueFractalRigidMulti3(double x, double y, double z) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y, dz = z;
-    var sum = 1.0 - baseNoise.singleValue3(seed, dx, dy, dz).abs(), amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var dz = z;
+    var sum = 1.0 - baseNoise.singleValue3(seed, dx, dy, dz).abs();
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;
@@ -110,8 +118,10 @@ class ValueFractalNoise implements Noise2And3 {
 
   double singleValueFractalFBM2(double x, double y) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y;
-    var sum = baseNoise.singleValue2(seed, dx, dy), amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var sum = baseNoise.singleValue2(seed, dx, dy);
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;
@@ -126,8 +136,10 @@ class ValueFractalNoise implements Noise2And3 {
 
   double singleValueFractalBillow2(double x, double y) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y;
-    var sum = baseNoise.singleValue2(seed, dx, dy).abs() * 2.0 - 1.0, amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var sum = baseNoise.singleValue2(seed, dx, dy).abs() * 2.0 - 1.0;
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;
@@ -141,8 +153,10 @@ class ValueFractalNoise implements Noise2And3 {
 
   double singleValueFractalRigidMulti2(double x, double y) {
     var seed = baseNoise.seed;
-    var dx = x, dy = y;
-    var sum = 1.0 - baseNoise.singleValue2(seed, dx, dy).abs(), amp = 1.0;
+    var dx = x;
+    var dy = y;
+    var sum = 1.0 - baseNoise.singleValue2(seed, dx, dy).abs();
+    var amp = 1.0;
 
     for (var i = 1; i < octaves; i++) {
       dx *= lacunarity;

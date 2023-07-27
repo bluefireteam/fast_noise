@@ -31,10 +31,14 @@ class CellularNoise implements Noise2And3 {
   }
 
   double singleCellular3(double x, double y, double z) {
-    final xr = x.round(), yr = y.round(), zr = z.round();
+    final xr = x.round();
+    final yr = y.round();
+    final zr = z.round();
 
     var distance = 999999.0;
-    var xc = 0, yc = 0, zc = 0;
+    var xc = 0;
+    var yc = 0;
+    var zc = 0;
 
     switch (cellularDistanceFunction) {
       case CellularDistanceFunction.euclidean:
@@ -43,10 +47,10 @@ class CellularNoise implements Noise2And3 {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
               final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
-              final vecX = xi - x + vec.x,
-                  vecY = yi - y + vec.y,
-                  vecZ = zi - z + vec.z,
-                  newDistance = vecX * vecX + vecY * vecY + vecZ * vecZ;
+              final vecX = xi - x + vec.x;
+              final vecY = yi - y + vec.y;
+              final vecZ = zi - z + vec.z;
+              final newDistance = vecX * vecX + vecY * vecY + vecZ * vecZ;
 
               if (newDistance < distance) {
                 distance = newDistance;
@@ -64,10 +68,10 @@ class CellularNoise implements Noise2And3 {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
               final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
-              final vecX = xi - x + vec.x,
-                  vecY = yi - y + vec.y,
-                  vecZ = zi - z + vec.z,
-                  newDistance = vecX.abs() + vecY.abs() + vecZ.abs();
+              final vecX = xi - x + vec.x;
+              final vecY = yi - y + vec.y;
+              final vecZ = zi - z + vec.z;
+              final newDistance = vecX.abs() + vecY.abs() + vecZ.abs();
 
               if (newDistance < distance) {
                 distance = newDistance;
@@ -85,11 +89,11 @@ class CellularNoise implements Noise2And3 {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
               final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
-              final vecX = xi - x + vec.x,
-                  vecY = yi - y + vec.y,
-                  vecZ = zi - z + vec.z,
-                  newDistance = (vecX.abs() + vecY.abs() + vecZ.abs()) +
-                      (vecX * vecX + vecY * vecY + vecZ * vecZ);
+              final vecX = xi - x + vec.x;
+              final vecY = yi - y + vec.y;
+              final vecZ = zi - z + vec.z;
+              final newDistance = (vecX.abs() + vecY.abs() + vecZ.abs()) +
+                  (vecX * vecX + vecY * vecY + vecZ * vecZ);
 
               if (newDistance < distance) {
                 distance = newDistance;
@@ -115,8 +119,11 @@ class CellularNoise implements Noise2And3 {
   }
 
   double singleCellular2Edge3(double x, double y, double z) {
-    final xr = x.round(), yr = y.round(), zr = z.round();
-    var distance = 999999.0, distance2 = 999999.0;
+    final xr = x.round();
+    final yr = y.round();
+    final zr = z.round();
+    var distance = 999999.0;
+    var distance2 = 999999.0;
 
     switch (cellularDistanceFunction) {
       case CellularDistanceFunction.euclidean:
@@ -125,10 +132,10 @@ class CellularNoise implements Noise2And3 {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
               final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
-              final vecX = xi - x + vec.x,
-                  vecY = yi - y + vec.y,
-                  vecZ = zi - z + vec.z,
-                  newDistance = vecX * vecX + vecY * vecY + vecZ * vecZ;
+              final vecX = xi - x + vec.x;
+              final vecY = yi - y + vec.y;
+              final vecZ = zi - z + vec.z;
+              final newDistance = vecX * vecX + vecY * vecY + vecZ * vecZ;
 
               distance2 = math.max(math.min(distance2, newDistance), distance);
               distance = math.min(distance, newDistance);
@@ -142,10 +149,10 @@ class CellularNoise implements Noise2And3 {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
               final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
-              final vecX = xi - x + vec.x,
-                  vecY = yi - y + vec.y,
-                  vecZ = zi - z + vec.z,
-                  newDistance = vecX.abs() + vecY.abs() + vecZ.abs();
+              final vecX = xi - x + vec.x;
+              final vecY = yi - y + vec.y;
+              final vecZ = zi - z + vec.z;
+              final newDistance = vecX.abs() + vecY.abs() + vecZ.abs();
 
               distance2 = math.max(math.min(distance2, newDistance), distance);
               distance = math.min(distance, newDistance);
@@ -159,11 +166,11 @@ class CellularNoise implements Noise2And3 {
             for (var zi = zr - 1; zi <= zr + 1; zi++) {
               final vec = cell3d[hash3D(seed, xi, yi, zi) & 255];
 
-              final vecX = xi - x + vec.x,
-                  vecY = yi - y + vec.y,
-                  vecZ = zi - z + vec.z,
-                  newDistance = (vecX.abs() + vecY.abs() + vecZ.abs()) +
-                      (vecX * vecX + vecY * vecY + vecZ * vecZ);
+              final vecX = xi - x + vec.x;
+              final vecY = yi - y + vec.y;
+              final vecZ = zi - z + vec.z;
+              final newDistance = (vecX.abs() + vecY.abs() + vecZ.abs()) +
+                  (vecX * vecX + vecY * vecY + vecZ * vecZ);
 
               distance2 = math.max(math.min(distance2, newDistance), distance);
               distance = math.min(distance, newDistance);
@@ -206,9 +213,11 @@ class CellularNoise implements Noise2And3 {
   }
 
   double singleCellular2(double x, double y) {
-    final xr = x.round(), yr = y.round();
+    final xr = x.round();
+    final yr = y.round();
     var distance = 999999.0;
-    var xc = 0, yc = 0;
+    var xc = 0;
+    var yc = 0;
 
     switch (cellularDistanceFunction) {
       case CellularDistanceFunction.euclidean:
@@ -216,9 +225,9 @@ class CellularNoise implements Noise2And3 {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
-            final vecX = xi - x + vec.x,
-                vecY = yi - y + vec.y,
-                newDistance = vecX * vecX + vecY * vecY;
+            final vecX = xi - x + vec.x;
+            final vecY = yi - y + vec.y;
+            final newDistance = vecX * vecX + vecY * vecY;
 
             if (newDistance < distance) {
               distance = newDistance;
@@ -233,9 +242,9 @@ class CellularNoise implements Noise2And3 {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
-            final vecX = xi - x + vec.x,
-                vecY = yi - y + vec.y,
-                newDistance = vecX.abs() + vecY.abs();
+            final vecX = xi - x + vec.x;
+            final vecY = yi - y + vec.y;
+            final newDistance = vecX.abs() + vecY.abs();
 
             if (newDistance < distance) {
               distance = newDistance;
@@ -250,10 +259,10 @@ class CellularNoise implements Noise2And3 {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
-            final vecX = xi - x + vec.x,
-                vecY = yi - y + vec.y,
-                newDistance =
-                    (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
+            final vecX = xi - x + vec.x;
+            final vecY = yi - y + vec.y;
+            final newDistance =
+                (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
 
             if (newDistance < distance) {
               distance = newDistance;
@@ -277,8 +286,10 @@ class CellularNoise implements Noise2And3 {
   }
 
   double singleCellular2Edge2(double x, double y) {
-    final xr = x.round(), yr = y.round();
-    var distance = 999999.0, distance2 = 999999.0;
+    final xr = x.round();
+    final yr = y.round();
+    var distance = 999999.0;
+    var distance2 = 999999.0;
 
     switch (cellularDistanceFunction) {
       case CellularDistanceFunction.euclidean:
@@ -286,9 +297,9 @@ class CellularNoise implements Noise2And3 {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
-            final vecX = xi - x + vec.x,
-                vecY = yi - y + vec.y,
-                newDistance = vecX * vecX + vecY * vecY;
+            final vecX = xi - x + vec.x;
+            final vecY = yi - y + vec.y;
+            final newDistance = vecX * vecX + vecY * vecY;
 
             distance2 = math.max(math.min(distance2, newDistance), distance);
             distance = math.min(distance, newDistance);
@@ -300,9 +311,9 @@ class CellularNoise implements Noise2And3 {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
-            final vecX = xi - x + vec.x,
-                vecY = yi - y + vec.y,
-                newDistance = vecX.abs() + vecY.abs();
+            final vecX = xi - x + vec.x;
+            final vecY = yi - y + vec.y;
+            final newDistance = vecX.abs() + vecY.abs();
 
             distance2 = math.max(math.min(distance2, newDistance), distance);
             distance = math.min(distance, newDistance);
@@ -314,10 +325,10 @@ class CellularNoise implements Noise2And3 {
           for (var yi = yr - 1; yi <= yr + 1; yi++) {
             final vec = cell2d[hash2D(seed, xi, yi) & 255];
 
-            final vecX = xi - x + vec.x,
-                vecY = yi - y + vec.y,
-                newDistance =
-                    (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
+            final vecX = xi - x + vec.x;
+            final vecY = yi - y + vec.y;
+            final newDistance =
+                (vecX.abs() + vecY.abs()) + (vecX * vecX + vecY * vecY);
 
             distance2 = math.max(math.min(distance2, newDistance), distance);
             distance = math.min(distance, newDistance);

@@ -8,9 +8,9 @@ class ImagePane extends StatelessWidget {
   final ui.Image? image;
 
   const ImagePane({
-    super.key,
     required this.loading,
     required this.image,
+    super.key,
   });
 
   @override

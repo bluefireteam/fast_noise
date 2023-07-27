@@ -1,23 +1,30 @@
+// TODO(spydon): Convert these to use vector_math
 class Vector2f {
-  double x, y;
+  double x;
+  double y;
 
   Vector2f(this.x, this.y);
 }
 
 class Vector3f {
-  double x, y, z;
+  double x;
+  double y;
+  double z;
 
   Vector3f(this.x, this.y, this.z);
 }
 
 class Float2 {
-  final double x, y;
+  final double x;
+  final double y;
 
   const Float2(this.x, this.y);
 }
 
 class Float3 {
-  final double x, y, z;
+  final double x;
+  final double y;
+  final double z;
 
   const Float3(this.x, this.y, this.z);
 }

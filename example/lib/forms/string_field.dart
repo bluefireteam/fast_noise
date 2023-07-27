@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 class StringField extends Field<String> {
   const StringField({
-    super.key,
-    super.enabled,
     required super.title,
     required super.value,
     required super.setValue,
+    super.key,
+    super.enabled,
   });
 
   @override

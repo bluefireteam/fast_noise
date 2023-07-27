@@ -21,12 +21,12 @@ void main() {
   final renderButton = querySelector('#render-now')!;
 
   renderButton.onClick.listen((_) {
-    final size = int.parse(sizeInput!.value!),
-        seed = int.parse(seedInput!.value!),
-        freq = double.parse(freqInput!.value!) as int,
-        gain = double.parse(gainInput!.value!) as int,
-        lacunarity = double.parse(lacunarityInput!.value!) as int,
-        octaves = int.parse(octavesInput!.value!);
+    final size = int.parse(sizeInput!.value!);
+    final seed = int.parse(seedInput!.value!);
+    final freq = double.parse(freqInput!.value!).toInt();
+    final gain = double.parse(gainInput!.value!).toInt();
+    final lacunarity = double.parse(lacunarityInput!.value!).toInt();
+    final octaves = int.parse(octavesInput!.value!);
     NoiseType? noiseType;
     FractalType? fractalType;
     Interp? interp;

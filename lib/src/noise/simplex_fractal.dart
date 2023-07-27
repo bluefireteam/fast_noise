@@ -26,7 +26,9 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   @override
   double getNoiseInt3(int x, int y, int z) {
-    final xd = x.toDouble(), yd = y.toDouble(), zd = z.toDouble();
+    final xd = x.toDouble();
+    final yd = y.toDouble();
+    final zd = z.toDouble();
     return getNoise3(xd, yd, zd);
   }
 
@@ -48,8 +50,11 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   double singleSimplexFractalFBM3(int x, int y, int z) {
     var seed = this.seed;
-    var sum = baseNoise.singleSimplex3(seed, x, y, z), amp = 1.0;
-    var x1 = x.toDouble(), y1 = y.toDouble(), z1 = z.toDouble();
+    var sum = baseNoise.singleSimplex3(seed, x, y, z);
+    var amp = 1.0;
+    var x1 = x.toDouble();
+    var y1 = y.toDouble();
+    var z1 = z.toDouble();
 
     for (var i = 1; i < octaves; i++) {
       x1 *= lacunarity;
@@ -67,9 +72,11 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   double singleSimplexFractalBillow3(int x, int y, int z) {
     var seed = this.seed;
-    var sum = baseNoise.singleSimplex3(seed, x, y, z).abs() * 2.0 - 1.0,
-        amp = 1.0;
-    var x1 = x.toDouble(), y1 = y.toDouble(), z1 = z.toDouble();
+    var sum = baseNoise.singleSimplex3(seed, x, y, z).abs() * 2.0 - 1.0;
+    var amp = 1.0;
+    var x1 = x.toDouble();
+    var y1 = y.toDouble();
+    var z1 = z.toDouble();
 
     for (var i = 1; i < octaves; i++) {
       x1 *= lacunarity;
@@ -95,8 +102,11 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   double singleSimplexFractalRigidMulti3(int x, int y, int z) {
     var seed = this.seed;
-    var sum = 1.0 - baseNoise.singleSimplex3(seed, x, y, z).abs(), amp = 1.0;
-    var x1 = x.toDouble(), y1 = y.toDouble(), z1 = z.toDouble();
+    var sum = 1.0 - baseNoise.singleSimplex3(seed, x, y, z).abs();
+    var amp = 1.0;
+    var x1 = x.toDouble();
+    var y1 = y.toDouble();
+    var z1 = z.toDouble();
 
     for (var i = 1; i < octaves; i++) {
       x1 *= lacunarity;
@@ -118,7 +128,8 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   @override
   double getNoiseInt2(int x, int y) {
-    final xd = x.toDouble(), yd = y.toDouble();
+    final xd = x.toDouble();
+    final yd = y.toDouble();
     return getNoise2(xd, yd);
   }
 
@@ -139,8 +150,10 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   double singleSimplexFractalFBM2(int x, int y) {
     var seed = this.seed;
-    var sum = baseNoise.singleSimplex2(seed, x, y), amp = 1.0;
-    var x1 = x.toDouble(), y1 = y.toDouble();
+    var sum = baseNoise.singleSimplex2(seed, x, y);
+    var amp = 1.0;
+    var x1 = x.toDouble();
+    var y1 = y.toDouble();
 
     for (var i = 1; i < octaves; i++) {
       x1 *= lacunarity;
@@ -155,8 +168,10 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   double singleSimplexFractalBillow2(int x, int y) {
     var seed = this.seed;
-    var sum = baseNoise.singleSimplex2(seed, x, y).abs() * 2.0 - 1.0, amp = 1.0;
-    var x1 = x.toDouble(), y1 = y.toDouble();
+    var sum = baseNoise.singleSimplex2(seed, x, y).abs() * 2.0 - 1.0;
+    var amp = 1.0;
+    var x1 = x.toDouble();
+    var y1 = y.toDouble();
 
     for (var i = 1; i < octaves; i++) {
       x1 *= lacunarity;
@@ -176,8 +191,10 @@ class SimplexFractalNoise implements Noise2And3, Noise2Int, Noise3Int {
 
   double singleSimplexFractalRigidMulti2(int x, int y) {
     var seed = this.seed;
-    var sum = 1.0 - baseNoise.singleSimplex2(seed, x, y).abs(), amp = 1.0;
-    var x1 = x.toDouble(), y1 = y.toDouble();
+    var sum = 1.0 - baseNoise.singleSimplex2(seed, x, y).abs();
+    var amp = 1.0;
+    var x1 = x.toDouble();
+    var y1 = y.toDouble();
 
     for (var i = 1; i < octaves; i++) {
       x1 *= lacunarity;
